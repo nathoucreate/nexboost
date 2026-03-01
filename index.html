@@ -738,6 +738,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   ]
 }
 </script>
+<!-- ═══ CHATBOT ═══ -->
+<button class="chatbot-fab" id="chatbotFab" aria-label="Ouvrir l'assistant">
+  <svg class="chatbot-fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+  <svg class="chatbot-fab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+</button>
+<aside class="chatbot" id="chatbot" aria-label="Assistant NexBoost">
+  <div class="chatbot-header">
+    <div class="chatbot-header-info">
+      <div class="chatbot-avatar">⚡</div>
+      <div>
+        <div class="chatbot-name">Assistant NexBoost</div>
+        <div class="chatbot-status">En ligne · Répond instantanément</div>
+      </div>
+    </div>
+  </div>
+  <div class="chatbot-messages" id="chatbotMessages">
+    <div class="chatbot-msg chatbot-msg-bot">
+      <span>Bonjour ! 👋 Je suis l'assistant NexBoost. Comment puis-je vous aider ? Posez-moi vos questions sur nos services, tarifs ou fonctionnement.</span>
+    </div>
+    <div class="chatbot-suggestions" id="chatbotSuggestions">
+      <button class="chatbot-suggestion" data-q="Quels sont vos tarifs ?">💰 Vos tarifs</button>
+      <button class="chatbot-suggestion" data-q="Quels services proposez-vous ?">🛠 Vos services</button>
+      <button class="chatbot-suggestion" data-q="Comment ça se passe concrètement ?">📋 Comment ça marche</button>
+      <button class="chatbot-suggestion" data-q="Comment vous contacter ?">📞 Vous contacter</button>
+    </div>
+  </div>
+  <form class="chatbot-input" id="chatbotForm">
+    <input type="text" id="chatbotInput" placeholder="Écrivez votre message..." autocomplete="off">
+    <button type="submit" aria-label="Envoyer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </form>
+</aside>
+
 <div class="cursor-bubble" id="cursorBubble"></div>
 </body>
 </html>

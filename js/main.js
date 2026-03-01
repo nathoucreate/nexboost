@@ -487,3 +487,103 @@ if (cursorBubble && window.matchMedia('(min-width: 901px)').matches) {
   }
   animateBubble();
 }
+
+// ═══════════════════════════════════════
+//  CHATBOT
+// ═══════════════════════════════════════
+const chatbotFab = document.getElementById('chatbotFab');
+const chatbot = document.getElementById('chatbot');
+const chatbotMessages = document.getElementById('chatbotMessages');
+const chatbotForm = document.getElementById('chatbotForm');
+const chatbotInput = document.getElementById('chatbotInput');
+
+const botResponses = {
+  tarifs: `Voici nos tarifs :\n\n🚀 <b>Sites web</b>\n• Landing page : 300 €\n• Site vitrine (3-5 pages) : 600 €\n• Site e-commerce : 1 000 €\n\n🎨 <b>Identité visuelle</b>\n• Logo : 150 €\n• Flyer recto/verso : 200 €\n• Carte de visite : 90 €\n\n📸 <b>Photo & Vidéo</b>\n• Pack 5 photos : 100 €\n• 3 photos drone : 150 €\n• Vidéo drone (15-30s) : 240 €\n\nTous nos prix sont sans engagement. <a href="#tarifs" style="color:var(--accent-light)">Voir la section tarifs →</a>`,
+
+  services: `Nous proposons :\n\n🌐 <b>Création de site web</b> — landing page, site vitrine, e-commerce\n📈 <b>SEO local</b> — être trouvé sur Google à Valenciennes\n📱 <b>Réseaux sociaux</b> — stratégie et gestion de contenu\n🎨 <b>Identité visuelle</b> — logo, flyer, carte de visite\n📸 <b>Photo & vidéo drone</b> — mise en valeur de votre activité\n📣 <b>Publicité en ligne</b> — Google Ads, Facebook Ads\n\nOn s'adapte à votre budget et vos besoins. <a href="#services" style="color:var(--accent-light)">Voir nos services →</a>`,
+
+  fonctionnement: `C'est très simple :\n\n1️⃣ <b>On échange</b> — vous nous parlez de votre activité et vos besoins\n2️⃣ <b>On vous propose un devis gratuit</b> — clair, sans surprise\n3️⃣ <b>On réalise le projet</b> — vous validez chaque étape\n4️⃣ <b>On livre</b> — votre site/contenu est en ligne !\n\nPas de jargon, pas de contrat longue durée. Vous restez concentré sur votre métier.`,
+
+  contact: `Vous pouvez nous contacter de plusieurs façons :\n\n📧 <b>Email</b> : nathan.lepretre@nexboost.fr\n📍 <b>Localisation</b> : Valenciennes, Hauts-de-France\n\nOu remplissez directement notre <a href="#contact" style="color:var(--accent-light)">formulaire de contact →</a>\n\nOn vous répond sous 24h, promis ! 🤝`,
+
+  delai: `Les délais dépendent du projet :\n\n• Landing page : <b>1-2 semaines</b>\n• Site vitrine : <b>2-4 semaines</b>\n• Site e-commerce : <b>4-6 semaines</b>\n• Logo / flyer : <b>3-5 jours</b>\n\nOn s'adapte aussi à vos urgences si besoin !`,
+
+  engagement: `<b>Aucun engagement</b> ! Chez NexBoost :\n\n✅ Pas de contrat longue durée\n✅ Devis gratuit et sans obligation\n✅ Vous payez uniquement ce que vous commandez\n✅ Réponse sous 24h\n\nOn veut gagner votre confiance par la qualité, pas par un contrat.`,
+
+  default: `Je n'ai pas de réponse précise à cette question, mais je peux vous aider sur :\n\n💰 Nos <b>tarifs</b>\n🛠 Nos <b>services</b>\n📋 Notre <b>fonctionnement</b>\n📞 Comment nous <b>contacter</b>\n⏱ Nos <b>délais</b>\n🤝 Notre politique <b>sans engagement</b>\n\nOu contactez-nous directement : <a href="#contact" style="color:var(--accent-light)">formulaire de contact →</a>`
+};
+
+function detectIntent(msg) {
+  const m = msg.toLowerCase();
+  if (/tarif|prix|co[uû]t|combien|€|euro|cher/.test(m)) return 'tarifs';
+  if (/service|propos|offr|fait|activit/.test(m)) return 'services';
+  if (/comment.*march|fonctionn|étape|process|dérou|concr/.test(m)) return 'fonctionnement';
+  if (/contact|joindre|appel|mail|téléph|adresse|où/.test(m)) return 'contact';
+  if (/délai|temps|durée|combien de temps|livr|rapide/.test(m)) return 'delai';
+  if (/engagement|contrat|obligation|annul|sans engagement/.test(m)) return 'engagement';
+  if (/bonjour|salut|hello|hey|coucou/.test(m)) return 'salut';
+  if (/merci|super|parfait|génial|top/.test(m)) return 'merci';
+  return 'default';
+}
+
+function addBotMsg(html) {
+  // Show typing
+  const typing = document.createElement('div');
+  typing.className = 'chatbot-typing';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  chatbotMessages.appendChild(typing);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+  setTimeout(() => {
+    typing.remove();
+    const div = document.createElement('div');
+    div.className = 'chatbot-msg chatbot-msg-bot';
+    div.innerHTML = `<span>${html}</span>`;
+    chatbotMessages.appendChild(div);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  }, 800 + Math.random() * 600);
+}
+
+function addUserMsg(text) {
+  const div = document.createElement('div');
+  div.className = 'chatbot-msg chatbot-msg-user';
+  div.innerHTML = `<span>${text}</span>`;
+  chatbotMessages.appendChild(div);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+function handleChatMessage(text) {
+  addUserMsg(text);
+  const suggestions = document.getElementById('chatbotSuggestions');
+  if (suggestions) suggestions.remove();
+
+  const intent = detectIntent(text);
+  if (intent === 'salut') {
+    addBotMsg('Bonjour ! 😊 Ravi de vous accueillir. Comment puis-je vous aider aujourd\'hui ?');
+  } else if (intent === 'merci') {
+    addBotMsg('Avec plaisir ! N\'hésitez pas si vous avez d\'autres questions. 😊');
+  } else {
+    addBotMsg(botResponses[intent]);
+  }
+}
+
+// Toggle chatbot
+chatbotFab.addEventListener('click', () => {
+  chatbot.classList.toggle('open');
+  chatbotFab.classList.toggle('active');
+  if (chatbot.classList.contains('open')) chatbotInput.focus();
+});
+
+// Submit message
+chatbotForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const val = chatbotInput.value.trim();
+  if (!val) return;
+  chatbotInput.value = '';
+  handleChatMessage(val);
+});
+
+// Suggestion buttons
+document.querySelectorAll('.chatbot-suggestion').forEach(btn => {
+  btn.addEventListener('click', () => handleChatMessage(btn.dataset.q));
+});
