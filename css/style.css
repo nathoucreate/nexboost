@@ -1533,6 +1533,33 @@ button { font-family: var(--font); cursor: pointer; }
   .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
 }
 
+.mentions-legales {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.mentions-legales h4 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.mentions-legales p {
+  font-size: 0.72rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.mentions-legales a {
+  color: var(--accent-light);
+  text-decoration: none;
+}
+.mentions-legales a:hover { text-decoration: underline; }
+.mentions-legales strong {
+  color: var(--text-secondary);
+}
+
 /* --- THEME TOGGLE --- */
 .theme-toggle {
   width: 48px;
