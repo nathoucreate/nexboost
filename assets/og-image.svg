@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#060609"/>
+      <stop offset="100%" style="stop-color:#0b0b12"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#818cf8"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="30%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(99,102,241,0.15)"/>
+      <stop offset="100%" style="stop-color:transparent"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <!-- Grid subtle -->
+  <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+    <path d="M 64 0 L 0 0 0 64" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <!-- Lightning bolt icon -->
+  <circle cx="600" cy="200" r="60" fill="none" stroke="rgba(99,102,241,0.2)" stroke-width="1"/>
+  <circle cx="600" cy="200" r="90" fill="none" stroke="rgba(99,102,241,0.1)" stroke-width="1"/>
+  <path d="M592,170 L582,200 L598,200 L594,230 L618,192 L602,192 L608,170 Z" fill="url(#accent)"/>
+  <!-- NexBoost text -->
+  <text x="600" y="310" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="800" font-size="56" fill="#f1f0ee" letter-spacing="-1">NexBoost</text>
+  <!-- Tagline -->
+  <text x="600" y="365" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="500" font-size="24" fill="#9ca3af">Agence Marketing Digital</text>
+  <!-- Location -->
+  <text x="600" y="410" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="400" font-size="18" fill="#6366f1">Valenciennes · Hauts-de-France</text>
+  <!-- Services bar -->
+  <rect x="200" y="470" width="800" height="48" rx="24" fill="rgba(99,102,241,0.08)" stroke="rgba(99,102,241,0.15)" stroke-width="1"/>
+  <text x="600" y="500" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-weight="500" font-size="16" fill="#818cf8">Site web · SEO local · Réseaux sociaux · Photo &amp; Vidéo drone</text>
+  <!-- Bottom accent line -->
+  <rect x="0" y="620" width="1200" height="10" fill="url(#accent)"/>
+</svg>
