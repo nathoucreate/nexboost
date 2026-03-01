@@ -25,6 +25,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://nexboost.fr/blog/</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nexboost.fr/blog/pourquoi-site-web-artisan.html</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nexboost.fr/blog/seo-local-guide-debutant.html</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://nexboost.fr/mentions-legales.html</loc>
     <lastmod>2026-03-01</lastmod>
     <changefreq>yearly</changefreq>
