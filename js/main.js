@@ -44,19 +44,21 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Active nav link on scroll
+// Active nav link on scroll (using IntersectionObserver to avoid layout thrashing)
 const sections = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => {
-    if (scrollY >= s.offsetTop - 150) current = s.id;
+let currentSection = '';
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      currentSection = entry.target.id;
+      navAnchors.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + currentSection ? 'var(--text)' : '';
+      });
+    }
   });
-  navAnchors.forEach(a => {
-    a.style.color = '';
-    if (a.getAttribute('href') === '#' + current) a.style.color = 'var(--text)';
-  });
-}, { passive: true });
+}, { threshold: 0.2, rootMargin: '-100px 0px -50% 0px' });
+sections.forEach(s => sectionObserver.observe(s));
 
 // ═══════════════════════════════════════
 //  SCROLL REVEAL
@@ -93,11 +95,13 @@ if (canvas) {
   let w, h;
 
   function resize() {
-    w = canvas.width = canvas.offsetWidth;
-    h = canvas.height = canvas.offsetHeight;
+    const rect = canvas.getBoundingClientRect();
+    w = canvas.width = rect.width;
+    h = canvas.height = rect.height;
   }
   resize();
-  window.addEventListener('resize', resize);
+  const resizeObserver = new ResizeObserver(() => resize());
+  resizeObserver.observe(canvas);
 
   class Particle {
     constructor() { this.reset(); }

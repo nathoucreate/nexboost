@@ -38,7 +38,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -54,7 +55,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <nav class="nav" id="nav" aria-label="Navigation principale">
   <div class="nav-inner">
     <a href="#accueil" class="logo" title="NexBoost — Agence marketing digital Valenciennes">
-        <img src="assets/logo nexboost.svg" alt="NexBoost — Agence marketing digital Valenciennes" class="logo-img">
+        <img src="assets/logo nexboost.svg" alt="NexBoost — Agence marketing digital Valenciennes" class="logo-img" fetchpriority="high">
       </a>
     <div class="nav-links" id="navLinks">
       <a href="#accueil">Accueil</a>
@@ -551,7 +552,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <nav class="footer-col" aria-label="Navigation pied de page">
-        <h4>Navigation</h4>
+        <h3>Navigation</h3>
         <ul>
           <li><a href="#accueil">Accueil</a></li>
           <li><a href="#services">Services</a></li>
@@ -563,7 +564,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </nav>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h3>Services</h3>
         <ul>
           <li><a href="creation-site-web-valenciennes.html">Création de site web</a></li>
           <li><a href="seo-local-valenciennes.html">Référencement local</a></li>
@@ -573,7 +574,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h3>Contact</h3>
         <ul>
           <li><a href="mailto:nathan.lepretre@nexboost.fr">nathan.lepretre@nexboost.fr</a></li>
           <li><a href="#contact">Demander un devis</a></li>
