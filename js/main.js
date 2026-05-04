@@ -85,76 +85,7 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
   revealObserver.observe(el);
 });
 
-// ═══════════════════════════════════════
-//  PARTICLES
-// ═══════════════════════════════════════
-const canvas = document.getElementById('particles-canvas');
-if (canvas) {
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let w, h;
-
-  function resize() {
-    const rect = canvas.getBoundingClientRect();
-    w = canvas.width = rect.width;
-    h = canvas.height = rect.height;
-  }
-  resize();
-  const resizeObserver = new ResizeObserver(() => resize());
-  resizeObserver.observe(canvas);
-
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.size = Math.random() * 1.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.25;
-      this.speedY = (Math.random() - 0.5) * 0.25;
-      this.opacity = Math.random() * 0.35 + 0.08;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) this.reset();
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
-      ctx.fill();
-    }
-  }
-
-  const pCount = Math.min(50, Math.floor((w * h) / 20000));
-  for (let i = 0; i < pCount; i++) particles.push(new Particle());
-
-  function drawLines() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 130) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(99, 102, 241, ${0.05 * (1 - dist / 130)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawLines();
-    requestAnimationFrame(animate);
-  }
-  animate();
-}
+// Particles removed — replaced by V4 hero
 
 // ═══════════════════════════════════════
 //  PRICING TABS
@@ -469,28 +400,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
   });
 });
 
-// ═══════════════════════════════════════
-//  CURSOR BUBBLE
-// ═══════════════════════════════════════
-const cursorBubble = document.getElementById('cursorBubble');
-if (cursorBubble && window.matchMedia('(min-width: 901px)').matches) {
-  let bx = 0, by = 0, cx = 0, cy = 0;
-  document.addEventListener('mousemove', e => {
-    bx = e.clientX;
-    by = e.clientY;
-    if (!cursorBubble.classList.contains('visible')) cursorBubble.classList.add('visible');
-  });
-  document.addEventListener('mouseleave', () => cursorBubble.classList.remove('visible'));
-
-  function animateBubble() {
-    cx += (bx - cx) * 0.12;
-    cy += (by - cy) * 0.12;
-    cursorBubble.style.left = cx + 'px';
-    cursorBubble.style.top = cy + 'px';
-    requestAnimationFrame(animateBubble);
-  }
-  animateBubble();
-}
+// Cursor bubble removed — replaced by V4 cursor
 
 // ═══════════════════════════════════════
 //  CHATBOT

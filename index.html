@@ -38,15 +38,194 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="css/style.css">
+<style>
+/* ─── V4 HERO ADDITIONS ─── */
+.v4-loader {
+  position: fixed; inset: 0; background: var(--bg); z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px;
+  transition: opacity 0.7s ease, visibility 0.7s;
+}
+.v4-loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+.v4-loader-logo { height: 70px; opacity: 0; animation: v4FadeIn 0.5s 0.2s forwards; }
+.v4-loader-track {
+  width: 160px; height: 2px; background: rgba(255,255,255,0.04);
+  border-radius: 2px; overflow: hidden;
+  opacity: 0; animation: v4FadeIn 0.4s 0.5s forwards;
+}
+.v4-loader-fill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  animation: v4Fill 1.6s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes v4FadeIn { to { opacity: 1; } }
+@keyframes v4Fill { to { width: 100%; } }
+
+.v4-progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light), #a78bfa);
+  z-index: 9999;
+}
+
+@media (pointer: fine) {
+  body { cursor: none; }
+  body a, body button { cursor: none; }
+}
+.v4-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 50%; pointer-events: none; z-index: 10001;
+  transform: translate(-50%,-50%);
+  transition: width 0.25s, height 0.25s, background 0.25s, border-color 0.25s;
+  mix-blend-mode: difference;
+}
+.v4-ring.hover { width: 60px; height: 60px; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
+.v4-dot {
+  position: fixed; width: 4px; height: 4px;
+  background: white; border-radius: 50%;
+  pointer-events: none; z-index: 10002; transform: translate(-50%,-50%);
+}
+@media (pointer: coarse) { .v4-ring, .v4-dot { display: none; } body { cursor: auto; } body a, body button { cursor: auto; } }
+
+.v4-hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden; padding: calc(var(--nav-h) + 20px) 24px 0;
+}
+.v4-hero-glow {
+  position: absolute; width: 900px; height: 900px;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 65%);
+  filter: blur(80px); pointer-events: none; will-change: transform;
+}
+.v4-hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.013) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.013) 1px, transparent 1px);
+  background-size: 90px 90px;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, black 20%, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, black 20%, transparent);
+}
+.v4-hero-inner {
+  position: relative; z-index: 2; text-align: center; max-width: 880px;
+}
+.v4-overline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 18px; border-radius: 100px;
+  border: 1px solid var(--border); background: rgba(99,102,241,0.06);
+  font-size: 0.72rem; font-weight: 600; color: var(--accent-light);
+  letter-spacing: 0.08em; margin-bottom: 32px;
+  opacity: 0; transform: translateY(16px);
+}
+.v4-overline .v4-dot-green {
+  width: 6px; height: 6px; border-radius: 50%; background: #10b981;
+  box-shadow: 0 0 8px rgba(16,185,129,0.5); animation: v4Blink 2s infinite;
+}
+@keyframes v4Blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+.v4-h1 {
+  font-family: 'Space Grotesk', var(--font-display);
+  font-size: clamp(2.4rem, 5.8vw, 4.6rem);
+  font-weight: 700; color: var(--text);
+  letter-spacing: -0.04em; line-height: 1.06; margin-bottom: 22px;
+}
+.v4-h1 .v4-line { display: block; overflow: hidden; }
+.v4-h1 .v4-line-inner { display: inline-block; transform: translateY(105%); }
+.v4-h1 .v4-serif {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400; font-style: italic; color: var(--accent-light);
+}
+
+.v4-hero-p {
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem); font-weight: 300;
+  color: var(--text-secondary); max-width: 540px;
+  margin: 0 auto 38px; line-height: 1.75;
+  opacity: 0; transform: translateY(20px);
+}
+.v4-hero-btns {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  opacity: 0; transform: translateY(20px);
+}
+.v4-hero-trust {
+  display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
+  margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
+  opacity: 0; transform: translateY(14px);
+}
+.v4-hero-trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.76rem; font-weight: 500; color: var(--text-muted);
+}
+.v4-hero-trust-item svg {
+  width: 14px; height: 14px; stroke: var(--accent-light);
+  fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.v4-scroll-cue {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0;
+}
+.v4-scroll-cue span {
+  font-size: 0.6rem; font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted);
+}
+.v4-scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, var(--accent-light), transparent);
+  animation: v4ScrollPulse 2.4s infinite;
+}
+@keyframes v4ScrollPulse {
+  0%{opacity:0;transform:scaleY(0);transform-origin:top}
+  30%{opacity:1;transform:scaleY(1)}
+  70%{opacity:1;transform:scaleY(1);transform-origin:bottom}
+  100%{opacity:0;transform:scaleY(0);transform-origin:bottom}
+}
+
+.v4-marquee {
+  padding: 44px 0; border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border); overflow: hidden;
+}
+.v4-marquee-track {
+  display: flex; animation: v4Marquee 28s linear infinite; width: max-content;
+}
+.v4-marquee-item {
+  flex-shrink: 0; font-family: 'Space Grotesk', var(--font-display);
+  font-size: clamp(0.85rem, 1.3vw, 1.1rem); font-weight: 600;
+  color: var(--text-muted); padding: 0 36px; white-space: nowrap;
+  display: flex; align-items: center; gap: 14px;
+}
+.v4-marquee-sep {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent); opacity: 0.5;
+}
+@keyframes v4Marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+@media (max-width: 600px) {
+  .v4-hero { padding: calc(var(--nav-h) + 10px) 16px 0; }
+  .v4-hero-btns { flex-direction: column; }
+  .v4-hero-btns .btn { width: 100%; justify-content: center; }
+}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMXDCX28"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+<!-- ═══ V4 LOADER ═══ -->
+<div class="v4-loader" id="v4Loader">
+  <img src="assets/logo nexboost.svg" alt="" class="v4-loader-logo">
+  <div class="v4-loader-track"><div class="v4-loader-fill"></div></div>
+</div>
+
+<!-- ═══ V4 CURSOR ═══ -->
+<div class="v4-ring" id="v4Ring"></div>
+<div class="v4-dot" id="v4Dot"></div>
+
+<!-- ═══ V4 PROGRESS ═══ -->
+<div class="v4-progress" id="v4Progress"></div>
 
 <div class="noise" aria-hidden="true"></div>
 
@@ -82,67 +261,66 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero" id="accueil">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-grid" aria-hidden="true"></div>
-  <canvas id="particles-canvas" aria-hidden="true"></canvas>
-  <div class="container hero-split">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="dot" aria-hidden="true"></span>
-        Agence digitale · Valenciennes
-      </div>
-      <h1>Vos clients vous cherchent en ligne.<br><span class="gradient-text">On fait en sorte qu'ils vous trouvent.</span></h1>
-      <p class="hero-description">Site web, visibilité sur Google, réseaux sociaux — on s'occupe de tout pour que vous puissiez vous concentrer sur votre métier. Pas de jargon, pas de contrat longue durée. Juste des résultats.</p>
-      <div class="hero-buttons">
-        <a href="#contact" class="btn btn-primary">
-          Parlez-nous de votre projet
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-        <a href="#tarifs" class="btn btn-outline">Découvrir nos tarifs</a>
-      </div>
-      <div class="hero-reassurance">
-        <div class="hero-reassurance-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span>Sans engagement</span>
-        </div>
-        <div class="hero-reassurance-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Devis gratuit</span>
-        </div>
-        <div class="hero-reassurance-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span>Réponse sous 24h</span>
-        </div>
-      </div>
+<!-- ═══ HERO V4 ═══ -->
+<section class="v4-hero" id="accueil">
+  <div class="v4-hero-glow" id="v4Glow"></div>
+  <div class="v4-hero-grid" aria-hidden="true"></div>
+  <div class="v4-hero-inner" id="v4HeroInner">
+    <div class="v4-overline">
+      <span class="v4-dot-green"></span>
+      Agence marketing digital · Valenciennes
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-card hero-card-1">
-        <div class="hero-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-        </div>
-        <span>Site vitrine</span>
-        <small>Design & SEO</small>
+    <h1 class="v4-h1">
+      <span class="v4-line"><span class="v4-line-inner">Vos clients vous cherchent.</span></span>
+      <span class="v4-line"><span class="v4-line-inner">On fait en sorte qu'ils</span></span>
+      <span class="v4-line"><span class="v4-line-inner"><span class="v4-serif">vous trouvent.</span></span></span>
+    </h1>
+    <p class="v4-hero-p">Site web, visibilité sur Google, réseaux sociaux — on s'occupe de tout pour que vous puissiez vous concentrer sur votre métier. Sans jargon, sans engagement. Juste des résultats.</p>
+    <div class="v4-hero-btns">
+      <a href="#contact" class="btn btn-primary">
+        Parlez-nous de votre projet
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="#tarifs" class="btn btn-outline">Découvrir nos tarifs</a>
+    </div>
+    <div class="v4-hero-trust">
+      <div class="v4-hero-trust-item">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span>Sans engagement</span>
       </div>
-      <div class="hero-card hero-card-2">
-        <div class="hero-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
-        </div>
-        <span>Visibilité Google</span>
-        <small>+150% de trafic</small>
+      <div class="v4-hero-trust-item">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Devis gratuit</span>
       </div>
-      <div class="hero-card hero-card-3">
-        <div class="hero-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <span>Réseaux sociaux</span>
-        <small>Stratégie & contenu</small>
+      <div class="v4-hero-trust-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Réponse sous 24h</span>
       </div>
-      <div class="hero-glow-ring"></div>
     </div>
   </div>
+  <div class="v4-scroll-cue" id="v4ScrollCue">
+    <span>Scroll</span>
+    <div class="v4-scroll-line"></div>
+  </div>
 </section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="v4-marquee">
+  <div class="v4-marquee-track">
+    <div class="v4-marquee-item">Sites web <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">SEO local <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Réseaux sociaux <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Identité visuelle <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Photo & drone <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Google Ads <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Sites web <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">SEO local <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Réseaux sociaux <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Identité visuelle <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Photo & drone <span class="v4-marquee-sep"></span></div>
+    <div class="v4-marquee-item">Google Ads <span class="v4-marquee-sep"></span></div>
+  </div>
+</div>
 
 <!-- ═══ SERVICES ═══ -->
 <section class="services" id="services">
@@ -645,6 +823,111 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <span class="toast-text"></span>
 </div>
 
+<!-- V4 Hero Script -->
+<script>
+(function(){
+  // Loader
+  var loader = document.getElementById('v4Loader');
+  setTimeout(function(){ loader.classList.add('done'); v4HeroReveal(); }, 2400);
+
+  // Cursor
+  var ring = document.getElementById('v4Ring'), dotEl = document.getElementById('v4Dot');
+  if (window.matchMedia('(pointer: fine)').matches && ring && dotEl) {
+    var mx=0,my=0,rx=0,ry=0,dxc=0,dyc=0;
+    document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
+    (function cl(){
+      rx+=(mx-rx)*0.09; ry+=(my-ry)*0.09;
+      dxc+=(mx-dxc)*0.28; dyc+=(my-dyc)*0.28;
+      ring.style.left=rx+'px'; ring.style.top=ry+'px';
+      dotEl.style.left=dxc+'px'; dotEl.style.top=dyc+'px';
+      requestAnimationFrame(cl);
+    })();
+    document.querySelectorAll('a,button').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ ring.classList.add('hover'); });
+      el.addEventListener('mouseleave', function(){ ring.classList.remove('hover'); });
+    });
+  }
+
+  // Progress bar
+  var prog = document.getElementById('v4Progress');
+  window.addEventListener('scroll', function(){
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if(max > 0) prog.style.width = (window.scrollY / max * 100) + '%';
+  }, {passive:true});
+
+  // Hero reveal
+  function v4HeroReveal(){
+    var overline = document.querySelector('.v4-overline');
+    var lines = document.querySelectorAll('.v4-h1 .v4-line-inner');
+    var p = document.querySelector('.v4-hero-p');
+    var btns = document.querySelector('.v4-hero-btns');
+    var trust = document.querySelector('.v4-hero-trust');
+    var cue = document.getElementById('v4ScrollCue');
+
+    setTimeout(function(){
+      overline.style.transition='opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+      overline.style.opacity=1; overline.style.transform='translateY(0)';
+    }, 100);
+    lines.forEach(function(l,i){
+      setTimeout(function(){
+        l.style.transition='transform 0.9s cubic-bezier(0.16,1,0.3,1)';
+        l.style.transform='translateY(0)';
+      }, 300 + i*140);
+    });
+    setTimeout(function(){
+      p.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+      p.style.opacity=1; p.style.transform='translateY(0)';
+    }, 900);
+    setTimeout(function(){
+      btns.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+      btns.style.opacity=1; btns.style.transform='translateY(0)';
+    }, 1050);
+    setTimeout(function(){
+      trust.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+      trust.style.opacity=1; trust.style.transform='translateY(0)';
+    }, 1200);
+    setTimeout(function(){
+      cue.style.transition='opacity 0.8s'; cue.style.opacity=1;
+    }, 1600);
+  }
+
+  // Hero parallax
+  var glow = document.getElementById('v4Glow');
+  var heroInner = document.getElementById('v4HeroInner');
+  var heroEl = document.querySelector('.v4-hero');
+  if(heroEl){
+    heroEl.addEventListener('mousemove', function(e){
+      var rx2 = (e.clientX/window.innerWidth - 0.5)*2;
+      var ry2 = (e.clientY/window.innerHeight - 0.5)*2;
+      glow.style.transform = 'translate(calc(-50% + '+rx2*50+'px), calc(-50% + '+ry2*30+'px))';
+      heroInner.style.transform = 'translate('+rx2*-5+'px, '+ry2*-3+'px)';
+    });
+    heroEl.addEventListener('mouseleave', function(){
+      glow.style.transform='translate(-50%,-50%)'; heroInner.style.transform='';
+    });
+  }
+
+  // Hero scroll fade
+  window.addEventListener('scroll', function(){
+    if(!heroInner) return;
+    var p2 = Math.min(window.scrollY / (window.innerHeight * 0.55), 1);
+    heroInner.style.opacity = 1 - p2;
+    heroInner.style.filter = 'blur(' + p2*5 + 'px)';
+  }, {passive:true});
+
+  // Magnetic on buttons
+  document.querySelectorAll('.v4-hero-btns .btn').forEach(function(el){
+    el.addEventListener('mousemove', function(e){
+      var r=el.getBoundingClientRect();
+      var x=(e.clientX-r.left-r.width/2)*0.1;
+      var y=(e.clientY-r.top-r.height/2)*0.1;
+      el.style.transform='translate('+x+'px,'+y+'px)';
+    });
+    el.addEventListener('mouseleave', function(){ el.style.transform=''; });
+  });
+})();
+</script>
+
 <!-- JavaScript -->
 <script src="js/main.js" defer></script>
 
@@ -786,6 +1069,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </form>
 </aside>
 
-<div class="cursor-bubble" id="cursorBubble"></div>
 </body>
 </html>
