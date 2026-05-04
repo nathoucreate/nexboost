@@ -270,14 +270,17 @@ document.getElementById('cartDevisForm').addEventListener('submit', function(e) 
   const company = this.querySelector('[name="devis-company"]').value || 'Non renseignée';
   const email = this.querySelector('[name="devis-email"]').value;
   const phone = this.querySelector('[name="devis-phone"]').value || 'Non renseigné';
+  const activite = this.querySelector('[name="devis-activite"]').value || 'Non renseignée';
+  const budget = this.querySelector('[name="devis-budget"]').value || 'Non renseigné';
+  const delai = this.querySelector('[name="devis-delai"]').value || 'Non renseigné';
   const message = this.querySelector('[name="devis-message"]').value || 'Aucun message';
 
   const subject = 'Demande de devis NexBoost — ' + name;
-  const body = `Nom : ${name}\nEntreprise : ${company}\nEmail : ${email}\nTéléphone : ${phone}\nMessage : ${message}\n\n--- PANIER ---\n${cartSummary}\n\nTotal estimé : ${total.toLocaleString('fr-FR')} € HT`;
+  const body = `Nom : ${name}\nEntreprise : ${company}\nActivité : ${activite}\nEmail : ${email}\nTéléphone : ${phone}\nBudget : ${budget}\nDélai : ${delai}\nMessage : ${message}\n\n--- PANIER ---\n${cartSummary}\n\nTotal estimé : ${total.toLocaleString('fr-FR')} € HT`;
 
   // Try FormSubmit, fallback mailto
   sendViaFormSubmit({
-    name, company, email, phone, message,
+    name, company, activite, email, phone, budget, delai, message,
     panier: cartSummary,
     total: total.toLocaleString('fr-FR') + ' € HT',
     _subject: subject
@@ -381,6 +384,7 @@ document.querySelectorAll('.form-group input, .form-group textarea').forEach(fie
 //  FAQ ACCORDION
 // ═══════════════════════════════════════
 document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.setAttribute('aria-expanded', 'false');
   btn.addEventListener('click', () => {
     const item = btn.parentElement;
     const answer = item.querySelector('.faq-answer');
@@ -390,12 +394,14 @@ document.querySelectorAll('.faq-question').forEach(btn => {
     document.querySelectorAll('.faq-item.open').forEach(openItem => {
       openItem.classList.remove('open');
       openItem.querySelector('.faq-answer').style.maxHeight = '0';
+      openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
     });
 
     // Open if wasn't open
     if (!isOpen) {
       item.classList.add('open');
       answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
     }
   });
 });

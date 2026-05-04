@@ -251,8 +251,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
   (function() {
-    var theme = localStorage.getItem('theme');
-    if (theme) {
+    var theme = localStorage.getItem('nexboost-theme');
+    if (theme && theme !== 'dark') {
       document.documentElement.setAttribute('data-theme', theme);
     }
   })();

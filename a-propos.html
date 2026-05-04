@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WMXDCX28');</script>
+<!-- End Google Tag Manager -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A propos — Nathan Lepretre | NexBoost</title>
+<meta name="description" content="Decouvrez l'histoire de Nathan Lepretre, fondateur de NexBoost. Ne a la campagne, entoure d'artisans et de commercants, il a cree NexBoost pour les aider a etre visibles en ligne.">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="canonical" href="https://nexboost.fr/a-propos.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nexboost.fr/a-propos.html">
+<meta property="og:title" content="A propos — Nathan Lepretre | NexBoost">
+<meta property="og:description" content="L'histoire derriere NexBoost. Pourquoi j'ai decide d'aider les artisans et commercants a etre visibles en ligne.">
+<meta property="og:image" content="https://nexboost.fr/assets/og-image.png">
+<meta property="og:locale" content="fr_FR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet"></noscript>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.about-hero {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--nav-h) + 40px) 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.about-hero-glow {
+  position: absolute;
+  width: 700px; height: 700px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 65%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+.about-hero-inner {
+  position: relative; z-index: 2;
+  max-width: 700px;
+}
+.about-overline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 18px; border-radius: 100px;
+  border: 1px solid var(--border); background: rgba(99,102,241,0.06);
+  font-size: 0.72rem; font-weight: 600; color: var(--accent-light);
+  letter-spacing: 0.08em; margin-bottom: 28px;
+}
+.about-h1 {
+  font-family: 'Space Grotesk', var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700; color: var(--text);
+  letter-spacing: -0.03em; line-height: 1.1;
+  margin-bottom: 20px;
+}
+.about-h1 .serif {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400; font-style: italic; color: var(--accent-light);
+}
+.about-hero-p {
+  font-size: clamp(0.92rem, 1.3vw, 1.05rem); font-weight: 300;
+  color: var(--text-secondary); max-width: 560px;
+  margin: 0 auto; line-height: 1.75;
+}
+
+.about-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+}
+.about-section {
+  margin-bottom: 72px;
+}
+.about-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.about-section p {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.about-section p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.about-highlight {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 28px 32px;
+  margin: 32px 0;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.5;
+}
+.about-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 36px;
+}
+.about-value-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: all 0.4s var(--ease);
+}
+.about-value-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+}
+.about-value-card h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.about-value-card p {
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.about-cta {
+  text-align: center;
+  padding: 64px 24px;
+  border-top: 1px solid var(--border);
+}
+.about-cta h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+.about-cta p {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .about-values { grid-template-columns: 1fr; }
+  .about-highlight { padding: 22px 20px; font-size: 1.05rem; }
+}
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMXDCX28"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="noise" aria-hidden="true"></div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<header>
+<nav class="nav" id="nav" aria-label="Navigation principale">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" title="NexBoost — Agence marketing digital Valenciennes">
+      <img src="assets/logo nexboost.svg" alt="NexBoost — Agence marketing digital Valenciennes" class="logo-img">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#tarifs">Tarifs</a>
+      <a href="a-propos.html" style="color:var(--text)">A propos</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="blog/">Blog</a>
+      <a href="index.html#tarifs" class="nav-cta">Voir les tarifs</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="theme-toggle" id="themeToggle" aria-label="Changer de theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main>
+
+<!-- ═══ HERO ═══ -->
+<section class="about-hero">
+  <div class="about-hero-glow" aria-hidden="true"></div>
+  <div class="about-hero-inner">
+    <div class="about-overline">A propos de NexBoost</div>
+    <h1 class="about-h1">
+      Je viens du meme monde<br>que <span class="serif">vous.</span>
+    </h1>
+    <p class="about-hero-p">Derriere NexBoost, il y a Nathan. Un gars du Nord, eleve entre les champs et les ateliers, qui a decide d'aider ceux qui travaillent dur a etre enfin visibles en ligne.</p>
+  </div>
+</section>
+
+<!-- ═══ CONTENT ═══ -->
+<div class="about-content">
+
+  <div class="about-section">
+    <h2>Grandir au milieu des artisans</h2>
+    <p>J'ai grandi dans un petit village pres de Valenciennes. Mon pere est artisan. Ma mere a tenu un commerce. Autour de moi, il y avait des boulangers qui se levaient a 4h du matin, des coiffeuses qui connaissaient chaque client par son prenom, des restaurateurs qui mettaient leur coeur dans chaque assiette.</p>
+    <p>Ces gens-la sont les meilleurs dans ce qu'ils font. Ils ont du talent, de la passion, une vraie relation avec leurs clients. Mais quand quelqu'un les cherchait sur Google ? <strong>Rien.</strong> Pas de site. Pas de fiche. Invisible.</p>
+    <p>Pendant ce temps, des concurrents parfois moins bons mais plus malins sur Internet leur piquaient des clients. Ca m'a toujours revolte.</p>
+  </div>
+
+  <div class="about-highlight">
+    "Le talent ne suffit pas. Il faut qu'on vous trouve."
+  </div>
+
+  <div class="about-section">
+    <h2>Pourquoi j'ai cree NexBoost</h2>
+    <p>En me formant au marketing digital, j'ai realise a quel point les outils existants n'etaient pas faits pour les artisans et les petits commercants. Des agences qui parlent en anglais, des devis a 5 000 euros pour un site vitrine, des tableaux de bord incomprehensibles... <strong>Tout etait pense pour les grandes boites.</strong></p>
+    <p>J'ai voulu creer l'inverse. Une agence qui parle votre langue. Qui comprend que vous n'avez pas le temps de vous former au SEO entre deux chantiers. Qui propose des tarifs honnetes, sans engagement, sans jargon.</p>
+    <p>NexBoost, c'est l'agence que mon pere aurait aimee trouver quand il cherchait a developper son activite. <strong>Celle qui vous ecoute, qui vous explique, et qui vous livre des resultats concrets.</strong></p>
+  </div>
+
+  <div class="about-section">
+    <h2>Ce que je crois profondement</h2>
+    <p>Je suis convaincu que chaque artisan, chaque commercant, chaque entrepreneur local merite d'etre visible en ligne. Pas parce que c'est a la mode, mais parce que <strong>vos clients vous cherchent deja sur Internet</strong>. Et si vous n'y etes pas, c'est quelqu'un d'autre qu'ils trouvent.</p>
+    <p>Je crois aussi que le marketing ne devrait pas etre un casse-tete. Pas besoin de comprendre les algorithmes de Google ou les tendances TikTok. Vous me dites ce que vous faites, je m'occupe de faire en sorte qu'on vous trouve.</p>
+
+    <div class="about-values">
+      <div class="about-value-card">
+        <h3>A votre ecoute</h3>
+        <p>Je prends le temps de comprendre votre metier, vos clients, vos contraintes. Pas de solution generique. Du sur-mesure, a chaque fois.</p>
+      </div>
+      <div class="about-value-card">
+        <h3>Zero jargon</h3>
+        <p>Je vous parle comme un voisin, pas comme un consultant. Si vous ne comprenez pas quelque chose, c'est ma faute, pas la votre.</p>
+      </div>
+      <div class="about-value-card">
+        <h3>Des resultats, pas des promesses</h3>
+        <p>Je ne vends pas du reve. Je vous montre ce qui marche, combien ca coute, et ce que ca vous rapporte concretement.</p>
+      </div>
+      <div class="about-value-card">
+        <h3>Ancre localement</h3>
+        <p>Je connais Valenciennes, le Nord, les Hauts-de-France. Je travaille avec des gens d'ici, pour des gens d'ici.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <h2>Concretement, comment ca se passe ?</h2>
+    <p>Vous m'appelez ou vous m'envoyez un message. On echange 15 minutes. Vous me parlez de votre activite, je vous dis honnetement ce que je peux faire pour vous. Si ca vous convient, on demarre. Sinon, pas de probleme — <strong>le conseil est gratuit et sans engagement.</strong></p>
+    <p>Pendant tout le projet, vous avez un seul interlocuteur : moi. Pas un robot, pas un stagiaire, pas un call center. Un humain qui repond en moins de 24 heures et qui connait votre dossier par coeur.</p>
+  </div>
+</div>
+
+<!-- ═══ CTA ═══ -->
+<section class="about-cta">
+  <h2>On se parle ?</h2>
+  <p>Racontez-moi votre activite. En 15 minutes, je vous dis ce que je peux faire pour vous. Gratuit, sans engagement, et avec un vrai humain au bout du fil.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="index.html#contact" class="btn btn-primary">
+      Parlons de votre projet
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+    <a href="tel:+33788845343" class="btn btn-outline">07 88 84 53 43</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><img src="assets/logo nexboost.svg" alt="NexBoost" class="logo-img"></div>
+        <p>Agence de marketing digital a Valenciennes. On aide les artisans, commercants et TPE a etre visibles en ligne — simplement et efficacement.</p>
+      </div>
+      <nav class="footer-col" aria-label="Navigation pied de page">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#tarifs">Tarifs</a></li>
+          <li><a href="a-propos.html">A propos</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="blog/">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+33788845343">07 88 84 53 43</a></li>
+          <li><a href="mailto:nathan.lepretre@nexboost.fr">nathan.lepretre@nexboost.fr</a></li>
+          <li><a href="index.html#contact">Demander un devis</a></li>
+          <li><span style="color:var(--text-secondary)">Valenciennes, France</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 NexBoost. Tous droits reserves.</span>
+      <a href="mentions-legales.html" class="footer-legal-link">Mentions legales</a>
+      <span>Cree avec passion a Valenciennes</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme
+var saved = localStorage.getItem('nexboost-theme');
+if (saved && saved !== 'dark') document.documentElement.setAttribute('data-theme', saved);
+
+var themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', function() {
+  var current = document.documentElement.getAttribute('data-theme');
+  var next = current === 'light' ? 'dark' : 'light';
+  if (next === 'dark') document.documentElement.removeAttribute('data-theme');
+  else document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('nexboost-theme', next);
+});
+
+// Nav
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+var menuToggle = document.getElementById('menuToggle');
+var navLinks = document.getElementById('navLinks');
+menuToggle.addEventListener('click', function() {
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+</script>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "A propos — Nathan Lepretre | NexBoost",
+  "description": "L'histoire de Nathan Lepretre, fondateur de NexBoost, agence marketing digital a Valenciennes.",
+  "url": "https://nexboost.fr/a-propos.html",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Nathan Lepretre",
+    "jobTitle": "Fondateur",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "NexBoost",
+      "url": "https://nexboost.fr"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Valenciennes",
+      "addressRegion": "Hauts-de-France",
+      "addressCountry": "FR"
+    }
+  }
+}
+</script>
+</body>
+</html>
