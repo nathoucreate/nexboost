@@ -430,6 +430,8 @@ const botResponses = {
 
   engagement: `<b>Aucun engagement</b> ! Chez NexBoost :\n\n✅ Pas de contrat longue durée\n✅ Devis gratuit et sans obligation\n✅ Vous payez uniquement ce que vous commandez\n✅ Réponse sous 24h\n\nOn veut gagner votre confiance par la qualité, pas par un contrat.`,
 
+  apropos: `NexBoost a été fondé par <b>Nathan</b>, un passionné du Nord qui a vu — ici et jusqu'au Vietnam — le même problème : <b>les meilleurs artisans et commerçants sont souvent les moins visibles en ligne</b>.\n\nFace aux grands, il faut lutter. NexBoost existe pour ça : booster votre activité avec un marketing humain, accessible et sans jargon.\n\n<a href="a-propos.html" style="color:var(--accent-light)">Lire l'histoire complète →</a>`,
+
   default: `Je n'ai pas de réponse précise à cette question, mais je peux vous aider sur :\n\n💰 Nos <b>tarifs</b>\n🛠 Nos <b>services</b>\n📋 Notre <b>fonctionnement</b>\n📞 Comment nous <b>contacter</b>\n⏱ Nos <b>délais</b>\n🤝 Notre politique <b>sans engagement</b>\n\nOu contactez-nous directement : <a href="#contact" style="color:var(--accent-light)">formulaire de contact →</a>`
 };
 
@@ -441,6 +443,7 @@ function detectIntent(msg) {
   if (/contact|joindre|appel|mail|téléph|adresse|où/.test(m)) return 'contact';
   if (/délai|temps|durée|combien de temps|livr|rapide/.test(m)) return 'delai';
   if (/engagement|contrat|obligation|annul|sans engagement/.test(m)) return 'engagement';
+  if (/qui|fondateur|nathan|histoire|propos|parcours|créé|equipe/.test(m)) return 'apropos';
   if (/bonjour|salut|hello|hey|coucou/.test(m)) return 'salut';
   if (/merci|super|parfait|génial|top/.test(m)) return 'merci';
   return 'default';
