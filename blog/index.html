@@ -33,118 +33,491 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="../css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+
 <style>
-  .blog-hero {
-    text-align: center;
-    padding: 120px 20px 60px;
-  }
-  .blog-hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    margin-bottom: 16px;
-  }
-  .blog-hero p {
-    font-size: 1.15rem;
-    opacity: 0.75;
-    max-width: 560px;
-    margin: 0 auto;
-  }
-  .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    max-width: 900px;
-    margin: 0 auto 80px;
-    padding: 0 20px;
-  }
-  @media (max-width: 680px) {
-    .blog-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  .blog-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 32px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .blog-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
-  }
-  .blog-card-date {
-    font-size: 0.85rem;
-    opacity: 0.55;
-    margin-bottom: 12px;
-  }
-  .blog-card h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    line-height: 1.3;
-  }
-  .blog-card p {
-    font-size: 0.95rem;
-    opacity: 0.7;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .blog-card-link {
-    margin-top: auto;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--accent, #6c5ce7);
-    text-decoration: none;
-  }
-  .blog-card-link:hover {
-    text-decoration: underline;
-  }
-  .blog-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 18px 20px;
-  }
-  .blog-nav .logo-img {
-    height: 170px;
-  }
-  .blog-nav-back {
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 10px 20px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: inherit;
-    transition: background 0.2s;
-  }
-  .blog-nav-back:hover {
-    background: var(--bg-card);
-  }
-  .blog-footer {
-    text-align: center;
-    padding: 40px 20px;
-    font-size: 0.85rem;
-    opacity: 0.6;
-    border-top: 1px solid var(--border);
-  }
-  .blog-footer a {
-    color: inherit;
-    text-decoration: underline;
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #050508;
+  --bg-soft: #0a0a12;
+  --bg-card: #0e0e18;
+  --bg-card-hover: #131320;
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-glow: rgba(99,102,241,0.12);
+  --text: #f0eff2;
+  --text-sec: #9294a0;
+  --text-muted: #5c5e6a;
+  --border: rgba(255,255,255,0.06);
+  --radius: 16px;
+  --font: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+  --bg: #f7f7fa;
+  --bg-soft: #ededf2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f5f9;
+  --accent: #4f46e5;
+  --accent-light: #6366f1;
+  --accent-glow: rgba(79,70,229,0.08);
+  --text: #1a1a2e;
+  --text-sec: #555770;
+  --text-muted: #7a7c8a;
+  --border: rgba(0,0,0,0.07);
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-sec);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ─── NAV ─── */
+.blog-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+.blog-nav .logo-img { height: 130px; filter: brightness(0) invert(1); }
+[data-theme="light"] .blog-nav .logo-img { filter: none; }
+.blog-nav-right {
+  display: flex; align-items: center; gap: 12px;
+}
+.blog-nav-link {
+  font-size: 0.8rem; font-weight: 500;
+  color: var(--text-muted);
+  padding: 9px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: border-color 0.3s, background 0.3s, color 0.3s;
+}
+.blog-nav-link:hover {
+  border-color: var(--accent);
+  color: var(--accent-light);
+  background: var(--accent-glow);
+}
+.theme-btn {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s;
+}
+.theme-btn:hover { border-color: var(--accent); color: var(--accent-light); }
+.theme-btn svg { width: 18px; height: 18px; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+.theme-btn:hover svg { transform: rotate(25deg); }
+.theme-btn .icon-sun { display: none; }
+.theme-btn .icon-moon { display: block; }
+[data-theme="light"] .theme-btn .icon-sun { display: block; }
+[data-theme="light"] .theme-btn .icon-moon { display: none; }
+
+/* ─── HERO ─── */
+.blog-hero {
+  text-align: center;
+  padding: 80px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.blog-hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+.blog-hero-overline {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center; gap: 8px;
+}
+.blog-hero-overline::before {
+  content: ''; width: 20px; height: 1px; background: var(--accent);
+}
+.blog-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 16px;
+  position: relative;
+}
+.blog-hero h1 .serif-accent {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent-light);
+}
+.blog-hero-desc {
+  font-size: 1rem;
+  color: var(--text-sec);
+  max-width: 540px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.blog-hero-stats {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  max-width: 500px;
+  margin: 0 auto;
+}
+.blog-stat {
+  text-align: center;
+}
+.blog-stat-val {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  line-height: 1;
+}
+.blog-stat-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ─── FEATURED ARTICLE ─── */
+.blog-featured {
+  max-width: 1100px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+}
+.featured-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+.featured-card:hover {
+  border-color: rgba(99,102,241,0.2);
+  box-shadow: 0 20px 60px rgba(99,102,241,0.05);
+}
+.featured-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.featured-card:hover::before { opacity: 1; }
+.featured-badge {
+  display: inline-flex;
+  align-items: center; gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: var(--accent-glow);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.featured-badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.featured-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.featured-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+.featured-excerpt {
+  font-size: 0.92rem;
+  color: var(--text-sec);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.featured-cta {
+  display: inline-flex;
+  align-items: center; gap: 8px;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: white;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.featured-cta:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(99,102,241,0.2);
+}
+.featured-cta svg { width: 14px; height: 14px; transition: transform 0.3s; }
+.featured-cta:hover svg { transform: translateX(3px); }
+
+.featured-visual {
+  background: linear-gradient(160deg, var(--bg-soft), var(--bg-card-hover));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+.featured-visual-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-style: italic;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.4;
+}
+.featured-visual-text .hl { color: var(--accent-light); }
+
+@media (max-width: 768px) {
+  .featured-card { grid-template-columns: 1fr; padding: 32px 24px; }
+  .featured-visual { min-height: 160px; }
+}
+
+/* ─── ARTICLES GRID ─── */
+.blog-section-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.blog-section-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.blog-section-count {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 5px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+}
+@media (max-width: 900px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
+
+.blog-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.blog-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(99,102,241,0.2);
+  box-shadow: 0 16px 48px rgba(99,102,241,0.05);
+}
+.blog-card:hover::after { opacity: 1; }
+
+.blog-card-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-glow);
+  line-height: 1;
+  margin-bottom: 14px;
+  opacity: 0.6;
+}
+[data-theme="light"] .blog-card-num { color: rgba(79,70,229,0.12); }
+.blog-card-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.blog-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.blog-card p {
+  font-size: 0.84rem;
+  color: var(--text-sec);
+  line-height: 1.65;
+  margin-bottom: 18px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-card-link {
+  display: inline-flex;
+  align-items: center; gap: 6px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--accent-light);
+  transition: gap 0.3s;
+}
+.blog-card-link:hover { gap: 10px; }
+.blog-card-link svg {
+  width: 14px; height: 14px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ─── CTA SECTION ─── */
+.blog-cta {
+  max-width: 700px;
+  margin: 0 auto 80px;
+  padding: 0 24px;
+  text-align: center;
+}
+.blog-cta-inner {
+  background: linear-gradient(135deg, #3730a3, var(--accent), var(--accent-light));
+  border-radius: 20px;
+  padding: 56px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.blog-cta-inner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05; pointer-events: none;
+}
+.blog-cta-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+  position: relative;
+}
+.blog-cta-inner p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 420px;
+  margin-left: auto; margin-right: auto;
+}
+.blog-cta-btn {
+  display: inline-flex;
+  align-items: center; gap: 8px;
+  padding: 14px 28px;
+  background: white;
+  color: #3730a3;
+  font-weight: 700;
+  font-size: 0.84rem;
+  border-radius: 8px;
+  position: relative;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.blog-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+.blog-cta-btn svg { width: 14px; height: 14px; transition: transform 0.3s; }
+.blog-cta-btn:hover svg { transform: translateX(3px); }
+
+/* ─── FOOTER ─── */
+.blog-footer {
+  text-align: center;
+  padding: 40px 24px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+.blog-footer a {
+  color: var(--accent-light);
+  text-decoration: none;
+}
+.blog-footer a:hover { text-decoration: underline; }
+
+/* ─── NOISE ─── */
+.noise {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+[data-theme="light"] .noise { opacity: 0.012; }
+
+/* ─── REVEAL ─── */
+[data-reveal] {
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+[data-reveal].visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -153,63 +526,155 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
+<div class="noise" aria-hidden="true"></div>
+
 <header>
   <nav class="blog-nav" aria-label="Navigation blog">
     <a href="../index.html" title="NexBoost — Retour au site">
       <img src="../assets/logo nexboost.svg" alt="NexBoost" class="logo-img">
     </a>
-    <a href="../index.html" class="blog-nav-back">Retour au site</a>
+    <div class="blog-nav-right">
+      <a href="../index.html" class="blog-nav-link">Retour au site</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Changer de th&egrave;me">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
   </nav>
 </header>
 
 <main>
-  <section class="blog-hero">
-    <h1>Blog NexBoost</h1>
-    <p>Conseils et astuces pour d&eacute;velopper votre activit&eacute; en ligne</p>
+  <!-- ═══ HERO ═══ -->
+  <section class="blog-hero" data-reveal>
+    <div class="blog-hero-glow" aria-hidden="true"></div>
+    <div class="blog-hero-overline">Blog NexBoost</div>
+    <h1>Des conseils concrets pour<br><span class="serif-accent">developper votre visibilite</span></h1>
+    <p class="blog-hero-desc">Pas de blabla marketing. Juste des guides pratiques, ecrits pour les artisans et commercants qui veulent attirer plus de clients en ligne.</p>
+    <div class="blog-hero-stats">
+      <div class="blog-stat">
+        <div class="blog-stat-val">4</div>
+        <div class="blog-stat-label">Articles</div>
+      </div>
+      <div class="blog-stat">
+        <div class="blog-stat-val">100%</div>
+        <div class="blog-stat-label">Gratuit</div>
+      </div>
+      <div class="blog-stat">
+        <div class="blog-stat-val">5 min</div>
+        <div class="blog-stat-label">Lecture moyenne</div>
+      </div>
+    </div>
   </section>
 
+  <!-- ═══ FEATURED ═══ -->
+  <section class="blog-featured" data-reveal>
+    <a href="google-business-profile-optimiser-fiche.html" class="featured-card">
+      <div>
+        <div class="featured-badge">Dernier article</div>
+        <div class="featured-date">30 avril 2026</div>
+        <h2 class="featured-title">Comment optimiser votre fiche Google Business Profile en 2026</h2>
+        <p class="featured-excerpt">Guide complet pour tirer le maximum de votre fiche Google gratuite : photos, avis, posts et astuces pour apparaitre en tete des recherches locales.</p>
+        <span class="featured-cta">
+          Lire l'article
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </span>
+      </div>
+      <div class="featured-visual">
+        <p class="featured-visual-text">"76% des recherches locales menent a une visite dans les <span class="hl">24 heures</span>."</p>
+      </div>
+    </a>
+  </section>
+
+  <!-- ═══ ALL ARTICLES ═══ -->
+  <div class="blog-section-header" data-reveal>
+    <h2 class="blog-section-title">Tous les articles</h2>
+    <span class="blog-section-count">4 articles</span>
+  </div>
+
   <section class="blog-grid">
-    <article class="blog-card">
-      <span class="blog-card-date">30 avril 2026</span>
-      <h2>Comment optimiser votre fiche Google Business Profile en 2026</h2>
-      <p>Guide complet pour tirer le maximum de votre fiche Google gratuite : photos, avis, posts et astuces pour appara&icirc;tre en t&ecirc;te des recherches locales.</p>
-      <a href="google-business-profile-optimiser-fiche.html" class="blog-card-link">Lire l'article</a>
-    </article>
-
-    <article class="blog-card">
+    <article class="blog-card" data-reveal>
+      <div class="blog-card-num">01</div>
       <span class="blog-card-date">8 mars 2026</span>
-      <h2>Strat&eacute;gie digitale pour PME et artisans : par o&ugrave; commencer ?</h2>
-      <p>Comment construire une strat&eacute;gie digitale efficace quand on est artisan ou PME ? D&eacute;couvrez les &eacute;tapes cl&eacute;s pour d&eacute;velopper votre pr&eacute;sence en ligne.</p>
-      <a href="strategie-digitale-pme-artisan.html" class="blog-card-link">Lire l'article</a>
+      <h2>Strategie digitale pour PME et artisans : par ou commencer ?</h2>
+      <p>Comment construire une strategie digitale efficace quand on est artisan ou PME ? Les etapes cles pour developper votre presence en ligne.</p>
+      <a href="strategie-digitale-pme-artisan.html" class="blog-card-link">
+        Lire l'article
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
     </article>
 
-    <article class="blog-card">
-      <span class="blog-card-date">27 février 2026</span>
+    <article class="blog-card" data-reveal>
+      <div class="blog-card-num">02</div>
+      <span class="blog-card-date">28 fevrier 2026</span>
+      <h2>Le guide du SEO local pour les debutants</h2>
+      <p>Apprenez les bases du referencement local pour apparaitre en tete des resultats Google dans votre ville.</p>
+      <a href="seo-local-guide-debutant.html" class="blog-card-link">
+        Lire l'article
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </article>
+
+    <article class="blog-card" data-reveal>
+      <div class="blog-card-num">03</div>
+      <span class="blog-card-date">27 fevrier 2026</span>
       <h2>Pourquoi votre entreprise a besoin d'un site web en 2026</h2>
-      <p>D&eacute;couvrez pourquoi un site web professionnel est devenu indispensable pour les artisans et commer&ccedil;ants qui souhaitent attirer de nouveaux clients.</p>
-      <a href="pourquoi-site-web-artisan.html" class="blog-card-link">Lire l'article</a>
+      <p>Decouvrez pourquoi un site web professionnel est devenu indispensable pour attirer de nouveaux clients.</p>
+      <a href="pourquoi-site-web-artisan.html" class="blog-card-link">
+        Lire l'article
+        <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
     </article>
+  </section>
 
-    <article class="blog-card">
-      <span class="blog-card-date">28 février 2026</span>
-      <h2>Le guide du SEO local pour les d&eacute;butants</h2>
-      <p>Apprenez les bases du r&eacute;f&eacute;rencement local pour appara&icirc;tre en t&ecirc;te des r&eacute;sultats Google dans votre ville et votre r&eacute;gion.</p>
-      <a href="seo-local-guide-debutant.html" class="blog-card-link">Lire l'article</a>
-    </article>
+  <!-- ═══ CTA ═══ -->
+  <section class="blog-cta" data-reveal>
+    <div class="blog-cta-inner">
+      <h2>Besoin d'un accompagnement ?</h2>
+      <p>On met en place votre strategie digitale de A a Z. Devis gratuit, sans engagement.</p>
+      <a href="../index.html#contact" class="blog-cta-btn">
+        Discutons de votre projet
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
   </section>
 </main>
 
 <footer class="blog-footer">
-  <p>&copy; 2026 NexBoost. Tous droits r&eacute;serv&eacute;s. <a href="../mentions-legales.html">Mentions l&eacute;gales</a></p>
+  <p>&copy; 2026 NexBoost. Tous droits reserves. <a href="../mentions-legales.html">Mentions legales</a></p>
 </footer>
 
 <script>
-  (function() {
-    var theme = localStorage.getItem('theme');
-    if (theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-    }
-  })();
+(function(){
+  // Theme toggle
+  var saved = localStorage.getItem('nexboost-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+
+  var btn = document.getElementById('themeToggle');
+  btn.addEventListener('click', function(){
+    var current = document.documentElement.getAttribute('data-theme');
+    var next = current === 'light' ? 'dark' : 'light';
+    if (next === 'dark') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('nexboost-theme', next);
+  });
+
+  // Reveal on scroll
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var parent = el.parentElement;
+        var siblings = parent ? Array.from(parent.children).filter(function(c){ return c.hasAttribute('data-reveal'); }) : [];
+        var idx = siblings.indexOf(el);
+        el.style.transitionDelay = (Math.max(0, idx) * 0.08) + 's';
+        el.classList.add('visible');
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ obs.observe(el); });
+})();
 </script>
 </body>
 </html>
