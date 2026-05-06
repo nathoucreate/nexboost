@@ -418,7 +418,7 @@ const chatbotForm = document.getElementById('chatbotForm');
 const chatbotInput = document.getElementById('chatbotInput');
 
 const botResponses = {
-  tarifs: `Voici nos tarifs :\n\n🚀 <b>Sites web</b>\n• Landing page : 300 €\n• Site vitrine (3-5 pages) : 600 €\n• Site e-commerce : 1 000 €\n\n🎨 <b>Identité visuelle</b>\n• Logo : 150 €\n• Flyer recto/verso : 200 €\n• Carte de visite : 90 €\n\n📸 <b>Photo & Vidéo</b>\n• Pack 5 photos : 100 €\n• 3 photos drone : 150 €\n• Vidéo drone (15-30s) : 240 €\n\nTous nos prix sont sans engagement. <a href="#tarifs" style="color:var(--accent-light)">Voir la section tarifs →</a>`,
+  tarifs: `Voici nos tarifs :\n\n🚀 <b>Sites web</b>\n• Landing page : à partir de 490 €\n• Site vitrine (3-5 pages) : à partir de 990 €\n• Site e-commerce : à partir de 1 900 €\n\n🎨 <b>Identité visuelle</b>\n• Logo : 150 €\n• Flyer recto/verso : 200 €\n• Carte de visite : 90 €\n\n📸 <b>Photo & Vidéo</b>\n• Pack 5 photos : 100 €\n• 3 photos drone : 150 €\n• Vidéo drone (15-30s) : 240 €\n\nTous nos prix sont sans engagement. <a href="#tarifs" style="color:var(--accent-light)">Voir la section tarifs →</a>`,
 
   services: `Nous proposons :\n\n🌐 <b>Création de site web</b> — landing page, site vitrine, e-commerce\n📈 <b>SEO local</b> — être trouvé sur Google à Valenciennes\n📱 <b>Réseaux sociaux</b> — stratégie et gestion de contenu\n🎨 <b>Identité visuelle</b> — logo, flyer, carte de visite\n📸 <b>Photo & vidéo drone</b> — mise en valeur de votre activité\n📣 <b>Publicité en ligne</b> — Google Ads, Facebook Ads\n\nOn s'adapte à votre budget et vos besoins. <a href="#services" style="color:var(--accent-light)">Voir nos services →</a>`,
 
