@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page introuvable | NexBoost</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700;800&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.e404 {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.e404-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 65%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+.e404-inner {
+  position: relative; z-index: 2;
+  max-width: 520px;
+}
+.e404-code {
+  font-family: 'Space Grotesk', var(--font-display);
+  font-size: clamp(6rem, 18vw, 10rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light), rgba(99,102,241,0.3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  user-select: none;
+}
+.e404-title {
+  font-family: 'Space Grotesk', var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.e404-title .serif {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent-light);
+}
+.e404-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.e404-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.e404-links {
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.e404-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.3s;
+}
+.e404-links a:hover { color: var(--accent-light); }
+</style>
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<main class="e404">
+  <div class="e404-glow" aria-hidden="true"></div>
+  <div class="e404-inner">
+    <div class="e404-code">404</div>
+    <h1 class="e404-title">Cette page est <span class="serif">introuvable</span></h1>
+    <p class="e404-desc">On dirait que cette page n'existe pas ou a ete deplacee. Pas de panique — votre prochaine destination est juste en dessous.</p>
+    <div class="e404-btns">
+      <a href="index.html" class="btn btn-primary">
+        Retour a l'accueil
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="index.html#contact" class="btn btn-outline">Nous contacter</a>
+    </div>
+    <nav class="e404-links">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#tarifs">Tarifs</a>
+      <a href="a-propos.html">A propos</a>
+      <a href="blog/">Blog</a>
+    </nav>
+  </div>
+</main>
+<script>
+  var saved = localStorage.getItem('nexboost-theme');
+  if (saved && saved !== 'dark') document.documentElement.setAttribute('data-theme', saved);
+</script>
+</body>
+</html>
