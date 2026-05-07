@@ -75,9 +75,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 .about-content {
-  max-width: 760px;
+  max-width: 1140px;
   margin: 0 auto;
   padding: 0 24px 100px;
+}
+.about-section-text {
+  max-width: 720px;
 }
 .about-section {
   margin-bottom: 72px;
@@ -100,25 +103,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   color: var(--text);
   font-weight: 600;
 }
+.about-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  margin-bottom: 72px;
+}
+.about-two-col-reverse { direction: rtl; }
+.about-two-col-reverse > * { direction: ltr; }
+@media (max-width: 900px) {
+  .about-two-col, .about-two-col-reverse {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    direction: ltr;
+  }
+}
 .about-highlight {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  padding: 28px 32px;
-  margin: 32px 0;
+  padding: 40px 36px;
   font-family: 'Instrument Serif', Georgia, serif;
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-style: italic;
   color: var(--text);
   line-height: 1.5;
 }
+.about-visual-card {
+  background: linear-gradient(160deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 280px;
+}
+.about-visual-stat {
+  font-family: 'Space Grotesk', var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.about-visual-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
 .about-values {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
-  margin-top: 36px;
+  margin-top: 48px;
 }
+@media (max-width: 900px) { .about-values { grid-template-columns: 1fr 1fr; } }
 .about-value-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -224,60 +270,92 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══ CONTENT ═══ -->
 <div class="about-content">
 
-  <div class="about-section">
-    <h2>Grandir au milieu des gens qui bossent</h2>
-    <p>J'ai grandi dans le Nord, pres de Valenciennes. Autour de moi, il y avait des boulangers qui se levaient a 4h du matin, des coiffeuses qui connaissaient chaque client par son prenom, des restaurateurs qui mettaient leur coeur dans chaque assiette.</p>
-    <p>Ces gens-la sont les meilleurs dans ce qu'ils font. Ils ont du talent, de la passion, une vraie relation avec leurs clients. Mais quand quelqu'un les cherchait sur Google ? <strong>Rien.</strong> Pas de site. Pas de fiche. Invisible.</p>
-    <p>Pendant ce temps, des concurrents parfois moins bons mais plus malins sur Internet leur piquaient des clients. Ca m'a toujours revolte.</p>
-  </div>
-
-  <div class="about-highlight">
-    "Le talent ne suffit pas. Il faut qu'on vous trouve."
-  </div>
-
-  <div class="about-section">
-    <h2>Le Vietnam : le declic</h2>
-    <p>C'est en voyageant au Vietnam que j'ai pris une vraie claque. La-bas, l'ecart est encore plus brutal qu'ici. D'un cote, les grandes enseignes qui dominent tout. De l'autre, <strong>des milliers de petits commercants et artisans tapis dans l'ombre</strong>, obliges de casser leurs prix en permanence juste pour survivre face aux geants.</p>
-    <p>J'ai vu des gens incroyablement talentueux, passionnes par leur metier, qui n'avaient aucune visibilite. Leur seule arme : baisser les prix encore et encore. C'est une impasse.</p>
-    <p>En rentrant, j'ai regarde autour de moi avec des yeux neufs. <strong>Le meme probleme existe ici.</strong> Les petits se battent avec les moyens du bord pendant que les gros raflent toute la visibilite en ligne. La difference ? Ici, on peut changer la donne. Il suffit des bons outils, au bon prix.</p>
-  </div>
-
-  <div class="about-section">
-    <h2>Pourquoi j'ai cree NexBoost</h2>
-    <p>En me formant au marketing digital, j'ai realise a quel point les outils existants n'etaient pas faits pour les artisans et les petits commercants. Des agences qui parlent en anglais, des devis a 5 000 euros pour un site vitrine, des tableaux de bord incomprehensibles... <strong>Tout etait pense pour les grandes boites.</strong></p>
-    <p>J'ai voulu creer l'inverse. Une agence qui parle votre langue. Qui comprend que vous n'avez pas le temps de vous former au SEO entre deux chantiers. Qui propose des tarifs honnetes, sans engagement, sans jargon.</p>
-    <p><strong>Face aux grands, il faut lutter. Et pour lutter, il faut booster son activite.</strong> C'est exactement pour ca que NexBoost existe. Un avenir plus visible, plus proche que ce que vous pouvez imaginer.</p>
-  </div>
-
-  <div class="about-section">
-    <h2>Ce que je crois profondement</h2>
-    <p>Je suis convaincu que chaque artisan, chaque commercant, chaque entrepreneur local merite d'etre visible en ligne. Pas parce que c'est a la mode, mais parce que <strong>vos clients vous cherchent deja sur Internet</strong>. Et si vous n'y etes pas, c'est quelqu'un d'autre qu'ils trouvent.</p>
-    <p>Je crois aussi que le marketing ne devrait pas etre un casse-tete. Pas besoin de comprendre les algorithmes de Google ou les tendances TikTok. Vous me dites ce que vous faites, je m'occupe de faire en sorte qu'on vous trouve.</p>
-
-    <div class="about-values">
-      <div class="about-value-card">
-        <h3>A votre ecoute</h3>
-        <p>Je prends le temps de comprendre votre metier, vos clients, vos contraintes. Pas de solution generique. Du sur-mesure, a chaque fois.</p>
+  <div class="about-two-col">
+    <div>
+      <div class="about-section" style="margin-bottom:0">
+        <h2>Grandir au milieu des gens qui bossent</h2>
+        <p>J'ai grandi dans le Nord, pres de Valenciennes. Autour de moi, il y avait des boulangers qui se levaient a 4h du matin, des coiffeuses qui connaissaient chaque client par son prenom, des restaurateurs qui mettaient leur coeur dans chaque assiette.</p>
+        <p>Ces gens-la sont les meilleurs dans ce qu'ils font. Ils ont du talent, de la passion, une vraie relation avec leurs clients. Mais quand quelqu'un les cherchait sur Google ? <strong>Rien.</strong> Pas de site. Pas de fiche. Invisible.</p>
+        <p>Pendant ce temps, des concurrents parfois moins bons mais plus malins sur Internet leur piquaient des clients. Ca m'a toujours revolte.</p>
       </div>
-      <div class="about-value-card">
-        <h3>Zero jargon</h3>
-        <p>Je vous parle comme un voisin, pas comme un consultant. Si vous ne comprenez pas quelque chose, c'est ma faute, pas la votre.</p>
+    </div>
+    <div class="about-highlight">
+      "Le talent ne suffit pas. Il faut qu'on vous trouve."
+    </div>
+  </div>
+
+  <div class="about-two-col about-two-col-reverse">
+    <div>
+      <div class="about-section" style="margin-bottom:0">
+        <h2>Le Vietnam : le declic</h2>
+        <p>C'est en voyageant au Vietnam que j'ai pris une vraie claque. La-bas, l'ecart est encore plus brutal qu'ici. D'un cote, les grandes enseignes qui dominent tout. De l'autre, <strong>des milliers de petits commercants et artisans tapis dans l'ombre</strong>, obliges de casser leurs prix en permanence juste pour survivre face aux geants.</p>
+        <p>J'ai vu des gens incroyablement talentueux, passionnes par leur metier, qui n'avaient aucune visibilite. Leur seule arme : baisser les prix encore et encore. C'est une impasse.</p>
+        <p>En rentrant, j'ai regarde autour de moi avec des yeux neufs. <strong>Le meme probleme existe ici.</strong> Les petits se battent avec les moyens du bord pendant que les gros raflent toute la visibilite en ligne. La difference ? Ici, on peut changer la donne.</p>
       </div>
-      <div class="about-value-card">
-        <h3>Des resultats, pas des promesses</h3>
-        <p>Je ne vends pas du reve. Je vous montre ce qui marche, combien ca coute, et ce que ca vous rapporte concretement.</p>
+    </div>
+    <div class="about-visual-card">
+      <div>
+        <div class="about-visual-stat">97%</div>
+        <div class="about-visual-label">des consommateurs cherchent un pro sur Google<br>avant de le contacter</div>
       </div>
-      <div class="about-value-card">
-        <h3>Ancre localement</h3>
-        <p>Je connais Valenciennes, le Nord, les Hauts-de-France. Je travaille avec des gens d'ici, pour des gens d'ici.</p>
+    </div>
+  </div>
+
+  <div class="about-two-col">
+    <div class="about-visual-card">
+      <div>
+        <div class="about-visual-stat" style="font-size:clamp(1.8rem,3.5vw,2.5rem);-webkit-text-fill-color:var(--text);background:none">Face aux grands,<br>il faut lutter.</div>
+        <div class="about-visual-label" style="margin-top:12px">Et pour lutter, il faut booster son activite.</div>
+      </div>
+    </div>
+    <div>
+      <div class="about-section" style="margin-bottom:0">
+        <h2>Pourquoi j'ai cree NexBoost</h2>
+        <p>En me formant au marketing digital, j'ai realise a quel point les outils existants n'etaient pas faits pour les artisans et les petits commercants. Des agences qui parlent en anglais, des devis a 5 000 euros pour un site vitrine, des tableaux de bord incomprehensibles... <strong>Tout etait pense pour les grandes boites.</strong></p>
+        <p>J'ai voulu creer l'inverse. Une agence qui parle votre langue. Qui comprend que vous n'avez pas le temps de vous former au SEO entre deux chantiers. Qui propose des tarifs honnetes, sans engagement, sans jargon.</p>
+        <p><strong>NexBoost existe pour ca.</strong> Un avenir plus visible, plus proche que ce que vous pouvez imaginer.</p>
       </div>
     </div>
   </div>
 
   <div class="about-section">
-    <h2>Concretement, comment ca se passe ?</h2>
-    <p>Vous m'appelez ou vous m'envoyez un message. On echange 15 minutes. Vous me parlez de votre activite, je vous dis honnetement ce que je peux faire pour vous. Si ca vous convient, on demarre. Sinon, pas de probleme — <strong>le conseil est gratuit et sans engagement.</strong></p>
-    <p>Pendant tout le projet, vous avez un seul interlocuteur : moi. Pas un robot, pas un stagiaire, pas un call center. Un humain qui repond en moins de 24 heures et qui connait votre dossier par coeur.</p>
+    <h2>Ce que je crois profondement</h2>
+    <p class="about-section-text">Je suis convaincu que chaque artisan, chaque commercant, chaque entrepreneur local merite d'etre visible en ligne. Pas parce que c'est a la mode, mais parce que <strong>vos clients vous cherchent deja sur Internet</strong>. Et si vous n'y etes pas, c'est quelqu'un d'autre qu'ils trouvent.</p>
+
+    <div class="about-values">
+      <div class="about-value-card">
+        <h3>A votre ecoute</h3>
+        <p>Je prends le temps de comprendre votre metier, vos clients, vos contraintes. Du sur-mesure, a chaque fois.</p>
+      </div>
+      <div class="about-value-card">
+        <h3>Zero jargon</h3>
+        <p>Je vous parle comme un voisin. Si vous ne comprenez pas, c'est ma faute, pas la votre.</p>
+      </div>
+      <div class="about-value-card">
+        <h3>Resultats concrets</h3>
+        <p>Je ne vends pas du reve. Je montre ce qui marche et ce que ca vous rapporte.</p>
+      </div>
+      <div class="about-value-card">
+        <h3>Ancre localement</h3>
+        <p>Valenciennes, le Nord, les Hauts-de-France. Des gens d'ici, pour des gens d'ici.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-two-col">
+    <div>
+      <div class="about-section" style="margin-bottom:0">
+        <h2>Concretement, comment ca se passe ?</h2>
+        <p>Vous m'appelez ou vous m'envoyez un message. On echange 15 minutes. Vous me parlez de votre activite, je vous dis honnetement ce que je peux faire pour vous. Si ca vous convient, on demarre. Sinon, pas de probleme — <strong>le conseil est gratuit et sans engagement.</strong></p>
+        <p>Pendant tout le projet, vous avez un seul interlocuteur : moi. Pas un robot, pas un stagiaire, pas un call center. Un humain qui repond en moins de 24 heures et qui connait votre dossier par coeur.</p>
+      </div>
+    </div>
+    <div class="about-visual-card">
+      <div>
+        <div class="about-visual-stat">24h</div>
+        <div class="about-visual-label">Temps de reponse maximum<br>Un seul interlocuteur, du debut a la fin</div>
+      </div>
+    </div>
   </div>
 </div>
 
