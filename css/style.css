@@ -279,7 +279,7 @@ button { font-family: var(--font); cursor: pointer; }
 }
 .nav-links a:hover { color: var(--text); }
 
-.nav-cta {
+.nav-links a.nav-cta {
   font-size: 0.82rem;
   font-weight: 600;
   padding: 9px 20px;
@@ -288,8 +288,9 @@ button { font-family: var(--font); cursor: pointer; }
   color: white;
   transition: all var(--transition);
 }
-.nav-cta:hover {
+.nav-links a.nav-cta:hover {
   background: var(--accent-dark);
+  color: white;
   transform: translateY(-1px);
   box-shadow: 0 8px 24px var(--accent-glow);
 }
