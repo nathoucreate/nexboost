@@ -1039,16 +1039,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "ProfessionalService", "Organization"],
+  "@id": "https://nexboost.fr/#organization",
   "name": "NexBoost — Agence Marketing Digital Valenciennes",
-  "description": "Agence de marketing digital à Valenciennes. Création de site web, SEO local, community management, identité visuelle et vidéo drone pour artisans, commerçants et TPE des Hauts-de-France.",
+  "alternateName": "NexBoost",
+  "description": "Agence de marketing digital à Valenciennes. Création de site web, SEO local, AEO/GEO (référencement IA), community management, identité visuelle et vidéo drone pour artisans, commerçants et TPE des Hauts-de-France.",
+  "slogan": "Le digital qui fait grandir les entreprises locales.",
   "url": "https://nexboost.fr",
   "email": "nathan.lepretre@nexboost.fr",
   "telephone": "+33788845343",
   "image": "https://nexboost.fr/assets/og-image.png",
   "logo": "https://nexboost.fr/assets/favicon.svg",
-  "founder": { "@type": "Person", "name": "Nathan Lepretre" },
-  "sameAs": ["https://www.linkedin.com/in/nathan-lepretre"],
+  "founder": { "@type": "Person", "name": "Nathan Lepretre", "url": "https://nathanlepretre.fr" },
+  "knowsAbout": ["Marketing digital", "SEO local", "Référencement naturel", "AEO (Answer Engine Optimization)", "GEO (Generative Engine Optimization)", "Référencement IA", "Optimisation pour ChatGPT et Gemini", "Création de site web", "Google Business Profile", "Community management", "Identité visuelle", "Photo et vidéo par drone"],
+  "sameAs": ["https://www.linkedin.com/in/nathan-lepretre", "https://nathanlepretre.fr"],
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Valenciennes",
@@ -1071,8 +1075,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     "opens": "09:00",
     "closes": "18:00"
   },
-  "serviceType": ["Marketing digital","Création de site web","SEO local","Community management","Identité visuelle","Photo et vidéo drone"],
+  "serviceType": ["Marketing digital","Création de site web","SEO local","AEO / GEO (référencement IA)","Community management","Identité visuelle","Photo et vidéo drone"],
   "priceRange": "€€-€€€"
+}
+</script>
+
+<!-- Schema.org — WebSite (entité + recherche) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://nexboost.fr/#website",
+  "name": "NexBoost",
+  "url": "https://nexboost.fr",
+  "inLanguage": "fr-FR",
+  "publisher": { "@id": "https://nexboost.fr/#organization" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": { "@type": "EntryPoint", "urlTemplate": "https://nexboost.fr/blog/?q={search_term_string}" },
+    "query-input": "required name=search_term_string"
+  }
 }
 </script>
 
