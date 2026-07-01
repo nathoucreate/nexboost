@@ -33,15 +33,22 @@ window.addEventListener('scroll', () => {
 
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
+function setMenu(open) {
+  menuToggle.classList.toggle('active', open);
+  navLinks.classList.toggle('open', open);
+  // Verrouille le scroll de la page derriere le menu
+  document.body.style.overflow = open ? 'hidden' : '';
+  menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
 menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  navLinks.classList.toggle('open');
+  setMenu(!navLinks.classList.contains('open'));
 });
 navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    menuToggle.classList.remove('active');
-    navLinks.classList.remove('open');
-  });
+  link.addEventListener('click', () => setMenu(false));
+});
+// Ferme le menu avec la touche Echap
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) setMenu(false);
 });
 
 // Active nav link on scroll (using IntersectionObserver to avoid layout thrashing)
