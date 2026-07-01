@@ -322,8 +322,8 @@ button { font-family: var(--font); cursor: pointer; }
 
 @media (max-width: 900px) {
   /* Header plus compact + logo a taille raisonnable sur mobile */
-  :root { --nav-h: 88px; }
-  .logo-img { height: 72px; }
+  :root { --nav-h: 100px; }
+  .logo-img { height: 160px; }
   .logo { position: relative; z-index: 10000; }
 
   .menu-toggle { display: flex; }
