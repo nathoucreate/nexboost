@@ -741,9 +741,28 @@ button { font-family: var(--font); cursor: pointer; }
   align-items: center;
   justify-content: center;
 }
+/* portrait de Nathan en filigrane, très transparent, derrière la citation */
+.story-photo {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 94%;
+  width: auto;
+  opacity: 0.12;
+  filter: grayscale(35%);
+  pointer-events: none;
+  user-select: none;
+  /* le haut du portrait se fond en douceur — pas de bord net */
+  -webkit-mask-image: linear-gradient(180deg, transparent 2%, black 26%);
+  mask-image: linear-gradient(180deg, transparent 2%, black 26%);
+}
+[data-theme="light"] .story-photo { opacity: 0.15; }
 .story-visual-inner {
   text-align: center;
   padding: 40px;
+  position: relative;
+  z-index: 1;
 }
 .story-quote {
   font-family: var(--font-display);
