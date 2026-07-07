@@ -34,6 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<script>try{var t=localStorage.getItem('nexboost-theme');if(t&&t!=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="stylesheet" href="../css/style.css">
 <style>
   .blog-nav {
@@ -197,6 +198,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Vous hésitez encore entre deux formules, ou vous voulez simplement un avis honnête sur votre situation ? On offre un audit gratuit et sans engagement : on regarde votre présence en ligne actuelle et on vous dit concrètement ce qui vous rapporterait le plus.</p>
 
     <p><a href="../index.html#contact">Contactez-nous</a> — réponse sous 24 h, sans jargon et sans pression commerciale.</p>
+  
+    <aside class="article-cta">
+      <div>
+        <h3>Et si on parlait de votre projet ?</h3>
+        <p>Audit gratuit, réponse sous 24 h, zéro jargon. On vous dit ce qui rapporterait le plus à votre activité.</p>
+      </div>
+      <a href="../index.html#contact" class="article-cta-btn">Discuter de mon projet →</a>
+    </aside>
   </article>
 </main>
 
@@ -233,6 +242,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   "inLanguage": "fr-FR",
   "keywords": ["prix site internet", "combien coûte un site web", "site internet artisan", "tarif site vitrine 2026", "coût site e-commerce"]
 }
+</script>
+<script>
+  (function(){
+    var art=document.querySelector('.blog-article'),meta=document.querySelector('.blog-article-meta, .blog-meta');
+    if(!art||!meta)return;
+    var w=art.textContent.trim().split(/\s+/).length,m=Math.max(2,Math.round(w/200));
+    meta.textContent+=' \u00b7 '+m+' min de lecture';
+  })();
 </script>
 </body>
 </html>

@@ -36,7 +36,8 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
+    <script>try{var t=localStorage.getItem('nexboost-theme');if(t&&t!=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
 
     <!-- Schema.org Article -->
     <script type="application/ld+json">
@@ -272,20 +273,29 @@
             <p>Vous souhaitez etre accompagne dans la mise en place de votre strategie digitale ? <strong>NexBoost aide les artisans et PME des Hauts-de-France a developper leur presence en ligne.</strong> Site web, referencement, conseils personnalises : on s'occupe de tout.</p>
             <p><a href="../index.html#contact">Demandez votre diagnostic digital gratuit</a></p>
         </div>
-    </article>
+    
+    <aside class="article-cta">
+      <div>
+        <h3>Et si on parlait de votre projet ?</h3>
+        <p>Audit gratuit, réponse sous 24 h, zéro jargon. On vous dit ce qui rapporterait le plus à votre activité.</p>
+      </div>
+      <a href="../index.html#contact" class="article-cta-btn">Discuter de mon projet →</a>
+    </aside>
+  </article>
 
     <footer class="blog-footer">
         <p>&copy; 2026 NexBoost. Tous droits reserves. | <a href="../mentions-legales.html">Mentions legales</a></p>
     </footer>
 
     <!-- Theme script -->
-    <script>
-        (function() {
-            var theme = localStorage.getItem('nexboost-theme');
-            if (theme && theme !== 'dark') {
-                document.documentElement.setAttribute('data-theme', theme);
-            }
-        })();
-    </script>
+    
+<script>
+  (function(){
+    var art=document.querySelector('.blog-article'),meta=document.querySelector('.blog-article-meta, .blog-meta');
+    if(!art||!meta)return;
+    var w=art.textContent.trim().split(/\s+/).length,m=Math.max(2,Math.round(w/200));
+    meta.textContent+=' \u00b7 '+m+' min de lecture';
+  })();
+</script>
 </body>
 </html>

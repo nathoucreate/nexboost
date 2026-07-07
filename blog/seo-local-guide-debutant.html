@@ -34,6 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+<script>try{var t=localStorage.getItem('nexboost-theme');if(t&&t!=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="stylesheet" href="../css/style.css">
 <style>
   .blog-nav {
@@ -211,6 +212,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Nous aidons les artisans, commer&ccedil;ants et TPE &agrave; &ecirc;tre trouv&eacute;s sur Google gr&acirc;ce &agrave; des strat&eacute;gies de <a href="../seo-local-valenciennes.html">r&eacute;f&eacute;rencement local</a> adapt&eacute;es &agrave; votre activit&eacute; et &agrave; votre zone g&eacute;ographique. Pas de jargon, pas d'engagement, juste des r&eacute;sultats concrets.</p>
 
     <p><a href="../index.html#contact">Contactez-nous</a> pour un &eacute;change gratuit et sans engagement. On vous explique ce qu'on peut faire pour vous, simplement.</p>
+  
+    <aside class="article-cta">
+      <div>
+        <h3>Et si on parlait de votre projet ?</h3>
+        <p>Audit gratuit, réponse sous 24 h, zéro jargon. On vous dit ce qui rapporterait le plus à votre activité.</p>
+      </div>
+      <a href="../index.html#contact" class="article-cta-btn">Discuter de mon projet →</a>
+    </aside>
   </article>
 </main>
 
@@ -250,11 +259,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 <script>
-  (function() {
-    var theme = localStorage.getItem('nexboost-theme');
-    if (theme && theme !== 'dark') {
-      document.documentElement.setAttribute('data-theme', theme);
-    }
+  (function(){
+    var art=document.querySelector('.blog-article'),meta=document.querySelector('.blog-article-meta, .blog-meta');
+    if(!art||!meta)return;
+    var w=art.textContent.trim().split(/\s+/).length,m=Math.max(2,Math.round(w/200));
+    meta.textContent+=' \u00b7 '+m+' min de lecture';
   })();
 </script>
 </body>

@@ -52,7 +52,8 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/style.css">
+    <script>try{var t=localStorage.getItem('nexboost-theme');if(t&&t!=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css">
 
     <!-- Schema.org Article -->
     <script type="application/ld+json">
@@ -424,7 +425,15 @@
             <p>Pas le temps ou l'envie de gerer vos reseaux sociaux vous-meme ? <strong>On s'en occupe pour vous.</strong> Chez NexBoost, on cree et on gere votre presence en ligne — publications, visuels, strategie — pour que vous puissiez rester concentre sur votre metier.</p>
             <p><a href="../index.html#contact">Demandez un devis gratuit pour votre community management →</a></p>
         </div>
-    </article>
+    
+    <aside class="article-cta">
+      <div>
+        <h3>Et si on parlait de votre projet ?</h3>
+        <p>Audit gratuit, réponse sous 24 h, zéro jargon. On vous dit ce qui rapporterait le plus à votre activité.</p>
+      </div>
+      <a href="../index.html#contact" class="article-cta-btn">Discuter de mon projet →</a>
+    </aside>
+  </article>
 
     <div class="blog-related">
         <h3>Articles qui pourraient vous interesser</h3>
@@ -440,13 +449,6 @@
         <p>&copy; 2026 NexBoost. Tous droits reserves. | <a href="../mentions-legales.html">Mentions legales</a> | <a href="../a-propos.html">A propos</a></p>
     </footer>
 
-    <script>
-        (function() {
-            var theme = localStorage.getItem('nexboost-theme');
-            if (theme && theme !== 'dark') {
-                document.documentElement.setAttribute('data-theme', theme);
-            }
-        })();
-    </script>
+    
 </body>
 </html>
