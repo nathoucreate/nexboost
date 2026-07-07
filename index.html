@@ -97,17 +97,48 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .v4-hero-glow {
   position: absolute; width: 900px; height: 900px;
   top: 50%; left: 50%; transform: translate(-50%,-50%);
-  background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 65%);
   filter: blur(80px); pointer-events: none; will-change: transform;
 }
+/* aurores : nappes de couleur qui dérivent lentement */
+.v4-aurora {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); pointer-events: none;
+  opacity: 0.32; will-change: transform;
+}
+.v4-aurora--1 {
+  width: 620px; height: 620px; top: -12%; left: -8%;
+  background: radial-gradient(circle, rgba(99,102,241,0.5), transparent 65%);
+  animation: v4Drift1 19s ease-in-out infinite alternate;
+}
+.v4-aurora--2 {
+  width: 540px; height: 540px; bottom: -18%; right: -6%;
+  background: radial-gradient(circle, rgba(168,85,247,0.45), transparent 65%);
+  animation: v4Drift2 23s ease-in-out infinite alternate;
+}
+.v4-aurora--3 {
+  width: 420px; height: 420px; top: 28%; right: 16%;
+  background: radial-gradient(circle, rgba(34,211,238,0.28), transparent 65%);
+  animation: v4Drift3 27s ease-in-out infinite alternate;
+}
+@keyframes v4Drift1 { to { transform: translate(120px, 90px) scale(1.15); } }
+@keyframes v4Drift2 { to { transform: translate(-110px, -70px) scale(1.1); } }
+@keyframes v4Drift3 { to { transform: translate(-90px, 60px) scale(0.9); } }
+[data-theme="light"] .v4-aurora { opacity: 0.2; }
+@media (prefers-reduced-motion: reduce) { .v4-aurora { animation: none; } }
 .v4-hero-grid {
   position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.013) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.013) 1px, transparent 1px);
-  background-size: 90px 90px;
-  mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, black 20%, transparent);
-  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 45%, black 20%, transparent);
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 25%, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 25%, transparent);
+}
+[data-theme="light"] .v4-hero-grid {
+  background-image:
+    linear-gradient(rgba(15,15,35,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,15,35,0.05) 1px, transparent 1px);
 }
 .v4-hero-inner {
   position: relative; z-index: 2; text-align: center; max-width: 880px;
@@ -136,7 +167,39 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .v4-h1 .v4-line-inner { display: inline-block; transform: translateY(105%); }
 .v4-h1 .v4-serif {
   font-family: 'Instrument Serif', Georgia, serif;
-  font-weight: 400; font-style: italic; color: var(--accent-light);
+  font-weight: 400; font-style: italic;
+  background: linear-gradient(100deg, #818cf8 0%, #c084fc 35%, #22d3ee 70%, #818cf8 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: v4Shimmer 7s linear infinite;
+}
+@keyframes v4Shimmer { to { background-position: -220% 0; } }
+@media (prefers-reduced-motion: reduce) { .v4-h1 .v4-serif { animation: none; } }
+
+/* CTA principal : halo pulsé + balayage lumineux */
+.v4-hero-btns .btn-primary {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  box-shadow: 0 10px 40px var(--accent-glow-strong);
+  animation: v4Pulse 3.2s ease-in-out infinite;
+}
+.v4-hero-btns .btn-primary::before {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 40%;
+  left: -60%; transform: skewX(-20deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: v4Shine 3.2s ease-in-out infinite;
+}
+@keyframes v4Pulse {
+  0%, 100% { box-shadow: 0 10px 40px var(--accent-glow-strong); }
+  50% { box-shadow: 0 10px 55px rgba(99,102,241,0.55); }
+}
+@keyframes v4Shine {
+  0%, 55% { left: -60%; }
+  85%, 100% { left: 130%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v4-hero-btns .btn-primary, .v4-hero-btns .btn-primary::before { animation: none; }
 }
 
 .v4-hero-p {
@@ -266,6 +329,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ═══ HERO V4 ═══ -->
 <section class="v4-hero" id="accueil">
   <div class="v4-hero-glow" id="v4Glow"></div>
+  <div class="v4-aurora v4-aurora--1" aria-hidden="true"></div>
+  <div class="v4-aurora v4-aurora--2" aria-hidden="true"></div>
+  <div class="v4-aurora v4-aurora--3" aria-hidden="true"></div>
   <div class="v4-hero-grid" aria-hidden="true"></div>
   <div class="v4-hero-inner" id="v4HeroInner">
     <div class="v4-overline">
