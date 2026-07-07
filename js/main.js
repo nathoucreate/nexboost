@@ -190,7 +190,62 @@ function updateCartUI() {
       </div>
     </div>
   `).join('');
+
+  // Vente additionnelle : suggestions selon le contenu du panier
+  const ups = getUpsells();
+  if (ups.length) {
+    cartItemsEl.innerHTML += `
+      <div class="cart-upsell">
+        <div class="cart-upsell-title">Pour aller plus loin</div>
+        ${ups.map(u => `
+          <div class="cart-upsell-item">
+            <div class="cart-upsell-info">
+              <div class="cart-upsell-name">${u.name}</div>
+              <div class="cart-upsell-desc">${u.desc}</div>
+            </div>
+            <button class="cart-upsell-add" onclick="addUpsell('${u.name.replace(/'/g, "\\'")}', ${u.price})">+ ${u.price.toLocaleString('fr-FR')} €</button>
+          </div>`).join('')}
+      </div>`;
+  }
 }
+
+// ═══════════════════════════════════════
+//  VENTE ADDITIONNELLE (upsell panier)
+// ═══════════════════════════════════════
+function getUpsells() {
+  const names = cart.map(i => i.name);
+  const has = s => names.some(n => n.toLowerCase().includes(s.toLowerCase()));
+  const suggestions = [];
+
+  // 1. Un site dans le panier, pas encore de suivi → proposer l'abonnement assorti
+  if (!has('Suivi')) {
+    if (has('Site e-commerce')) {
+      suggestions.push({ name: 'Suivi Performance (199 €/mois)', price: 199, desc: 'Votre boutique suivie et améliorée chaque mois' });
+    } else if (has('Site vitrine')) {
+      suggestions.push({ name: 'Suivi Croissance (99 €/mois)', price: 99, desc: 'Améliorations + SEO tous les mois, sans engagement' });
+    } else if (has('Landing page')) {
+      suggestions.push({ name: 'Suivi Essentiel (49 €/mois)', price: 49, desc: 'Hébergement, mises à jour et modifications incluses' });
+    }
+  }
+
+  const aUnSite = has('Landing page') || has('Site vitrine') || has('Site e-commerce');
+
+  // 2. Un site sans logo → proposer l'identité visuelle
+  if (aUnSite && !has('logo')) {
+    suggestions.push({ name: 'Création de logo', price: 150, desc: 'Une identité cohérente pour votre nouveau site' });
+  }
+
+  // 3. Un site sans visuels → proposer le pack photos
+  if (aUnSite && !has('photos') && !has('photo')) {
+    suggestions.push({ name: 'Pack 5 photos', price: 100, desc: 'Des vraies photos de votre activité plutôt que des images de banque' });
+  }
+
+  return suggestions.slice(0, 2);
+}
+
+window.addUpsell = function(name, price) {
+  addToCart(name, price);
+};
 
 function addToCart(name, price) {
   const existing = cart.find(i => i.name === name);
