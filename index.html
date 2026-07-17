@@ -40,7 +40,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=perf1">
 <style>
 /* ─── V4 HERO ADDITIONS ─── */
 .v4-loader {
@@ -268,6 +268,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .v4-hero { padding: calc(var(--nav-h) + 10px) 16px 0; }
   .v4-hero-btns { flex-direction: column; }
   .v4-hero-btns .btn { width: 100%; justify-content: center; }
+}
+/* Mobile : premier rendu immédiat — pas d'écran d'intro, hero visible sans JS */
+@media (max-width: 768px) {
+  .v4-loader { display: none; }
+  .v4-overline, .v4-hero-p, .v4-hero-btns, .v4-hero-trust, #v4ScrollCue { opacity: 1 !important; transform: none !important; }
+  .v4-h1 .v4-line-inner { transform: none !important; }
 }
 </style>
 </head>
@@ -702,7 +708,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <p class="pricing-note reveal">Tarifs donnés à titre indicatif — chaque projet fait l'objet d'un devis personnalisé.</p>
+    <p class="pricing-note reveal">Tarifs donnés à titre indicatif : chaque projet est unique, et le devis final dépend de vous — vos besoins, vos attentes et votre budget. On en parle, puis on chiffre juste.</p>
   </div>
 </section>
 
@@ -763,7 +769,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
 
-    <p class="abos-note reveal">Sans engagement · résiliable chaque mois · démarre à la mise en ligne de votre site</p>
+    <p class="abos-note reveal">Sans engagement · résiliable chaque mois · démarre à la mise en ligne de votre site<br>Montants indicatifs — l'abonnement s'ajuste à vos besoins réels et à vos attentes.</p>
   </div>
   <svg class="abos-wave abos-wave--bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,80 L1440,80 L1440,42 C1260,8 1060,68 840,44 C620,20 400,66 200,38 C130,28 60,30 0,42 Z"/>
@@ -1062,9 +1068,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 (function(){
   // Loader
   var loader = document.getElementById('v4Loader');
-  window.addEventListener('load', function(){
-    setTimeout(function(){ loader.classList.add('done'); v4HeroReveal(); }, 400);
-  });
+  var rideauOuvert = false;
+  function ouvrirRideau(){
+    if (rideauOuvert) return; rideauOuvert = true;
+    loader.classList.add('done'); v4HeroReveal();
+  }
+  // Plus d'attente du chargement complet : on révèle dès que le DOM est prêt.
+  if (matchMedia('(max-width: 768px)').matches) { ouvrirRideau(); }
+  else { setTimeout(ouvrirRideau, 350); }
+  window.addEventListener('load', ouvrirRideau); // filet de sécurité
 
   // Cursor
   var ring = document.getElementById('v4Ring'), dotEl = document.getElementById('v4Dot');
@@ -1165,7 +1177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 
 <!-- JavaScript -->
-<script src="js/main.js" defer></script>
+<script src="js/main.js?v=perf1" defer></script>
 
 <!-- Schema.org — LocalBusiness -->
 <script type="application/ld+json">

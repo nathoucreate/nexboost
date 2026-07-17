@@ -38,7 +38,99 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=perf1">
+<style>
+/* ═══ SEO local — habillage pro (textes intacts) ═══ */
+.slv-hero { position:relative; padding:calc(var(--nav-h) + 72px) 0 84px; text-align:center; overflow:hidden; }
+.slv-hero::before { content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(560px 320px at 50% -60px, rgba(99,102,241,.18), transparent 70%),
+             radial-gradient(420px 260px at 82% 30%, rgba(34,211,238,.08), transparent 70%); }
+.slv-hero::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:72px 72px; mask-image:radial-gradient(70% 60% at 50% 30%, #000, transparent); -webkit-mask-image:radial-gradient(70% 60% at 50% 30%, #000, transparent); }
+.slv-hero .container { position:relative; }
+.slv-ariane { display:flex; justify-content:center; gap:8px; font-size:.8rem; color:var(--text-muted); margin-bottom:22px; }
+.slv-ariane a:hover { color:var(--accent-light); }
+.slv-pill { display:inline-flex; align-items:center; gap:8px; padding:7px 18px; border-radius:100px;
+  border:1px solid var(--border); background:rgba(99,102,241,.07); color:var(--accent-light);
+  font-weight:600; font-size:.85rem; letter-spacing:.04em; text-transform:uppercase; margin-bottom:20px; }
+.slv-pill i { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 10px var(--green); }
+.slv-hero h1 { font-family:var(--font-display); font-size:clamp(2rem,5vw,3.3rem); font-weight:800; line-height:1.15; margin-bottom:22px; }
+.slv-hero h1 em { font-style:normal; background:linear-gradient(100deg,var(--accent-light),#22d3ee); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.slv-hero .slv-lead { color:var(--text-secondary); font-size:clamp(1rem,1.5vw,1.15rem); line-height:1.7; max-width:640px; margin:0 auto 32px; }
+.slv-cta-row { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+.slv-trust { display:flex; justify-content:center; gap:22px; flex-wrap:wrap; margin-top:26px; color:var(--text-muted); font-size:.85rem; }
+.slv-trust span { display:inline-flex; align-items:center; gap:7px; }
+.slv-trust svg { width:15px; height:15px; stroke:var(--green); }
+.slv-serp { max-width:540px; margin:44px auto 0; text-align:left; background:var(--bg-card);
+  border:1px solid var(--border); border-radius:16px; padding:18px 20px; box-shadow:0 24px 60px rgba(0,0,0,.35); }
+.slv-serp-bar { display:flex; align-items:center; gap:10px; background:var(--bg-elevated); border:1px solid var(--border);
+  border-radius:100px; padding:9px 16px; color:var(--text-secondary); font-size:.88rem; }
+.slv-serp-bar svg { width:15px; height:15px; stroke:var(--text-muted); flex-shrink:0; }
+.slv-serp-res { margin-top:14px; padding:14px; border-radius:12px; background:rgba(99,102,241,.07); border:1px solid var(--border-hover); }
+.slv-serp-res .t { color:var(--accent-light); font-weight:600; font-size:.98rem; }
+.slv-serp-res .n { display:flex; align-items:center; gap:8px; color:var(--text-secondary); font-size:.82rem; margin-top:5px; }
+.slv-serp-res .n b { color:#fbbf24; letter-spacing:1px; font-weight:600; }
+.slv-serp-res .n i { font-style:normal; color:var(--green); }
+.slv-serp-vous { margin-top:10px; text-align:center; font-size:.8rem; color:var(--text-muted); }
+.slv-serp-vous b { color:var(--accent-light); }
+.slv-sec { padding:76px 0; }
+.slv-sec--alt { background:var(--bg-soft); }
+.slv-h2 { font-family:var(--font-display); font-size:clamp(1.5rem,3vw,2.1rem); font-weight:700; text-align:center; margin-bottom:20px; }
+.slv-prose { color:var(--text-secondary); font-size:1rem; line-height:1.8; max-width:680px; margin:0 auto; }
+.slv-prose p + p { margin-top:16px; }
+.slv-prose strong { color:var(--text); }
+.slv-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; margin-top:44px; }
+.slv-card { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:30px;
+  transition:transform .35s ease, border-color .3s, box-shadow .35s; }
+.slv-card:hover { transform:translateY(-5px); border-color:var(--border-hover); box-shadow:0 20px 50px rgba(0,0,0,.35); }
+.slv-card .ic { width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  display:flex; align-items:center; justify-content:center; margin-bottom:18px; box-shadow:0 8px 24px var(--accent-glow-strong); }
+.slv-card h3 { font-family:var(--font-display); font-size:1.12rem; font-weight:700; margin-bottom:10px; }
+.slv-card p { color:var(--text-secondary); line-height:1.7; font-size:.95rem; }
+.slv-steps { max-width:720px; margin:40px auto 0; display:flex; flex-direction:column; }
+.slv-step { position:relative; display:flex; gap:22px; padding-bottom:34px; }
+.slv-step:last-child { padding-bottom:0; }
+.slv-step::before { content:''; position:absolute; left:23px; top:52px; bottom:6px; width:2px;
+  background:linear-gradient(var(--accent), transparent); opacity:.35; }
+.slv-step:last-child::before { display:none; }
+.slv-step .no { min-width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+  color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:800; font-size:1.15rem;
+  box-shadow:0 8px 24px var(--accent-glow-strong); }
+.slv-step h3 { font-family:var(--font-display); font-size:1.1rem; font-weight:700; margin-bottom:8px; }
+.slv-step p { color:var(--text-secondary); line-height:1.7; font-size:.95rem; }
+.slv-bande { margin:0 auto; max-width:960px; border-radius:20px; padding:34px clamp(22px,4vw,44px);
+  background:linear-gradient(120deg, rgba(99,102,241,.16), rgba(34,211,238,.08)); border:1px solid var(--border-hover);
+  display:flex; align-items:center; justify-content:space-between; gap:22px; flex-wrap:wrap; }
+.slv-bande p { font-family:var(--font-display); font-weight:700; font-size:clamp(1.05rem,2vw,1.3rem); max-width:34ch; }
+.slv-faq { max-width:720px; margin:40px auto 0; display:grid; gap:12px; }
+.slv-faq details { background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:18px 22px; }
+.slv-faq details[open] { border-color:var(--border-hover); }
+.slv-faq summary { cursor:pointer; font-weight:600; color:var(--text); list-style:none; display:flex; justify-content:space-between; gap:14px; }
+.slv-faq summary::after { content:'+'; color:var(--accent-light); font-weight:600; }
+.slv-faq details[open] summary::after { content:'−'; }
+.slv-faq p { color:var(--text-secondary); line-height:1.7; font-size:.95rem; margin-top:12px; }
+.slv-final { max-width:720px; margin:0 auto; text-align:center; background:var(--bg-card);
+  border:1px solid var(--border-hover); border-radius:24px; padding:clamp(34px,5vw,54px);
+  box-shadow:0 30px 80px rgba(0,0,0,.4); position:relative; overflow:hidden; }
+.slv-final::before { content:''; position:absolute; inset:-40% -20% auto; height:70%;
+  background:radial-gradient(closest-side, rgba(99,102,241,.22), transparent); pointer-events:none; }
+.slv-final > * { position:relative; }
+.slv-final .puces { display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin:22px 0 28px; color:var(--text-secondary); font-size:.9rem; }
+.slv-final .puces span { display:inline-flex; gap:7px; align-items:center; }
+.slv-final .puces svg { width:15px; height:15px; stroke:var(--green); }
+.slv-mail { display:block; margin-top:16px; color:var(--text-muted); font-size:.9rem; }
+.slv-mail a { color:var(--accent-light); text-decoration:underline; text-underline-offset:3px; }
+.slv-sticky { position:fixed; left:12px; right:12px; bottom:12px; z-index:900;
+  display:none; gap:10px; padding:10px; border-radius:16px;
+  background:rgba(16,16,26,.92); backdrop-filter:blur(14px); border:1px solid var(--border-hover);
+  box-shadow:0 18px 50px rgba(0,0,0,.5);
+  transform:translateY(120%); transition:transform .4s ease; }
+.slv-sticky.visible { transform:none; }
+.slv-sticky .btn { flex:1; justify-content:center; text-align:center; font-size:.9rem; padding:13px 10px; }
+@media (max-width:768px) { .slv-sticky { display:flex; } body { padding-bottom:76px; } }
+@media (prefers-reduced-motion:reduce) { .slv-card, .slv-sticky { transition:none; } }
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -60,30 +152,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main>
 
   <!-- HERO -->
-  <section style="padding: calc(var(--nav-h) + 60px) 0 80px; text-align: center;">
-    <div class="container" style="max-width: 820px;">
-      <p style="color: var(--accent); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 16px;">Agence SEO Nord</p>
-      <h1 style="font-family: var(--font-display); font-size: clamp(1.8rem, 4.5vw, 3rem); font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 24px;">
-        SEO Local a Valenciennes — Soyez trouve sur Google
-      </h1>
-      <p style="color: var(--text-secondary); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.7; max-width: 640px; margin: 0 auto 36px;">
+  <section class="slv-hero">
+    <div class="container" style="max-width: 860px;">
+      <nav class="slv-ariane" aria-label="Fil d'ariane"><a href="index.html">Accueil</a><span>›</span><span>SEO local Valenciennes</span></nav>
+      <p class="slv-pill"><i></i>Agence SEO Nord — places disponibles</p>
+      <h1>SEO Local a Valenciennes —<br>Soyez <em>trouve sur Google</em></h1>
+      <p class="slv-lead">
         Vos futurs clients cherchent un professionnel comme vous sur Google. Si votre entreprise n'apparait pas dans les premiers resultats, c'est votre concurrent qui recupere ces clients. On change ca ensemble.
       </p>
-      <a href="index.html#contact" class="btn btn-primary" style="font-size: 1rem; padding: 14px 32px;">Demander un diagnostic gratuit</a>
+      <div class="slv-cta-row">
+        <a href="index.html#contact" class="btn btn-primary" style="font-size:1rem; padding:15px 34px;">Demander un diagnostic gratuit</a>
+        <a href="mailto:nathan.lepretre@nexboost.fr" class="btn btn-outline" style="font-size:1rem; padding:15px 28px;">Écrire un e-mail</a>
+      </div>
+      <div class="slv-trust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Réponse sous 24 h</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Sans engagement</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Valenciennes &amp; tout le Nord</span>
+      </div>
+
+      <div class="slv-serp" role="img" aria-label="Illustration : votre entreprise en premiere position sur Google">
+        <div class="slv-serp-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          plombier valenciennes
+        </div>
+        <div class="slv-serp-res">
+          <div class="t">Votre entreprise — Valenciennes</div>
+          <div class="n"><b>★★★★★</b> 4,9 (87 avis) · <i>Ouvert</i> · Valenciennes</div>
+        </div>
+        <p class="slv-serp-vous">↑ <b>Cette place</b>, c'est celle qu'on va chercher pour vous.</p>
+      </div>
     </div>
   </section>
 
   <!-- QU'EST-CE QUE LE SEO LOCAL -->
-  <section style="padding: 60px 0; background: var(--bg-alt, var(--bg));">
+  <section class="slv-sec slv-sec--alt">
     <div class="container" style="max-width: 820px;">
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--text); margin-bottom: 24px; text-align: center;">
+      <h2 class="slv-h2">
         Le referencement local, c'est quoi exactement ?
       </h2>
-      <div style="color: var(--text-secondary); font-size: 1rem; line-height: 1.8; max-width: 680px; margin: 0 auto;">
-        <p style="margin-bottom: 16px;">
+      <div class="slv-prose">
+        <p>
           Quand un habitant de Valenciennes tape <strong style="color: var(--text);">"plombier Valenciennes"</strong> ou <strong style="color: var(--text);">"boulangerie pres de moi"</strong> sur Google, les resultats qui s'affichent en premier ne sont pas la par hasard. C'est le resultat d'un travail appele <strong style="color: var(--text);">referencement local</strong> (ou SEO local).
         </p>
-        <p style="margin-bottom: 16px;">
+        <p>
           Concretement, le SEO local regroupe toutes les actions qui permettent a votre entreprise d'apparaitre en haut de Google quand quelqu'un cherche vos services dans votre zone. Cela inclut votre fiche Google (Google Maps), votre site internet et votre presence sur les annuaires locaux.
         </p>
         <p>
@@ -94,39 +205,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </section>
 
   <!-- BENEFICES -->
-  <section style="padding: 80px 0;">
+  <section class="slv-sec">
     <div class="container" style="max-width: 960px;">
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--text); margin-bottom: 48px; text-align: center;">
+      <h2 class="slv-h2">
         Pourquoi investir dans le SEO local a Valenciennes ?
       </h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+      <div class="slv-cards">
 
-        <div style="background: var(--card-bg, var(--bg-alt, var(--bg))); border: 1px solid var(--border); border-radius: 16px; padding: 32px;">
-          <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+        <div class="slv-card reveal">
+          <div class="ic">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 12px;">Plus de clients a votre porte</h3>
-          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;">
+          <h3>Plus de clients a votre porte</h3>
+          <p>
             Les personnes qui cherchent sur Google sont deja pretes a acheter ou a prendre rendez-vous. En apparaissant dans les premiers resultats, vous attirez des clients qui ont besoin de vous maintenant, pas dans trois mois.
           </p>
         </div>
 
-        <div style="background: var(--card-bg, var(--bg-alt, var(--bg))); border: 1px solid var(--border); border-radius: 16px; padding: 32px;">
-          <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+        <div class="slv-card reveal">
+          <div class="ic">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 12px;">Visible sur Google Maps</h3>
-          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;">
+          <h3>Visible sur Google Maps</h3>
+          <p>
             Votre fiche Google Business apparait directement sur la carte avec vos horaires, votre adresse et vos avis clients. C'est souvent la premiere chose que vos clients voient avant de vous contacter.
           </p>
         </div>
 
-        <div style="background: var(--card-bg, var(--bg-alt, var(--bg))); border: 1px solid var(--border); border-radius: 16px; padding: 32px;">
-          <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+        <div class="slv-card reveal">
+          <div class="ic">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           </div>
-          <h3 style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 12px;">Prenez de l'avance sur vos concurrents</h3>
-          <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;">
+          <h3>Prenez de l'avance sur vos concurrents</h3>
+          <p>
             La plupart des artisans et commercants de Valenciennes ne travaillent pas encore leur referencement local. C'est une opportunite : en agissant maintenant, vous occupez la place avant eux sur Google.
           </p>
         </div>
@@ -135,43 +246,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <!-- BANDE CTA -->
+  <section class="slv-sec" style="padding-top:0;">
+    <div class="container">
+      <div class="slv-bande reveal">
+        <p>Curieux de savoir où vous en êtes sur Google ?</p>
+        <a href="index.html#contact" class="btn btn-primary" style="white-space:nowrap;">Je demande mon diagnostic</a>
+      </div>
+    </div>
+  </section>
+
   <!-- PROCESSUS -->
-  <section style="padding: 80px 0; background: var(--bg-alt, var(--bg));">
+  <section class="slv-sec slv-sec--alt">
     <div class="container" style="max-width: 820px;">
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--text); margin-bottom: 16px; text-align: center;">
+      <h2 class="slv-h2">
         Comment ca se passe concretement ?
       </h2>
-      <p style="color: var(--text-secondary); text-align: center; margin-bottom: 48px; font-size: 1rem;">
+      <p style="color: var(--text-secondary); text-align:center; font-size:1rem;">
         Trois etapes simples. Vous restez concentre sur votre metier, on s'occupe du reste.
       </p>
 
-      <div style="display: flex; flex-direction: column; gap: 36px;">
+      <div class="slv-steps">
 
-        <div style="display: flex; gap: 24px; align-items: flex-start;">
-          <div style="min-width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;">1</div>
+        <div class="slv-step reveal">
+          <div class="no">1</div>
           <div>
-            <h3 style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">Audit de votre presence en ligne</h3>
-            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;">
+            <h3>Audit de votre presence en ligne</h3>
+            <p>
               On analyse votre situation actuelle : votre fiche Google, votre site, vos avis, et ce que font vos concurrents. On identifie ce qui vous empeche d'etre trouve sur Google a Valenciennes. Ce diagnostic est gratuit et sans engagement.
             </p>
           </div>
         </div>
 
-        <div style="display: flex; gap: 24px; align-items: flex-start;">
-          <div style="min-width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;">2</div>
+        <div class="slv-step reveal">
+          <div class="no">2</div>
           <div>
-            <h3 style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">Optimisation complete</h3>
-            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;">
+            <h3>Optimisation complete</h3>
+            <p>
               On optimise votre fiche Google Business, on ameliore votre site pour les recherches locales, on vous inscrit sur les bons annuaires et on met en place une strategie pour obtenir plus d'avis clients. Tout est fait pour que Google vous place en haut des resultats a Valenciennes et dans le Nord.
             </p>
           </div>
         </div>
 
-        <div style="display: flex; gap: 24px; align-items: flex-start;">
-          <div style="min-width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;">3</div>
+        <div class="slv-step reveal">
+          <div class="no">3</div>
           <div>
-            <h3 style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">Resultats mesurables</h3>
-            <p style="color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem;">
+            <h3>Resultats mesurables</h3>
+            <p>
               Chaque mois, on vous envoie un rapport clair (sans jargon technique) avec le nombre de personnes qui vous ont trouve sur Google, les appels recus et les demandes de contact. Vous voyez concretement le retour sur investissement.
             </p>
           </div>
@@ -181,17 +302,43 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="slv-sec">
+    <div class="container" style="max-width:820px;">
+      <h2 class="slv-h2">Les questions qu'on nous pose souvent</h2>
+      <div class="slv-faq">
+        <details class="reveal">
+          <summary>Combien de temps avant de voir des resultats en SEO local ?</summary>
+          <p>Les premiers effets sur votre fiche Google (Maps) apparaissent souvent en 4 a 8 semaines. Pour les recherches classiques a Valenciennes, comptez 2 a 4 mois selon la concurrence de votre secteur. Chaque mois, votre rapport montre la progression.</p>
+        </details>
+        <details class="reveal">
+          <summary>Est-ce que ca marche pour un artisan sans site internet ?</summary>
+          <p>Oui : on commence par optimiser votre fiche Google Business, qui peut deja vous apporter des appels. Un site simple et bien construit multiplie ensuite les resultats — on peut s'en occuper aussi.</p>
+        </details>
+        <details class="reveal">
+          <summary>Le diagnostic gratuit, c'est quoi exactement ?</summary>
+          <p>On analyse votre visibilite actuelle sur Google (fiche, site, avis, concurrents de Valenciennes) et on vous remet un plan d'action clair. C'est gratuit, sans engagement — et il reste a vous meme si on ne travaille pas ensemble.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
-  <section style="padding: 80px 0; text-align: center;">
-    <div class="container" style="max-width: 680px;">
-      <h2 style="font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--text); margin-bottom: 16px;">
-        Pret a etre trouve par vos clients sur Google ?
-      </h2>
-      <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 32px;">
-        Demandez votre diagnostic gratuit. On analyse votre visibilite actuelle sur Google et on vous explique comment ameliorer votre referencement local a Valenciennes. Sans engagement, sans jargon.
-      </p>
-      <a href="index.html#contact" class="btn btn-primary" style="font-size: 1rem; padding: 16px 36px;">Obtenir mon diagnostic gratuit</a>
-      <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 16px;">Reponse sous 24h — Aucun engagement</p>
+  <section class="slv-sec">
+    <div class="container">
+      <div class="slv-final reveal">
+        <h2 class="slv-h2" style="margin-bottom:12px;">Pret a etre trouve par vos clients sur Google ?</h2>
+        <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.7;">
+          Demandez votre diagnostic gratuit. On analyse votre visibilite actuelle sur Google et on vous explique comment ameliorer votre referencement local a Valenciennes. Sans engagement, sans jargon.
+        </p>
+        <div class="puces">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Reponse sous 24 h</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Aucun engagement</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Plan d'action offert</span>
+        </div>
+        <a href="index.html#contact" class="btn btn-primary" style="font-size: 1.05rem; padding: 17px 40px;">Obtenir mon diagnostic gratuit</a>
+        <span class="slv-mail">ou directement par e-mail : <a href="mailto:nathan.lepretre@nexboost.fr">nathan.lepretre@nexboost.fr</a></span>
+      </div>
     </div>
   </section>
 
@@ -252,10 +399,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 }
 </script>
 
+<!-- Barre d'action mobile -->
+<div class="slv-sticky" id="slvSticky" aria-hidden="true">
+  <a href="index.html#contact" class="btn btn-primary">Diagnostic gratuit</a>
+  <a href="mailto:nathan.lepretre@nexboost.fr" class="btn btn-outline">E-mail</a>
+</div>
+
 <script>
   // Apply saved theme
   const t = localStorage.getItem('nexboost-theme');
   if (t) document.documentElement.setAttribute('data-theme', t);
+
+  // Reveals : visibles par defaut, on ne masque que sous la ligne de flottaison
+  (function(){
+    if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('masque'); e.target.classList.add('visible'); io.unobserve(e.target); } });
+    },{threshold:0.08, rootMargin:'0px 0px -30px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){
+      if(el.getBoundingClientRect().top > innerHeight*0.92){ el.classList.add('masque'); io.observe(el); }
+    });
+  })();
+
+  // Barre d'action mobile apres le premier ecran
+  (function(){
+    var barre=document.getElementById('slvSticky');
+    if(!barre) return;
+    var maj=function(){ var v=scrollY>innerHeight*0.6; barre.classList.toggle('visible',v); barre.setAttribute('aria-hidden',!v); };
+    addEventListener('scroll',maj,{passive:true}); maj();
+  })();
+</script>
+
+<!-- Schema.org — FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Combien de temps avant de voir des resultats en SEO local ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Les premiers effets sur votre fiche Google (Maps) apparaissent souvent en 4 a 8 semaines. Pour les recherches classiques a Valenciennes, comptez 2 a 4 mois selon la concurrence de votre secteur." } },
+    { "@type": "Question", "name": "Est-ce que ca marche pour un artisan sans site internet ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui : on commence par optimiser votre fiche Google Business, qui peut deja vous apporter des appels. Un site simple et bien construit multiplie ensuite les resultats." } },
+    { "@type": "Question", "name": "Le diagnostic gratuit, c'est quoi exactement ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "On analyse votre visibilite actuelle sur Google (fiche, site, avis, concurrents de Valenciennes) et on vous remet un plan d'action clair. Gratuit et sans engagement." } }
+  ]
+}
 </script>
 </body>
 </html>

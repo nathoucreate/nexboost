@@ -82,6 +82,7 @@ const revealObserver = new IntersectionObserver((entries) => {
       );
       const idx = siblings.indexOf(entry.target);
       entry.target.style.transitionDelay = `${idx * 0.08}s`;
+      entry.target.classList.remove('masque');
       entry.target.classList.add('visible');
       revealObserver.unobserve(entry.target);
     }
@@ -89,7 +90,13 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-  revealObserver.observe(el);
+  // on ne masque que ce qui est sous la ligne de flottaison : le premier écran peint immédiatement
+  if (el.getBoundingClientRect().top > window.innerHeight * 0.92) {
+    el.classList.add('masque');
+    revealObserver.observe(el);
+  } else {
+    el.classList.add('visible');
+  }
 });
 
 // Particles removed — replaced by V4 hero

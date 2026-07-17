@@ -134,40 +134,19 @@ button { font-family: var(--font); cursor: pointer; }
   background-clip: text;
 }
 
-/* --- REVEAL ANIMATIONS --- */
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-.reveal.visible {
+/* --- REVEAL ANIMATIONS ---
+   Visible par défaut (premier rendu instantané, SEO/no-JS intacts).
+   Le JS ajoute .masque aux éléments sous la ligne de flottaison, puis .visible. */
+.reveal, .reveal-left, .reveal-right, .reveal-scale {
   opacity: 1;
-  transform: translateY(0);
-}
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-32px);
+  transform: none;
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
 }
-.reveal-left.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-.reveal-right {
-  opacity: 0;
-  transform: translateX(32px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-.reveal-right.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-.reveal-scale.visible {
+.reveal.masque { opacity: 0; transform: translateY(32px); }
+.reveal-left.masque { opacity: 0; transform: translateX(-32px); }
+.reveal-right.masque { opacity: 0; transform: translateX(32px); }
+.reveal-scale.masque { opacity: 0; transform: scale(0.92); }
+.reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
   opacity: 1;
   transform: scale(1);
 }
