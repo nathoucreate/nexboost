@@ -75,25 +75,6 @@
     }
     </script>
 
-    <!-- Schema.org HowTo -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "HowTo",
-        "name": "Comment optimiser son site pour etre cite par les IA (AEO/GEO)",
-        "description": "Methode en 8 etapes pour rendre une entreprise visible et recommandee par ChatGPT, Gemini et Perplexity.",
-        "step": [
-            { "@type": "HowToStep", "position": 1, "name": "Repondre directement aux questions", "text": "Placer une reponse claire et concise en haut de chaque page, avant les details." },
-            { "@type": "HowToStep", "position": 2, "name": "Structurer en questions-reponses", "text": "Utiliser des titres sous forme de questions et des reponses courtes que l'IA peut citer telles quelles." },
-            { "@type": "HowToStep", "position": 3, "name": "Ajouter des donnees structurees", "text": "Implementer les schemas Article, FAQPage, HowTo, Organization et LocalBusiness en JSON-LD." },
-            { "@type": "HowToStep", "position": 4, "name": "Renforcer l'entite de marque", "text": "Garder un nom, une adresse et un telephone identiques partout (NAP) et soigner la fiche Google Business Profile." },
-            { "@type": "HowToStep", "position": 5, "name": "Etre cite par des sources tierces", "text": "Obtenir des mentions et avis sur des sites de confiance, annuaires et medias locaux." },
-            { "@type": "HowToStep", "position": 6, "name": "Publier un fichier llms.txt", "text": "Ajouter un fichier llms.txt a la racine pour guider les moteurs d'IA vers les contenus cles." },
-            { "@type": "HowToStep", "position": 7, "name": "Autoriser les robots d'IA", "text": "Configurer robots.txt pour autoriser GPTBot, ClaudeBot, PerplexityBot et Google-Extended." },
-            { "@type": "HowToStep", "position": 8, "name": "Appuyer chaque affirmation", "text": "Citer des chiffres, des dates recentes et des sources : les IA privilegient les contenus verifiables." }
-        ]
-    }
-    </script>
 
     <!-- Schema.org FAQ -->
     <script type="application/ld+json">
@@ -223,7 +204,7 @@
         <p>Transformez vos titres en <strong>vraies questions</strong> ("Combien coute un site web ?") et donnez des reponses autonomes, comprehensibles meme sorties de leur contexte.</p>
 
         <h3>3. Ajoutez des donnees structurees (JSON-LD)</h3>
-        <p>Implementez les schemas <strong>Article, FAQPage, HowTo, Organization et LocalBusiness</strong>. Ils aident les machines a comprendre qui vous etes et ce que vous affirmez. Cette page utilise les trois premiers.</p>
+        <p>Implementez les schemas <strong>Article, FAQPage, Organization et LocalBusiness</strong>. Ils aident les machines a comprendre qui vous etes et ce que vous affirmez. Cette page utilise les deux premiers. (Le schema HowTo existe toujours, mais Google a retire ses resultats enrichis en 2023 — ne l'utilisez plus.)</p>
 
         <h3>4. Renforcez votre entite de marque</h3>
         <p>Gardez un <strong>nom, une adresse et un telephone identiques partout</strong> (le fameux NAP), une page "A propos" claire, et une fiche <a href="google-business-profile-optimiser-fiche.html">Google Business Profile</a> complete. Les IA construisent une "fiche" mentale de votre entreprise a partir de ces signaux.</p>
@@ -232,10 +213,10 @@
         <p>Avis clients, annuaires, presse locale, partenaires : <strong>plus votre marque est mentionnee sur des sites de confiance, plus une IA la considere comme une reference</strong>. C'est le coeur du GEO.</p>
 
         <h3>6. Publiez un fichier llms.txt</h3>
-        <p>Comme le <code>robots.txt</code> guide les moteurs de recherche, le <strong>llms.txt</strong> guide les moteurs d'IA vers vos contenus essentiels. Un standard emergent, simple a mettre en place, et qui vous positionne en avance.</p>
+        <p>Comme le <code>robots.txt</code> guide les moteurs de recherche, le <strong>llms.txt</strong> guide les moteurs d'IA vers vos contenus essentiels. Un standard emergent, simple a mettre en place, et qui vous positionne en avance — la <a href="https://llmstxt.org/" target="_blank" rel="noopener">specification officielle est consultable sur llmstxt.org</a>.</p>
 
         <h3>7. Autorisez les robots d'IA</h3>
-        <p>Verifiez que votre <code>robots.txt</code> n'interdit pas <strong>GPTBot, ClaudeBot, PerplexityBot, Google-Extended</strong>. Si ces robots ne peuvent pas lire votre site, vous ne pouvez pas etre cite.</p>
+        <p>Verifiez que votre <code>robots.txt</code> n'interdit pas <strong>GPTBot, ClaudeBot, PerplexityBot, Google-Extended</strong>. Si ces robots ne peuvent pas lire votre site, vous ne pouvez pas etre cite — la <a href="https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers" target="_blank" rel="noopener">liste officielle des robots Google</a> precise lesquels controler.</p>
 
         <h3>8. Appuyez chaque affirmation</h3>
         <p>Les IA aiment le verifiable : <strong>chiffres, dates recentes, exemples concrets, sources</strong>. Une page datee de 2026 et chiffree inspire plus confiance qu'un texte vague et intemporel.</p>
