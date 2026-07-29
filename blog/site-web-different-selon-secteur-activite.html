@@ -135,6 +135,40 @@
             color: var(--text-secondary);
         }
 
+        /* Chapo : premiere phrase mise en avant, sert d'accroche avant le reste du texte */
+        .blog-lead {
+            font-size: 1.15rem;
+            font-weight: 400;
+            line-height: 1.65;
+            color: var(--text);
+            margin-bottom: 1.4rem;
+        }
+
+        /* Citation extraite : casse le mur de texte au milieu de l'article */
+        .blog-pull {
+            margin: 2.2rem 0;
+            padding: 0 0 0 1.4rem;
+            border-left: 3px solid var(--accent);
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text);
+        }
+        .blog-pull .hl { color: var(--accent-light); }
+
+        /* Apparition en cascade au defilement, memes reglages que le reste du site (js/main.js) */
+        .reveal {
+            opacity: 1;
+            transform: none;
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+        }
+        .reveal.masque { opacity: 0; transform: translateY(24px); }
+        .reveal.visible { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: none; }
+        }
+
         .blog-nav {
             display: flex;
             align-items: center;
@@ -210,23 +244,27 @@
         <h1>Site web par secteur d'activite : pourquoi un modele unique ne marche pas</h1>
         <div class="blog-meta">Publie le 29 juillet 2026 par Nathan Lepretre</div>
 
-        <p>L'annee derniere, j'ai passe trois semaines au Vietnam. Avant de partir, j'avais prepare mon voyage comme je le fais toujours en Europe : reserver en ligne, payer par carte, tout planifier a l'avance. Sur place, rien ne s'est passe comme prevu. Les reservations se font par message WhatsApp plutot que par formulaire. Le cash reste roi dans les petites villes. Et ce qui rassure un touriste occidental (avis Google, photos professionnelles) compte parfois moins qu'une recommandation glissee par un autre voyageur croise la veille.</p>
+        <p class="blog-lead">Cette annee, en mars, j'ai passe deux mois au Vietnam. Avant de partir, j'avais prepare mon voyage comme je le fais toujours en Europe : reserver en ligne, payer par carte, tout planifier a l'avance.</p>
 
-        <p>Rien de tout ca n'est etonnant en soi. Ce qui m'a frappe, c'est a quel point on l'oublie des qu'on revient a nos habitudes de travail. <strong>On continue de penser qu'un site web, c'est un site web</strong> : une page d'accueil, quelques photos, un formulaire de contact, et le tour est joue. Sauf que la meme erreur qu'on commet en debarquant au Vietnam avec des reflexes francais, on la commet en construisant un site avec des reflexes de site generique, quel que soit le metier qu'il represente.</p>
+        <p class="reveal">Sur place, rien ne s'est passe comme prevu. Les reservations se font par message WhatsApp plutot que par formulaire. Le cash reste roi dans les petites villes. Et ce qui rassure un touriste occidental (avis Google, photos professionnelles) compte parfois moins qu'une recommandation glissee par un autre voyageur croise la veille.</p>
 
-        <h2>Vos clients ne se comportent pas comme des touristes en terrain connu</h2>
+        <p class="reveal">Rien de tout ca n'est etonnant en soi. Ce qui m'a frappe, c'est a quel point on l'oublie des qu'on revient a nos habitudes de travail. <strong>On continue de penser qu'un site web, c'est un site web</strong> : une page d'accueil, quelques photos, un formulaire de contact, et le tour est joue. Sauf que la meme erreur qu'on commet en debarquant au Vietnam avec des reflexes francais, on la commet en construisant un site avec des reflexes de site generique, quel que soit le metier qu'il represente.</p>
 
-        <p>Un site web n'existe pas pour vous. Il existe pour quelqu'un qui a un probleme precis et qui cherche a le resoudre vite. Et ce quelqu'un ne se comporte pas du tout de la meme facon selon ce qu'il cherche.</p>
+        <h2 class="reveal">Vos clients ne se comportent pas comme des touristes en terrain connu</h2>
 
-        <p>Quelqu'un qui a besoin d'un plombier en urgence un dimanche soir veut voir un numero de telephone en trois secondes, pas un beau slogan. Quelqu'un qui compare des restaurants pour un anniversaire veut voir la carte, les photos des plats et les avis avant meme de penser a reserver. Quelqu'un qui cherche un kine pour une douleur au dos veut d'abord etre rassure sur les competences et les specialites avant de prendre rendez-vous. <strong>Trois intentions differentes, trois parcours differents, trois sites qui ne devraient pas se ressembler.</strong></p>
+        <p class="reveal">Un site web n'existe pas pour vous. Il existe pour quelqu'un qui a un probleme precis et qui cherche a le resoudre vite. Et ce quelqu'un ne se comporte pas du tout de la meme facon selon ce qu'il cherche.</p>
 
-        <p>C'est exactement la meme logique que decouvrir un pays etranger : ce qui marche pour convaincre quelqu'un ne marche pas pour convaincre tout le monde. Le contexte, les habitudes et les attentes changent le jeu entier.</p>
+        <p class="reveal">Quelqu'un qui a besoin d'un plombier en urgence un dimanche soir veut voir un numero de telephone en trois secondes, pas un beau slogan. Quelqu'un qui compare des restaurants pour un anniversaire veut voir la carte, les photos des plats et les avis avant meme de penser a reserver. Quelqu'un qui cherche un kine pour une douleur au dos veut d'abord etre rassure sur les competences et les specialites avant de prendre rendez-vous.</p>
 
-        <h2>Ce qui change concretement d'un secteur a l'autre</h2>
+        <blockquote class="reveal blog-pull">Trois intentions differentes, trois parcours differents, trois sites qui <span class="hl">ne devraient pas se ressembler</span>.</blockquote>
 
-        <p>Voici quelques exemples tres concrets de ce qui differe selon l'activite :</p>
+        <p class="reveal">C'est exactement la meme logique que decouvrir un pays etranger : ce qui marche pour convaincre quelqu'un ne marche pas pour convaincre tout le monde. Le contexte, les habitudes et les attentes changent le jeu entier.</p>
 
-        <ul>
+        <h2 class="reveal">Ce qui change concretement d'un secteur a l'autre</h2>
+
+        <p class="reveal">Voici quelques exemples tres concrets de ce qui differe selon l'activite :</p>
+
+        <ul class="reveal">
             <li><strong>Restaurant &amp; traiteur :</strong> la carte et les photos des plats priment sur tout le reste. Le visiteur doit pouvoir se projeter dans l'assiette en quelques secondes, et reserver ou appeler sans chercher.</li>
             <li><strong>Artisan du batiment (macon, electricien, plombier) :</strong> ce qui rassure, ce sont les realisations passees, les certifications et la reactivite. Le devis doit etre a un clic, pas cache dans un menu.</li>
             <li><strong>Sante &amp; bien-etre (kine, coiffeur, institut) :</strong> la prise de rendez-vous en ligne devient centrale, ainsi que la presentation des specialites et de l'equipe, pour instaurer la confiance avant meme le premier contact.</li>
@@ -234,32 +272,32 @@
             <li><strong>Services aux entreprises :</strong> ici, ce sont les references clients, les chiffres et la credibilite qui font la difference, avec un ton plus sobre et plus factuel.</li>
         </ul>
 
-        <p>Un site construit sur un modele unique, applique tel quel a n'importe quel metier, ignore ces differences. Il peut etre joli. Il ne convertira pas, parce qu'il ne repond pas a la vraie question que se pose le visiteur au moment ou il arrive sur la page.</p>
+        <p class="reveal">Un site construit sur un modele unique, applique tel quel a n'importe quel metier, ignore ces differences. Il peut etre joli. Il ne convertira pas, parce qu'il ne repond pas a la vraie question que se pose le visiteur au moment ou il arrive sur la page.</p>
 
-        <h2>Le meme principe s'applique entre deux pays, entre deux villes</h2>
+        <h2 class="reveal">Le meme principe s'applique entre deux pays, entre deux villes</h2>
 
-        <p>Ce n'est pas qu'une question de metier. C'est aussi une question de zone de chalandise. Un artisan a Valenciennes ne s'adresse pas exactement a la meme clientele qu'un artisan a Lille, meme dans le meme secteur : la concurrence locale, les habitudes de recherche et le niveau de prix acceptable different. <strong>Un site pense pour un contexte local precis fonctionne mieux qu'un site pense pour "tout le monde, partout".</strong></p>
+        <p class="reveal">Ce n'est pas qu'une question de metier. C'est aussi une question de zone de chalandise. Un artisan a Valenciennes ne s'adresse pas exactement a la meme clientele qu'un artisan a Lille, meme dans le meme secteur : la concurrence locale, les habitudes de recherche et le niveau de prix acceptable different. <strong>Un site pense pour un contexte local precis fonctionne mieux qu'un site pense pour "tout le monde, partout".</strong></p>
 
-        <p>C'est le meme raisonnement qui s'applique quand une entreprise s'exporte a l'international : ce qui convainc un client francais ne convainc pas forcement un client allemand ou vietnamien. Les codes de confiance, les moyens de paiement preferes, le ton employe, tout peut changer. Un site qui ignore ce contexte perd des clients qu'il n'a jamais vu venir.</p>
+        <p class="reveal">C'est le meme raisonnement qui s'applique quand une entreprise s'exporte a l'international : ce qui convainc un client francais ne convainc pas forcement un client allemand ou vietnamien. Les codes de confiance, les moyens de paiement preferes, le ton employe, tout peut changer. Un site qui ignore ce contexte perd des clients qu'il n'a jamais vu venir.</p>
 
-        <h2>Pourquoi les modeles "prets a l'emploi" tombent souvent a plat</h2>
+        <h2 class="reveal">Pourquoi les modeles "prets a l'emploi" tombent souvent a plat</h2>
 
-        <p>Les generateurs de sites en ligne proposent des dizaines de "templates" par categorie : un pour la restauration, un pour le batiment, un pour la beaute. Sur le papier, c'est deja un progres par rapport a un modele unique. Dans les faits, ce sont encore des gabarits generiques, remplis avec votre logo et vos photos, mais pas construits autour de votre facon de travailler, de votre zone geographique ou de ce qui vous distingue vraiment de vos concurrents directs.</p>
+        <p class="reveal">Les generateurs de sites en ligne proposent des dizaines de "templates" par categorie : un pour la restauration, un pour le batiment, un pour la beaute. Sur le papier, c'est deja un progres par rapport a un modele unique. Dans les faits, ce sont encore des gabarits generiques, remplis avec votre logo et vos photos, mais pas construits autour de votre facon de travailler, de votre zone geographique ou de ce qui vous distingue vraiment de vos concurrents directs.</p>
 
-        <p>Le resultat, ce sont des dizaines de sites d'artisans qui se ressemblent tous dans une meme region, avec la meme structure, les memes intitules de rubriques, et donc aucune raison objective de choisir l'un plutot que l'autre. <strong>Se fondre dans le decor n'a jamais aide personne a se demarquer.</strong></p>
+        <p class="reveal">Le resultat, ce sont des dizaines de sites d'artisans qui se ressemblent tous dans une meme region, avec la meme structure, les memes intitules de rubriques, et donc aucune raison objective de choisir l'un plutot que l'autre. <strong>Se fondre dans le decor n'a jamais aide personne a se demarquer.</strong></p>
 
-        <h2>Ce que ca change concretement pour votre projet</h2>
+        <h2 class="reveal">Ce que ca change concretement pour votre projet</h2>
 
-        <p>Penser un site par secteur d'activite, ca veut dire se poser les bonnes questions avant meme d'ouvrir un editeur de site : qui arrive sur cette page, avec quelle urgence, avec quelles reticences, et quelle est la seule action qu'on veut vraiment qu'il fasse ? Les reponses ne sont jamais les memes entre un restaurant, un artisan et un cabinet de sante, et c'est precisement ce qui doit guider la structure du site, pas l'inverse.</p>
+        <p class="reveal">Penser un site par secteur d'activite, ca veut dire se poser les bonnes questions avant meme d'ouvrir un editeur de site : qui arrive sur cette page, avec quelle urgence, avec quelles reticences, et quelle est la seule action qu'on veut vraiment qu'il fasse ? Les reponses ne sont jamais les memes entre un restaurant, un artisan et un cabinet de sante, et c'est precisement ce qui doit guider la structure du site, pas l'inverse.</p>
 
-        <p><strong>Chez NexBoost, nous ne partons jamais d'un modele generique.</strong> Chaque site est pense pour le metier et la zone d'intervention du client : ce qui rassure un visiteur, ce qui le fait rester, et ce qui le pousse a decrocher son telephone ou a remplir un formulaire. Un site de traiteur ne ressemble pas a un site de macon, et ce n'est pas un accident : c'est le point de depart.</p>
+        <p class="reveal"><strong>Chez NexBoost, nous ne partons jamais d'un modele generique.</strong> Chaque site est pense pour le metier et la zone d'intervention du client : ce qui rassure un visiteur, ce qui le fait rester, et ce qui le pousse a decrocher son telephone ou a remplir un formulaire. Un site de traiteur ne ressemble pas a un site de macon, et ce n'est pas un accident : c'est le point de depart.</p>
 
-        <div class="blog-cta">
+        <div class="blog-cta reveal">
             <p>Vous voulez un site pense pour votre metier, pas un gabarit recycle ? <strong>Demandez votre devis gratuit et sans engagement.</strong> Nous prenons le temps de comprendre votre activite et vos clients avant de dessiner quoi que ce soit.</p>
             <p><a href="../index.html#contact">Contactez-nous pour un devis gratuit</a></p>
         </div>
 
-        <aside class="article-cta">
+        <aside class="article-cta reveal">
             <div>
                 <h3>Et si on parlait de votre projet ?</h3>
                 <p>Audit gratuit, reponse sous 24 h, zero jargon. On vous dit ce qui rapporterait le plus a votre activite.</p>
@@ -271,6 +309,36 @@
     <footer class="blog-footer">
         <p>&copy; 2026 NexBoost. Tous droits reserves. | <a href="../mentions-legales.html">Mentions legales</a></p>
     </footer>
+
+    <!-- Apparition en cascade au defilement : memes reglages que js/main.js (threshold, delai, easing) -->
+    <script>
+      (function () {
+        var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var els = document.querySelectorAll('.blog-article .reveal');
+        if (reduit || !('IntersectionObserver' in window)) {
+          els.forEach(function (el) { el.classList.add('visible'); });
+          return;
+        }
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry, i) {
+            if (entry.isIntersecting) {
+              entry.target.style.transitionDelay = (i * 0.05) + 's';
+              entry.target.classList.remove('masque');
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(function (el) {
+          if (el.getBoundingClientRect().top > window.innerHeight * 0.92) {
+            el.classList.add('masque');
+            obs.observe(el);
+          } else {
+            el.classList.add('visible');
+          }
+        });
+      })();
+    </script>
 
     <!-- Theme script -->
 
