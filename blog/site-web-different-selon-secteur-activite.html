@@ -225,6 +225,73 @@
             color: var(--text-muted);
             text-decoration: underline;
         }
+
+        /* Chiffres cles : casse le mur de texte avec des donnees reelles, sourcees */
+        .blog-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.4rem;
+            margin: 2.4rem 0;
+            padding: 1.8rem 1.6rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+        .blog-stat-num {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.7rem, 4vw, 2.3rem);
+            font-weight: 800;
+            line-height: 1;
+            color: var(--accent-light);
+        }
+        .blog-stat-label {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            color: var(--text-secondary);
+        }
+        .blog-stats-source {
+            grid-column: 1 / -1;
+            margin-top: 0.6rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+        .blog-stats-source a { color: var(--text-muted); }
+        @media (max-width: 560px) {
+            .blog-stats { grid-template-columns: 1fr; gap: 1.1rem; }
+        }
+
+        /* Grille secteurs : chaque metier a sa couleur, remplace la liste a puces plate */
+        .blog-sectors {
+            display: grid;
+            gap: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+        .blog-sector {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 1.1rem 1.3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--sc);
+            border-radius: 0 10px 10px 0;
+        }
+        .blog-sector-num {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            color: var(--sc);
+            flex-shrink: 0;
+            padding-top: 0.1rem;
+        }
+        .blog-sector p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -260,17 +327,48 @@
 
         <p class="reveal">C'est exactement la meme logique que decouvrir un pays etranger : ce qui marche pour convaincre quelqu'un ne marche pas pour convaincre tout le monde. Le contexte, les habitudes et les attentes changent le jeu entier.</p>
 
+        <div class="blog-stats reveal">
+            <div>
+                <span class="blog-stat-num">88 %</span>
+                <span class="blog-stat-label">des recherches locales se font depuis un mobile</span>
+            </div>
+            <div>
+                <span class="blog-stat-num">76 %</span>
+                <span class="blog-stat-label">des recherches "pres de moi" menent a une visite sous 24 h</span>
+            </div>
+            <div>
+                <span class="blog-stat-num">54 %</span>
+                <span class="blog-stat-label">des visiteurs cherchent d'abord les horaires d'ouverture</span>
+            </div>
+            <p class="blog-stats-source">Sources : <a href="https://blog.digitaleo.fr/referencement-local" target="_blank" rel="noopener">Digitaleo, 20 chiffres cles du referencement local</a> &middot; <a href="https://www.hi-commerce.fr/stats-seo-local-france-2026-en/" target="_blank" rel="noopener">Hi-Commerce, Local SEO Statistics France 2026</a></p>
+        </div>
+
         <h2 class="reveal">Ce qui change concretement d'un secteur a l'autre</h2>
 
         <p class="reveal">Voici quelques exemples tres concrets de ce qui differe selon l'activite :</p>
 
-        <ul class="reveal">
-            <li><strong>Restaurant &amp; traiteur :</strong> la carte et les photos des plats priment sur tout le reste. Le visiteur doit pouvoir se projeter dans l'assiette en quelques secondes, et reserver ou appeler sans chercher.</li>
-            <li><strong>Artisan du batiment (macon, electricien, plombier) :</strong> ce qui rassure, ce sont les realisations passees, les certifications et la reactivite. Le devis doit etre a un clic, pas cache dans un menu.</li>
-            <li><strong>Sante &amp; bien-etre (kine, coiffeur, institut) :</strong> la prise de rendez-vous en ligne devient centrale, ainsi que la presentation des specialites et de l'equipe, pour instaurer la confiance avant meme le premier contact.</li>
-            <li><strong>Commerce local :</strong> les horaires, l'adresse et le plan d'acces doivent sauter aux yeux. Le visiteur veut savoir en un coup d'oeil si c'est ouvert maintenant.</li>
-            <li><strong>Services aux entreprises :</strong> ici, ce sont les references clients, les chiffres et la credibilite qui font la difference, avec un ton plus sobre et plus factuel.</li>
-        </ul>
+        <div class="blog-sectors reveal">
+            <div class="blog-sector" style="--sc: var(--accent-light)">
+                <span class="blog-sector-num">01</span>
+                <p><strong>Restaurant &amp; traiteur :</strong> la carte et les photos des plats priment sur tout le reste. Le visiteur doit pouvoir se projeter dans l'assiette en quelques secondes, et reserver ou appeler sans chercher.</p>
+            </div>
+            <div class="blog-sector" style="--sc: var(--orange)">
+                <span class="blog-sector-num">02</span>
+                <p><strong>Artisan du batiment (macon, electricien, plombier) :</strong> ce qui rassure, ce sont les realisations passees, les certifications et la reactivite. Le devis doit etre a un clic, pas cache dans un menu.</p>
+            </div>
+            <div class="blog-sector" style="--sc: var(--green)">
+                <span class="blog-sector-num">03</span>
+                <p><strong>Sante &amp; bien-etre (kine, coiffeur, institut) :</strong> la prise de rendez-vous en ligne devient centrale, ainsi que la presentation des specialites et de l'equipe, pour instaurer la confiance avant meme le premier contact.</p>
+            </div>
+            <div class="blog-sector" style="--sc: var(--accent-dark)">
+                <span class="blog-sector-num">04</span>
+                <p><strong>Commerce local :</strong> les horaires, l'adresse et le plan d'acces doivent sauter aux yeux. Le visiteur veut savoir en un coup d'oeil si c'est ouvert maintenant.</p>
+            </div>
+            <div class="blog-sector" style="--sc: var(--accent)">
+                <span class="blog-sector-num">05</span>
+                <p><strong>Services aux entreprises :</strong> ici, ce sont les references clients, les chiffres et la credibilite qui font la difference, avec un ton plus sobre et plus factuel.</p>
+            </div>
+        </div>
 
         <p class="reveal">Un site construit sur un modele unique, applique tel quel a n'importe quel metier, ignore ces differences. Il peut etre joli. Il ne convertira pas, parce qu'il ne repond pas a la vraie question que se pose le visiteur au moment ou il arrive sur la page.</p>
 
