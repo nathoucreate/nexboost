@@ -1,0 +1,23 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-07-29T20:47:14.317Z",
+        "reason": "Police de marque nexboost.fr, utilisee sur les 8 articles du blog et tout le site depuis fevrier 2026"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "blog/site-web-different-selon-secteur-activite.html"
+        ],
+        "createdAt": "2026-07-29T20:47:15.144Z",
+        "reason": "Style d'encadre CTA existant, deja utilise sur les 7 autres articles du blog (ex: pourquoi-site-web-artisan.html)"
+      }
+    ]
+  }
+}
