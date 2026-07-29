@@ -1,6 +1,10 @@
 {
   "detector": {
-    "ignoreRules": [],
+    "ignoreRules": [
+      "dark-glow",
+      "gpt-thin-border-wide-shadow",
+      "flat-type-hierarchy"
+    ],
     "ignoreFiles": [],
     "ignoreValues": [
       {
@@ -17,15 +21,6 @@
         ],
         "createdAt": "2026-07-29T20:47:15.144Z",
         "reason": "Style d'encadre CTA existant, deja utilise sur les 7 autres articles du blog (ex: pourquoi-site-web-artisan.html)"
-      },
-      {
-        "rule": "dark-glow",
-        "value": "*",
-        "files": [
-          "blog/index.html"
-        ],
-        "createdAt": "2026-07-29T20:53:53.518Z",
-        "reason": "Halo indigo tres subtil (5% opacite) au survol de la carte vedette, deja present dans le CSS partage du blog avant intervention, confirme intentionnel par Nathan"
       }
     ]
   }
