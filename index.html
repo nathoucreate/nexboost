@@ -78,11 +78,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   position: fixed; width: 36px; height: 36px;
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 50%; pointer-events: none; z-index: 10001;
-  transform: translate(-50%,-50%);
-  transition: width 0.25s, height 0.25s, background 0.25s, border-color 0.25s;
+  transform: translate(-50%,-50%) scale(1);
+  transition: transform 0.25s, background 0.25s, border-color 0.25s;
   mix-blend-mode: difference;
 }
-.v4-ring.hover { width: 60px; height: 60px; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
+.v4-ring.hover { transform: translate(-50%,-50%) scale(1.667); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
 .v4-dot {
   position: fixed; width: 4px; height: 4px;
   background: white; border-radius: 50%;
@@ -126,20 +126,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 @keyframes v4Drift3 { to { transform: translate(-90px, 60px) scale(0.9); } }
 [data-theme="light"] .v4-aurora { opacity: 0.2; }
 @media (prefers-reduced-motion: reduce) { .v4-aurora { animation: none; } }
-.v4-hero-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 25%, transparent);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, black 25%, transparent);
-}
-[data-theme="light"] .v4-hero-grid {
-  background-image:
-    linear-gradient(rgba(15,15,35,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,15,35,0.05) 1px, transparent 1px);
-}
 .v4-hero-inner {
   position: relative; z-index: 2; text-align: center; max-width: 880px;
 }
@@ -147,15 +133,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   display: inline-flex; align-items: center; gap: 8px;
   padding: 7px 18px; border-radius: 100px;
   border: 1px solid var(--border); background: rgba(99,102,241,0.06);
-  font-size: 0.72rem; font-weight: 600; color: var(--accent-light);
-  letter-spacing: 0.08em; margin-bottom: 32px;
+  font-size: 0.8rem; font-weight: 600; color: var(--accent-light);
+  letter-spacing: 0.02em; margin-bottom: 32px;
   opacity: 0; transform: translateY(16px);
 }
 .v4-overline .v4-dot-green {
   width: 6px; height: 6px; border-radius: 50%; background: #10b981;
-  box-shadow: 0 0 8px rgba(16,185,129,0.5); animation: v4Blink 2s infinite;
 }
-@keyframes v4Blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
 .v4-h1 {
   font-family: 'Space Grotesk', var(--font-display);
@@ -230,8 +214,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0;
 }
 .v4-scroll-cue span {
-  font-size: 0.6rem; font-weight: 500;
-  letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted);
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
 }
 .v4-scroll-line {
   width: 1px; height: 36px;
@@ -245,24 +229,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   100%{opacity:0;transform:scaleY(0);transform-origin:bottom}
 }
 
-.v4-marquee {
-  padding: 44px 0; border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border); overflow: hidden;
+.v4-services-strip {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 10px; padding: 36px 24px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
 }
-.v4-marquee-track {
-  display: flex; animation: v4Marquee 28s linear infinite; width: max-content;
+.v4-service-tag {
+  font-family: 'Space Grotesk', var(--font-display);
+  font-size: 0.86rem; font-weight: 600;
+  color: var(--text-secondary); text-decoration: none;
+  padding: 9px 18px; border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s;
 }
-.v4-marquee-item {
-  flex-shrink: 0; font-family: 'Space Grotesk', var(--font-display);
-  font-size: clamp(0.85rem, 1.3vw, 1.1rem); font-weight: 600;
-  color: var(--text-muted); padding: 0 36px; white-space: nowrap;
-  display: flex; align-items: center; gap: 14px;
+.v4-service-tag:hover {
+  color: var(--text); border-color: var(--accent-light);
+  background: var(--accent-glow); transform: translateY(-2px);
 }
-.v4-marquee-sep {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--accent); opacity: 0.5;
-}
-@keyframes v4Marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@media (prefers-reduced-motion: reduce) { .v4-service-tag { transition: none; } }
 
 @media (max-width: 600px) {
   .v4-hero { padding: calc(var(--nav-h) + 10px) 16px 0; }
@@ -338,7 +322,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="v4-aurora v4-aurora--1" aria-hidden="true"></div>
   <div class="v4-aurora v4-aurora--2" aria-hidden="true"></div>
   <div class="v4-aurora v4-aurora--3" aria-hidden="true"></div>
-  <div class="v4-hero-grid" aria-hidden="true"></div>
   <div class="v4-hero-inner" id="v4HeroInner">
     <div class="v4-overline">
       <span class="v4-dot-green"></span>
@@ -378,23 +361,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ═══ MARQUEE ═══ -->
-<div class="v4-marquee">
-  <div class="v4-marquee-track">
-    <div class="v4-marquee-item">Sites web <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">SEO local <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Réseaux sociaux <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Identité visuelle <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Photo & drone <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Google Ads <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Sites web <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">SEO local <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Réseaux sociaux <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Identité visuelle <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Photo & drone <span class="v4-marquee-sep"></span></div>
-    <div class="v4-marquee-item">Google Ads <span class="v4-marquee-sep"></span></div>
-  </div>
-</div>
+<!-- ═══ SERVICES STRIP ═══ -->
+<nav class="v4-services-strip" aria-label="Nos services">
+  <a href="#services" class="v4-service-tag">Sites web</a>
+  <a href="#services" class="v4-service-tag">SEO local</a>
+  <a href="#services" class="v4-service-tag">Réseaux sociaux</a>
+  <a href="#services" class="v4-service-tag">Identité visuelle</a>
+  <a href="#services" class="v4-service-tag">Photo &amp; drone</a>
+  <a href="#services" class="v4-service-tag">Google Ads</a>
+</nav>
 
 <!-- ═══ SERVICES ═══ -->
 <section class="services" id="services">
