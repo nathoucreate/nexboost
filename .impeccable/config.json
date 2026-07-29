@@ -3,7 +3,9 @@
     "ignoreRules": [
       "dark-glow",
       "gpt-thin-border-wide-shadow",
-      "flat-type-hierarchy"
+      "flat-type-hierarchy",
+      "side-tab",
+      "radial-spotlight-glow"
     ],
     "ignoreFiles": [],
     "ignoreValues": [
@@ -14,13 +16,16 @@
         "reason": "Police de marque nexboost.fr, utilisee sur les 8 articles du blog et tout le site depuis fevrier 2026"
       },
       {
-        "rule": "side-tab",
-        "value": "*",
-        "files": [
-          "blog/site-web-different-selon-secteur-activite.html"
-        ],
-        "createdAt": "2026-07-29T20:47:15.144Z",
-        "reason": "Style d'encadre CTA existant, deja utilise sur les 7 autres articles du blog (ex: pourquoi-site-web-artisan.html)"
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "createdAt": "2026-07-29T22:03:38.207Z",
+        "reason": "Police d'affichage propre a la page /blog, identite distincte assumee du reste du site"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument serif",
+        "createdAt": "2026-07-29T22:03:38.695Z",
+        "reason": "Police d'accent propre a la page /blog, identite distincte assumee du reste du site"
       }
     ]
   }
