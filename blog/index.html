@@ -612,11 +612,14 @@ img { max-width: 100%; display: block; }
    penchee a droite. Sans marge, le masque de l'animation rogne le dernier
    « e ». On elargit donc la zone de clip, et on annule l'elargissement en
    marge negative pour que la mise en page ne bouge pas d'un pixel. */
+/* L'animation n'a besoin de masquer que le HAUT et le BAS : la ligne monte.
+   overflow:hidden, lui, coupe aussi a gauche et a droite — et l'italique
+   d'Instrument Serif deborde a droite, d'ou le « e » tranche.
+   clip-path permet de clipper la verticale en laissant l'horizontale
+   totalement libre (-100% de chaque cote). */
 .ligne-titre {
   display: block;
-  overflow: hidden;
-  padding: 0.1em 0.08em 0.2em;
-  margin: -0.1em -0.08em -0.2em;
+  clip-path: inset(-0.05em -100% -0.02em -100%);
 }
 .ligne-titre > span {
   display: inline-block;
