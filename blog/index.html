@@ -393,21 +393,56 @@ img { max-width: 100%; display: block; }
 }
 .blog-card:hover::after { opacity: 1; }
 
-.blog-card-num {
-  font-family: var(--font-display);
-  font-size: 2rem;
+/* ─── Etiquette de categorie ───
+   Remplace le numero decoratif 01-08 : il occupait la meilleure place de la
+   carte sans rien apprendre au lecteur, et faisait concurrence au titre.
+   Une couleur par sujet rend la grille lisible d'un coup d'oeil. */
+.card-tag {
+  align-self: flex-start;
+  /* 0.72rem = 11.5px : sous 11px une etiquette fonctionnelle devient
+     illisible sur ecran dense, et celle-ci nomme la categorie du filtre. */
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--accent-glow);
-  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 100px;
   margin-bottom: 14px;
-  opacity: 0.6;
+  border: 1px solid transparent;
 }
-[data-theme="light"] .blog-card-num { color: rgba(79,70,229,0.12); }
+.card-tag[data-cat="strategie"]  { color: #a5a8ff; background: rgba(99,102,241,0.13); border-color: rgba(99,102,241,0.25); }
+.card-tag[data-cat="seo"]        { color: #67e8f9; background: rgba(34,211,238,0.11); border-color: rgba(34,211,238,0.22); }
+.card-tag[data-cat="ia"]         { color: #d8b4fe; background: rgba(168,85,247,0.13); border-color: rgba(168,85,247,0.25); }
+.card-tag[data-cat="social"]     { color: #f9a8d4; background: rgba(236,72,153,0.12); border-color: rgba(236,72,153,0.24); }
+.card-tag[data-cat="budget"]     { color: #fcd34d; background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.24); }
+[data-theme="light"] .card-tag[data-cat="strategie"] { color: #4338ca; background: rgba(99,102,241,0.10); }
+[data-theme="light"] .card-tag[data-cat="seo"]       { color: #0e7490; background: rgba(34,211,238,0.12); }
+[data-theme="light"] .card-tag[data-cat="ia"]        { color: #7e22ce; background: rgba(168,85,247,0.10); }
+[data-theme="light"] .card-tag[data-cat="social"]    { color: #be185d; background: rgba(236,72,153,0.10); }
+[data-theme="light"] .card-tag[data-cat="budget"]    { color: #b45309; background: rgba(245,158,11,0.14); }
+
+/* Date + duree : la duree de lecture est le premier signal qui declenche
+   le clic — on annonce l'engagement demande avant de le demander. */
 .blog-card-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 0.75rem;
   color: var(--text-muted);
   margin-bottom: 10px;
   font-weight: 500;
+}
+.card-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-sec);
+}
+.card-time::before {
+  content: '';
+  width: 3px; height: 3px; border-radius: 50%;
+  background: currentColor; opacity: 0.5;
+  margin-right: 4px;
 }
 .blog-card h2 {
   font-family: var(--font-display);
@@ -522,12 +557,105 @@ img { max-width: 100%; display: block; }
 }
 [data-theme="light"] .noise { opacity: 0.012; }
 
+/* ─── FILTRES ───
+   Le vrai levier de retention : 8 articles sur des sujets sans rapport,
+   un visiteur venu pour les prix n'a aucune raison de lire le reste.
+   Filtrer transforme une page vue en plusieurs. */
+.blog-filtres {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  max-width: 1100px; margin: 0 auto 26px; padding: 0 24px;
+}
+.filtre {
+  font-family: inherit;
+  font-size: 0.8rem; font-weight: 600;
+  color: var(--text-sec);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
+}
+.filtre:hover { color: var(--text); border-color: rgba(99,102,241,0.35); }
+.filtre[aria-pressed="true"] {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+[data-theme="light"] .filtre[aria-pressed="true"] { color: #fff; }
+.filtre-compte { opacity: 0.55; font-weight: 500; margin-left: 3px; }
+
+/* Sortie de grille : on retire la carte apres l'animation, pas avant,
+   sinon elle disparait d'un coup au lieu de s'effacer. */
+.blog-card.sortie {
+  opacity: 0; transform: scale(0.96);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.blog-card.masquee { display: none; }
+
+.blog-vide {
+  grid-column: 1 / -1; text-align: center;
+  padding: 40px 0; color: var(--text-muted); font-size: 0.9rem;
+}
+
 /* ─── REVEAL ─── */
 [data-reveal] {
   opacity: 0; transform: translateY(32px);
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
 }
 [data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+/* ─── ENTREE DU HERO ───
+   Au-dessus de la ligne de flottaison : ca s'anime au chargement, pas au
+   defilement — personne ne scrolle pour declencher un titre deja visible. */
+/* L'italique serif deborde de sa boite de ligne : jambages en bas, panse
+   penchee a droite. Sans marge, le masque de l'animation rogne le dernier
+   « e ». On elargit donc la zone de clip, et on annule l'elargissement en
+   marge negative pour que la mise en page ne bouge pas d'un pixel. */
+.ligne-titre {
+  display: block;
+  overflow: hidden;
+  padding: 0.1em 0.08em 0.2em;
+  margin: -0.1em -0.08em -0.2em;
+}
+.ligne-titre > span {
+  display: inline-block;
+  /* on part sous le bord de clip elargi, sinon le haut des lettres
+     depasserait dans la marge avant le debut de l'animation */
+  transform: translateY(calc(100% + 0.2em));
+  opacity: 0;
+  animation: monteLigne 0.9s var(--ease) forwards;
+}
+.ligne-titre:nth-child(2) > span { animation-delay: 0.12s; }
+@keyframes monteLigne { to { transform: translateY(0); opacity: 1; } }
+
+.blog-hero-desc, .blog-hero-stats {
+  opacity: 0;
+  animation: apparait 0.8s var(--ease) 0.35s forwards;
+}
+.blog-hero-stats { animation-delay: 0.5s; }
+@keyframes apparait { to { opacity: 1; } }
+
+/* Respiration tres lente du halo : la page n'est jamais tout a fait figee,
+   sans jamais attirer l'oeil non plus. */
+.blog-hero-glow { animation: respire 9s ease-in-out infinite; }
+@keyframes respire {
+  0%, 100% { opacity: 0.75; transform: translate(-50%,-50%) scale(1); }
+  50%      { opacity: 1;    transform: translate(-50%,-50%) scale(1.08); }
+}
+
+/* La fleche part vers la droite au survol de toute la carte, pas seulement
+   du lien : la cible cliquable percue devient la carte entiere. */
+.blog-card-link svg { transition: transform 0.3s var(--ease); }
+.blog-card:hover .blog-card-link svg { transform: translateX(4px); }
+.blog-card:hover .blog-card-link { color: var(--accent-light); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ligne-titre > span, .blog-hero-desc, .blog-hero-stats,
+  .blog-hero-glow { animation: none; opacity: 1; transform: none; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .blog-card.sortie { transition: none; }
+}
 </style>
 </head>
 <body>
@@ -557,20 +685,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ═══ HERO ═══ -->
   <section class="blog-hero" data-reveal>
     <div class="blog-hero-glow" aria-hidden="true"></div>
-    <h1>Des conseils concrets pour<br><span class="serif-accent">developper votre visibilite</span></h1>
+    <h1>
+      <span class="ligne-titre"><span>Des conseils concrets pour</span></span>
+      <span class="ligne-titre"><span class="serif-accent">developper votre visibilite</span></span>
+    </h1>
     <p class="blog-hero-desc">Pas de blabla marketing. Juste des guides pratiques, ecrits pour les artisans et commercants qui veulent attirer plus de clients en ligne.</p>
     <div class="blog-hero-stats">
       <div class="blog-stat">
-        <div class="blog-stat-val">8</div>
+        <div class="blog-stat-val" data-compte="8">8</div>
         <div class="blog-stat-label">Articles</div>
       </div>
       <div class="blog-stat">
-        <div class="blog-stat-val">100%</div>
+        <div class="blog-stat-val" data-compte="100" data-suffixe="%">100%</div>
         <div class="blog-stat-label">Gratuit</div>
       </div>
       <div class="blog-stat">
-        <div class="blog-stat-val">5 min</div>
-        <div class="blog-stat-label">Lecture moyenne</div>
+        <div class="blog-stat-val" data-compte="44" data-suffixe=" min">44 min</div>
+        <div class="blog-stat-label">De lecture au total</div>
       </div>
     </div>
   </section>
@@ -597,13 +728,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- ═══ ALL ARTICLES ═══ -->
   <div class="blog-section-header" data-reveal>
     <h2 class="blog-section-title">Tous les articles</h2>
-    <span class="blog-section-count">8 articles</span>
+    <span class="blog-section-count" id="compteArticles">8 articles</span>
   </div>
 
-  <section class="blog-grid">
-    <article class="blog-card" data-reveal>
-      <div class="blog-card-num">01</div>
-      <span class="blog-card-date">29 juillet 2026</span>
+  <div class="blog-filtres" role="group" aria-label="Filtrer les articles par sujet">
+    <button class="filtre" data-filtre="tous" aria-pressed="true">Tous <span class="filtre-compte">8</span></button>
+    <button class="filtre" data-filtre="strategie" aria-pressed="false">Strategie <span class="filtre-compte">3</span></button>
+    <button class="filtre" data-filtre="seo" aria-pressed="false">Referencement <span class="filtre-compte">2</span></button>
+    <button class="filtre" data-filtre="ia" aria-pressed="false">IA <span class="filtre-compte">1</span></button>
+    <button class="filtre" data-filtre="social" aria-pressed="false">Reseaux sociaux <span class="filtre-compte">1</span></button>
+    <button class="filtre" data-filtre="budget" aria-pressed="false">Budget <span class="filtre-compte">1</span></button>
+  </div>
+
+  <section class="blog-grid" id="grilleArticles">
+    <article class="blog-card" data-reveal data-cat="strategie">
+      <span class="card-tag" data-cat="strategie">Strategie</span>
+      <span class="blog-card-date">29 juillet 2026<span class="card-time">6 min de lecture</span></span>
       <h2>Site web par secteur d'activite : pourquoi un modele unique ne marche pas</h2>
       <p>Un site de restaurant, un site d'artisan BTP et un site de kine n'ont rien a vendre de la meme facon. Pourquoi votre site doit etre pense pour votre metier, pas copie sur un modele generique.</p>
       <a href="site-web-different-selon-secteur-activite.html" class="blog-card-link">
@@ -612,9 +752,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </article>
 
-        <article class="blog-card" data-reveal>
-      <div class="blog-card-num">02</div>
-      <span class="blog-card-date">8 juillet 2026</span>
+        <article class="blog-card" data-reveal data-cat="budget">
+      <span class="card-tag" data-cat="budget">Budget</span>
+      <span class="blog-card-date">8 juillet 2026<span class="card-time">5 min de lecture</span></span>
       <h2>Combien coûte un site internet pour un artisan en 2026 ?</h2>
       <p>Fourchettes de prix réelles, coûts cachés, maintenance : les vrais chiffres pour choisir entre landing page, site vitrine et e-commerce sans vous tromper.</p>
       <a href="combien-coute-site-internet-2026.html" class="blog-card-link">
@@ -623,9 +763,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </article>
 
-    <article class="blog-card" data-reveal>
-      <div class="blog-card-num">03</div>
-      <span class="blog-card-date">29 juin 2026</span>
+    <article class="blog-card" data-reveal data-cat="ia">
+      <span class="card-tag" data-cat="ia">IA</span>
+      <span class="blog-card-date">29 juin 2026<span class="card-time">6 min de lecture</span></span>
       <h2>AEO &amp; GEO : etre visible et cite par les IA en 2026</h2>
       <p>ChatGPT, Gemini et Perplexity recommandent deja des entreprises. Voici la methode AEO/GEO en 8 etapes pour que ce soit la votre.</p>
       <a href="aeo-geo-referencement-ia-2026.html" class="blog-card-link">
@@ -634,9 +774,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </article>
 
-    <article class="blog-card" data-reveal>
-      <div class="blog-card-num">04</div>
-      <span class="blog-card-date">7 mai 2026</span>
+    <article class="blog-card" data-reveal data-cat="social">
+      <span class="card-tag" data-cat="social">Reseaux sociaux</span>
+      <span class="blog-card-date">7 mai 2026<span class="card-time">6 min de lecture</span></span>
       <h2>Reseaux sociaux pour artisans et commercants : guide 2026</h2>
       <p>Comment utiliser Instagram, Facebook et Google pour attirer des clients locaux ? 10 idees de publications et les 5 erreurs a eviter.</p>
       <a href="reseaux-sociaux-artisan-commercant.html" class="blog-card-link">
@@ -645,9 +785,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </article>
 
-    <article class="blog-card" data-reveal>
-      <div class="blog-card-num">05</div>
-      <span class="blog-card-date">30 avril 2026</span>
+    <article class="blog-card" data-reveal data-cat="seo">
+      <span class="card-tag" data-cat="seo">Referencement</span>
+      <span class="blog-card-date">30 avril 2026<span class="card-time">7 min de lecture</span></span>
       <h2>Comment optimiser votre fiche Google Business Profile en 2026</h2>
       <p>Guide complet pour tirer le maximum de votre fiche Google gratuite : photos, avis, posts et astuces pour apparaitre en tete des recherches locales.</p>
       <a href="google-business-profile-optimiser-fiche.html" class="blog-card-link">
@@ -656,9 +796,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </article>
 
-    <article class="blog-card" data-reveal>
-      <div class="blog-card-num">06</div>
-      <span class="blog-card-date">8 mars 2026</span>
+    <article class="blog-card" data-reveal data-cat="strategie">
+      <span class="card-tag" data-cat="strategie">Strategie</span>
+      <span class="blog-card-date">8 mars 2026<span class="card-time">6 min de lecture</span></span>
       <h2>Strategie digitale pour PME et artisans : par ou commencer ?</h2>
       <p>Comment construire une strategie digitale efficace quand on est artisan ou PME ? Les etapes cles pour developper votre presence en ligne.</p>
       <a href="strategie-digitale-pme-artisan.html" class="blog-card-link">
@@ -667,9 +807,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </article>
 
-    <article class="blog-card" data-reveal>
-      <div class="blog-card-num">07</div>
-      <span class="blog-card-date">28 fevrier 2026</span>
+    <article class="blog-card" data-reveal data-cat="seo">
+      <span class="card-tag" data-cat="seo">Referencement</span>
+      <span class="blog-card-date">28 fevrier 2026<span class="card-time">4 min de lecture</span></span>
       <h2>Le guide du SEO local pour les debutants</h2>
       <p>Apprenez les bases du referencement local pour apparaitre en tete des resultats Google dans votre ville.</p>
       <a href="seo-local-guide-debutant.html" class="blog-card-link">
@@ -678,9 +818,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </article>
 
-    <article class="blog-card" data-reveal>
-      <div class="blog-card-num">08</div>
-      <span class="blog-card-date">27 fevrier 2026</span>
+    <article class="blog-card" data-reveal data-cat="strategie">
+      <span class="card-tag" data-cat="strategie">Strategie</span>
+      <span class="blog-card-date">27 fevrier 2026<span class="card-time">4 min de lecture</span></span>
       <h2>Pourquoi votre entreprise a besoin d'un site web en 2026</h2>
       <p>Decouvrez pourquoi un site web professionnel est devenu indispensable pour attirer de nouveaux clients.</p>
       <a href="pourquoi-site-web-artisan.html" class="blog-card-link">
@@ -738,6 +878,79 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('[data-reveal]').forEach(function(el){ obs.observe(el); });
+
+  var sobre = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ─── Compteurs du hero ───
+     Les chiffres se construisent sous les yeux : on regarde la valeur
+     monter, ce qui donne une raison de rester une seconde de plus. */
+  document.querySelectorAll('[data-compte]').forEach(function(el){
+    var cible = parseInt(el.getAttribute('data-compte'), 10);
+    var suffixe = el.getAttribute('data-suffixe') || '';
+    if (sobre || !cible) { el.textContent = cible + suffixe; return; }
+    el.textContent = '0' + suffixe;
+    var debut = null, duree = 1100;
+    function tic(t){
+      if (!debut) debut = t;
+      var p = Math.min((t - debut) / duree, 1);
+      var adouci = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(adouci * cible) + suffixe;
+      if (p < 1) requestAnimationFrame(tic);
+      else el.textContent = cible + suffixe;
+    }
+    requestAnimationFrame(tic);
+  });
+
+  /* ─── Filtres ───
+     Tout reste dans le DOM : on masque en CSS, jamais en supprimant.
+     Les 8 articles restent donc lisibles par Google et par les lecteurs
+     d'ecran, quel que soit le filtre actif. */
+  var grille = document.getElementById('grilleArticles');
+  var boutons = Array.prototype.slice.call(document.querySelectorAll('.filtre'));
+  var cartes = Array.prototype.slice.call(grille.querySelectorAll('.blog-card'));
+  var compteur = document.getElementById('compteArticles');
+  var vide = null;
+
+  function appliquer(filtre){
+    var visibles = 0;
+    cartes.forEach(function(carte){
+      var garde = (filtre === 'tous') || (carte.getAttribute('data-cat') === filtre);
+      if (garde) visibles++;
+      if (garde) {
+        carte.classList.remove('masquee');
+        // laisse le navigateur enregistrer l'affichage avant de reanimer
+        requestAnimationFrame(function(){ carte.classList.remove('sortie'); });
+      } else if (sobre) {
+        carte.classList.add('sortie', 'masquee');
+      } else {
+        carte.classList.add('sortie');
+        setTimeout(function(){
+          if (carte.classList.contains('sortie')) carte.classList.add('masquee');
+        }, 220);
+      }
+    });
+
+    compteur.textContent = visibles + (visibles > 1 ? ' articles' : ' article');
+
+    if (!visibles) {
+      if (!vide) {
+        vide = document.createElement('p');
+        vide.className = 'blog-vide';
+        vide.textContent = 'Aucun article dans ce sujet pour le moment.';
+        grille.appendChild(vide);
+      }
+    } else if (vide) {
+      vide.remove();
+      vide = null;
+    }
+  }
+
+  boutons.forEach(function(b){
+    b.addEventListener('click', function(){
+      boutons.forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      appliquer(b.getAttribute('data-filtre'));
+    });
+  });
 })();
 </script>
 </body>
