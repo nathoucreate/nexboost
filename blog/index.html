@@ -629,8 +629,18 @@ img { max-width: 100%; display: block; }
   opacity: 0;
   animation: monteLigne 0.9s var(--ease) forwards;
 }
-.ligne-titre:nth-child(2) > span { animation-delay: 0.12s; }
+/* Compensation optique de l'italique.
+   Une ligne italique mathematiquement centree parait decalee a droite :
+   ses fûts penchent de ce cote, et l'oeil suit la pente. On la ramene
+   legerement a gauche pour qu'elle paraisse alignee avec la ligne droite
+   du dessus. Le decalage vit dans l'image-cle, pour ne pas entrer en
+   conflit avec la translation verticale de l'entree. */
+.ligne-titre:nth-child(2) > span {
+  animation-name: monteLigneItalique;
+  animation-delay: 0.12s;
+}
 @keyframes monteLigne { to { transform: translateY(0); opacity: 1; } }
+@keyframes monteLigneItalique { to { transform: translate(-0.05em, 0); opacity: 1; } }
 
 .blog-hero-desc, .blog-hero-stats {
   opacity: 0;
@@ -656,6 +666,8 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) {
   .ligne-titre > span, .blog-hero-desc, .blog-hero-stats,
   .blog-hero-glow { animation: none; opacity: 1; transform: none; }
+  /* la compensation optique n'est pas une animation : elle reste */
+  .ligne-titre:nth-child(2) > span { transform: translate(-0.05em, 0); }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .blog-card.sortie { transition: none; }
 }
