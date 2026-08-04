@@ -28,7 +28,10 @@
 - [A propos / Nathan Lepretre](https://nexboost.fr/a-propos.html)
 
 ## Blog (conseils marketing digital pour entreprises locales)
+- [IA : 55 % des TPE-PME l'ont essayee, 17 % s'en servent vraiment](https://nexboost.fr/blog/ia-tpe-pme-usage-reel-2026.html) : chiffres INSEE et Bpifrance sur l'adoption reelle de l'IA dans les TPE-PME francaises, six usages concrets pour un artisan ou un commercant, et les trois erreurs a eviter (donnees clients, publication sans relecture, contenu generique).
 - [AEO & GEO : etre visible et cite par les IA en 2026](https://nexboost.fr/blog/aeo-geo-referencement-ia-2026.html) : definitions AEO/GEO et methode en 8 etapes pour etre recommande par ChatGPT, Gemini et Perplexity.
+- [Site web par secteur d'activite : pourquoi un modele unique ne marche pas](https://nexboost.fr/blog/site-web-different-selon-secteur-activite.html)
+- [Combien coute un site internet pour un artisan en 2026 ?](https://nexboost.fr/blog/combien-coute-site-internet-2026.html)
 - [Reseaux sociaux pour artisans et commercants : guide 2026](https://nexboost.fr/blog/reseaux-sociaux-artisan-commercant.html)
 - [Optimiser sa fiche Google Business Profile en 2026](https://nexboost.fr/blog/google-business-profile-optimiser-fiche.html)
 - [Strategie digitale pour PME et artisans](https://nexboost.fr/blog/strategie-digitale-pme-artisan.html)
