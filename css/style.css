@@ -77,6 +77,16 @@ body {
   overflow-x: hidden;
 }
 
+/* Filet de sécurité contre le défilement horizontal.
+   `overflow-x: hidden` sur body SEUL ne suffit pas : Safari iOS laisse quand
+   même la page se décaler au swipe vers la droite. On verrouille donc html
+   aussi. `clip` plutôt que `hidden` car il ne crée pas de conteneur de
+   défilement — pas d'effet de bord sur le scroll fluide ni sur position:sticky.
+   Les navigateurs sans `overflow: clip` (Safari < 16) gardent le hidden ci-dessus. */
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
+
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; display: block; }
@@ -2393,7 +2403,13 @@ button { font-family: var(--font); cursor: pointer; }
 .v4-marquee::after { bottom: 0; }
 
 /* — sections : halos d'ambiance — */
-.services, .process, .faq, .story { position: relative; }
+/* overflow-x seul (et pas `overflow: hidden`) : les halos débordent volontairement
+   vers le HAUT sur la section précédente, on ne coupe que la fuite horizontale,
+   qui sur mobile poussait la page ~310 px au-delà de l'écran. */
+.services, .process, .faq, .story {
+  position: relative;
+  overflow-x: clip;
+}
 .services::after, .process::after, .faq::after {
   content: '';
   position: absolute;
