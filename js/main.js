@@ -4,24 +4,12 @@
  */
 
 // ═══════════════════════════════════════
-//  THEME TOGGLE
+//  THÈME
 // ═══════════════════════════════════════
-const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('nexboost-theme');
-if (savedTheme) {
-  document.documentElement.setAttribute('data-theme', savedTheme);
-}
-
-themeToggle.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
-  if (next === 'dark') {
-    document.documentElement.removeAttribute('data-theme');
-  } else {
-    document.documentElement.setAttribute('data-theme', next);
-  }
-  localStorage.setItem('nexboost-theme', next);
-});
+// Déplacé dans js/theme.js. Le bloc qui se trouvait ici faisait
+// themeToggle.addEventListener sans vérifier que le bouton existe : sur toute
+// page dépourvue de #themeToggle, il levait une TypeError qui interrompait
+// TOUT le reste de ce fichier (navigation, panier, révélations, chatbot).
 
 // ═══════════════════════════════════════
 //  NAVIGATION

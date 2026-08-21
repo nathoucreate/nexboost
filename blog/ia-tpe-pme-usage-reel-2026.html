@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr-FR">
+<html lang="fr-FR" data-theme="light">
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -40,8 +40,8 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
 
     <!-- CSS -->
-    <script>try{var t=localStorage.getItem('nexboost-theme');if(t&&t!=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
-<link rel="stylesheet" href="../css/style.css">
+    <script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css?v=theme1">
 
     <!-- Schema.org Article -->
     <script type="application/ld+json">
@@ -918,5 +918,6 @@
         meta.textContent+=' · '+m+' min de lecture';
       })();
     </script>
+<script defer src="../js/theme.js?v=theme1"></script>
 </body>
 </html>

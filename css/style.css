@@ -1850,6 +1850,12 @@ button { font-family: var(--font); cursor: pointer; }
 }
 .theme-toggle svg { width: 18px; height: 18px; transition: transform 0.4s var(--ease-spring); }
 .theme-toggle:hover svg { transform: rotate(25deg); }
+
+/* Bouton de thème ajouté par js/theme.js sur les pages qui n'en avaient pas.
+   Les barres de navigation sont en space-between : sans cette marge auto, le
+   bouton se retrouverait isolé au milieu au lieu de rejoindre le bloc de droite. */
+.theme-toggle[data-injecte] { margin-left: auto; margin-right: 12px; }
+
 .theme-toggle .icon-sun { display: none; }
 .theme-toggle .icon-moon { display: block; }
 [data-theme="light"] .theme-toggle .icon-sun { display: block; }

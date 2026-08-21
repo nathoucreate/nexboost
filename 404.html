@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700;800&family=Instrument+Serif&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+    <script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
+<link rel="stylesheet" href="css/style.css?v=theme1">
 <style>
 .e404 {
   min-height: 100vh;
@@ -117,5 +118,6 @@
   var saved = localStorage.getItem('nexboost-theme');
   if (saved && saved !== 'dark') document.documentElement.setAttribute('data-theme', saved);
 </script>
+<script defer src="js/theme.js?v=theme1"></script>
 </body>
 </html>

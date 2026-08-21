@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <!-- Google Tag Manager -->
@@ -34,8 +34,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-<script>try{var t=localStorage.getItem('nexboost-theme');if(t&&t!=='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
-<link rel="stylesheet" href="../css/style.css">
+<script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
+<link rel="stylesheet" href="../css/style.css?v=theme1">
 <style>
   .blog-nav {
     display: flex;
@@ -251,5 +251,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     meta.textContent+=' \u00b7 '+m+' min de lecture';
   })();
 </script>
+<script defer src="../js/theme.js?v=theme1"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <!-- Google Tag Manager -->
@@ -60,6 +60,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 </script>
 
+<script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -883,18 +884,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 (function(){
-  // Theme toggle
-  var saved = localStorage.getItem('nexboost-theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-
-  var btn = document.getElementById('themeToggle');
-  btn.addEventListener('click', function(){
-    var current = document.documentElement.getAttribute('data-theme');
-    var next = current === 'light' ? 'dark' : 'light';
-    if (next === 'dark') document.documentElement.removeAttribute('data-theme');
-    else document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('nexboost-theme', next);
-  });
+  // Thème : géré par js/theme.js (bascule) et le script en <head> (préférence).
 
   // Reveal on scroll
   var obs = new IntersectionObserver(function(entries){
@@ -987,5 +977,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   });
 })();
 </script>
+<script defer src="../js/theme.js?v=theme1"></script>
 </body>
 </html>
