@@ -230,10 +230,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   100%{opacity:0;transform:scaleY(0);transform-origin:bottom}
 }
 
+/* Bandeau de services — défilement continu.
+   Deux jeux identiques se suivent et on translate d'exactement un jeu : le
+   raccord est invisible. L'écart entre les deux jeux est porté par le
+   padding-right du jeu, et surtout PAS par un gap sur la piste — avec un gap,
+   translateX(-50%) tomberait à côté du raccord et la boucle sauterait. */
 .v4-services-strip {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-  gap: 10px; padding: 36px 24px;
+  padding: 36px 0;
   border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.v4-strip-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+@supports (overflow: clip) {
+  /* clip et non hidden : empêche le navigateur de faire défiler la boîte pour
+     amener en vue un lien hors-champ atteint au clavier, ce qui décalerait
+     l'animation de façon permanente. */
+  .v4-strip-viewport { overflow: clip; }
+}
+.v4-strip-track {
+  display: flex;
+  width: max-content;
+  animation: v4-strip-defile 34s linear infinite;
+}
+.v4-strip-set {
+  display: flex; align-items: center;
+  gap: 10px; padding-right: 10px;
+}
+@keyframes v4-strip-defile {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* Ce sont des liens : on suspend au survol et à la tabulation pour qu'ils
+   restent cliquables. */
+.v4-services-strip:hover .v4-strip-track,
+.v4-services-strip:focus-within .v4-strip-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Retour exact à la disposition d'origine : une seule rangée centrée. */
+  .v4-strip-track { animation: none; width: 100%; justify-content: center; }
+  .v4-strip-set { flex-wrap: wrap; justify-content: center; padding-right: 0; }
+  .v4-strip-set[aria-hidden="true"] { display: none; }
+  .v4-strip-viewport { -webkit-mask-image: none; mask-image: none; }
+  .v4-services-strip { padding: 36px 24px; }
 }
 .v4-service-tag {
   font-family: 'Space Grotesk', var(--font-display);
@@ -364,12 +405,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ═══ SERVICES STRIP ═══ -->
 <nav class="v4-services-strip" aria-label="Nos services">
-  <a href="#services" class="v4-service-tag">Sites web</a>
-  <a href="#services" class="v4-service-tag">SEO local</a>
-  <a href="#services" class="v4-service-tag">Réseaux sociaux</a>
-  <a href="#services" class="v4-service-tag">Identité visuelle</a>
-  <a href="#services" class="v4-service-tag">Photo &amp; drone</a>
-  <a href="#services" class="v4-service-tag">Google Ads</a>
+  <div class="v4-strip-viewport">
+    <div class="v4-strip-track">
+      <div class="v4-strip-set">
+        <a href="#services" class="v4-service-tag">Sites web</a>
+        <a href="#services" class="v4-service-tag">SEO local</a>
+        <a href="#services" class="v4-service-tag">Réseaux sociaux</a>
+        <a href="#services" class="v4-service-tag">Identité visuelle</a>
+        <a href="#services" class="v4-service-tag">Photo &amp; drone</a>
+        <a href="#services" class="v4-service-tag">Google Ads</a>
+      </div>
+      <!-- Copie strictement visuelle : masquée aux lecteurs d'écran et retirée
+           du parcours de tabulation, pour ne pas annoncer deux fois les services. -->
+      <div class="v4-strip-set" aria-hidden="true">
+        <a href="#services" class="v4-service-tag" tabindex="-1">Sites web</a>
+        <a href="#services" class="v4-service-tag" tabindex="-1">SEO local</a>
+        <a href="#services" class="v4-service-tag" tabindex="-1">Réseaux sociaux</a>
+        <a href="#services" class="v4-service-tag" tabindex="-1">Identité visuelle</a>
+        <a href="#services" class="v4-service-tag" tabindex="-1">Photo &amp; drone</a>
+        <a href="#services" class="v4-service-tag" tabindex="-1">Google Ads</a>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <!-- ═══ SERVICES ═══ -->
