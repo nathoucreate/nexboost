@@ -230,65 +230,112 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   100%{opacity:0;transform:scaleY(0);transform-origin:bottom}
 }
 
-/* Bandeau de services — défilement continu.
-   Deux jeux identiques se suivent et on translate d'exactement un jeu : le
-   raccord est invisible. L'écart entre les deux jeux est porté par le
-   padding-right du jeu, et surtout PAS par un gap sur la piste — avec un gap,
-   translateX(-50%) tomberait à côté du raccord et la boucle sauterait. */
+/* ── Bandeau de services ─────────────────────────────────────────────
+   Deux états, et un seul jeu de liens dans le HTML :
+   • sans JS ou en « mouvement réduit » → rangée statique centrée qui
+     passe à la ligne (état par défaut, donc rien à rattraper) ;
+   • avec JS → la classe .is-live passe la piste en défilement continu.
+     Le script duplique le jeu autant de fois qu'il faut pour couvrir
+     l'écran et pilote la translation lui-même (voir en fin de page) :
+     la boucle reste sans raccord quelle que soit la largeur, ce qu'une
+     animation CSS en pourcentage ne savait pas faire — au-delà de
+     ~800 px, un vide traversait le bandeau à chaque tour. */
 .v4-services-strip {
-  padding: 36px 0;
-  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  position: relative;
+  padding: 18px 0;
+  background:
+    radial-gradient(70% 140% at 50% 50%, var(--accent-glow), transparent 72%),
+    linear-gradient(180deg, transparent, var(--bg-soft) 42%, transparent);
 }
-.v4-strip-viewport {
+/* Filets qui s'effacent aux extrémités, plutôt que deux traits nets. */
+.v4-services-strip::before,
+.v4-services-strip::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-hover) 22%, var(--border-hover) 78%, transparent);
+  opacity: 0.7; pointer-events: none;
+}
+.v4-services-strip::before { top: 0; }
+.v4-services-strip::after { bottom: 0; }
+
+/* Respiration verticale : le survol soulève la pastille de 3 px et projette
+   une ombre — sans ce padding, overflow:clip les tranche. */
+.v4-strip-viewport { overflow: visible; padding: 14px 0; }
+.v4-services-strip.is-live .v4-strip-viewport {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 @supports (overflow: clip) {
   /* clip et non hidden : empêche le navigateur de faire défiler la boîte pour
      amener en vue un lien hors-champ atteint au clavier, ce qui décalerait
      l'animation de façon permanente. */
-  .v4-strip-viewport { overflow: clip; }
+  .v4-services-strip.is-live .v4-strip-viewport { overflow: clip; }
 }
+
 .v4-strip-track {
-  display: flex;
-  width: max-content;
-  animation: v4-strip-defile 34s linear infinite;
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 12px;
+}
+.is-live .v4-strip-track {
+  flex-wrap: nowrap; justify-content: flex-start;
+  width: max-content; gap: 0;
+  will-change: transform;
 }
 .v4-strip-set {
-  display: flex; align-items: center;
-  gap: 10px; padding-right: 10px;
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: center; gap: 12px;
 }
-@keyframes v4-strip-defile {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-/* Ce sont des liens : on suspend au survol et à la tabulation pour qu'ils
-   restent cliquables. */
-.v4-services-strip:hover .v4-strip-track,
-.v4-services-strip:focus-within .v4-strip-track { animation-play-state: paused; }
+/* L'écart entre deux jeux est porté par le padding du jeu, jamais par un
+   gap sur la piste : le pas de la boucle vaut exactement la largeur d'un
+   jeu, padding compris. */
+.is-live .v4-strip-set { flex-wrap: nowrap; padding-right: 12px; }
 
-@media (prefers-reduced-motion: reduce) {
-  /* Retour exact à la disposition d'origine : une seule rangée centrée. */
-  .v4-strip-track { animation: none; width: 100%; justify-content: center; }
-  .v4-strip-set { flex-wrap: wrap; justify-content: center; padding-right: 0; }
-  .v4-strip-set[aria-hidden="true"] { display: none; }
-  .v4-strip-viewport { -webkit-mask-image: none; mask-image: none; }
-  .v4-services-strip { padding: 36px 24px; }
-}
 .v4-service-tag {
+  display: inline-flex; align-items: center; gap: 9px; flex: 0 0 auto;
   font-family: 'Space Grotesk', var(--font-display);
-  font-size: 0.86rem; font-weight: 600;
-  color: var(--text-secondary); text-decoration: none;
-  padding: 9px 18px; border-radius: 100px;
+  font-size: 0.85rem; font-weight: 600; letter-spacing: -0.01em;
+  color: var(--text-secondary); text-decoration: none; white-space: nowrap;
+  padding: 10px 18px; border-radius: 100px;
+  background: var(--bg-card);
   border: 1px solid var(--border);
-  transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s;
+  box-shadow: 0 1px 2px var(--shadow-card);
+  transition: color 0.3s, background 0.3s, border-color 0.3s,
+              transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.v4-service-tag svg {
+  width: 15px; height: 15px; flex: 0 0 auto;
+  stroke: var(--accent-light); fill: none;
+  stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;
+  opacity: 0.8;
+  transition: opacity 0.3s, transform 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 .v4-service-tag:hover {
-  color: var(--text); border-color: var(--accent-light);
-  background: var(--accent-glow); transform: translateY(-2px);
+  /* voile d'accent PAR-DESSUS la carte plutôt que --bg-card-hover : en thème
+     clair ce dernier est plus sombre que le blanc de la pastille, la pastille
+     survolée paraissait donc éteinte au lieu de s'allumer. */
+  color: var(--text);
+  background: linear-gradient(var(--accent-glow), var(--accent-glow)), var(--bg-card);
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px -16px var(--accent-glow-strong), 0 1px 2px var(--shadow-card);
 }
-@media (prefers-reduced-motion: reduce) { .v4-service-tag { transition: none; } }
+.v4-service-tag:hover svg { opacity: 1; transform: scale(1.1); }
+.v4-service-tag:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px;
+  color: var(--text); border-color: var(--border-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  .v4-service-tag, .v4-service-tag svg { transition: none; }
+  .v4-service-tag:hover { transform: none; }
+}
+@media (max-width: 600px) {
+  .v4-services-strip { padding: 12px 0; }
+  .v4-strip-viewport { padding: 12px 0; }
+  .v4-service-tag { font-size: 0.8rem; padding: 9px 15px; gap: 7px; }
+  .v4-service-tag svg { width: 14px; height: 14px; }
+  .v4-strip-track, .v4-strip-set { gap: 10px; }
+  .is-live .v4-strip-set { padding-right: 10px; }
+}
 
 @media (max-width: 600px) {
   .v4-hero { padding: calc(var(--nav-h) + 10px) 16px 0; }
@@ -404,30 +451,140 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ═══ SERVICES STRIP ═══ -->
-<nav class="v4-services-strip" aria-label="Nos services">
+<nav class="v4-services-strip" id="v4Strip" aria-label="Tout ce que nous proposons">
   <div class="v4-strip-viewport">
     <div class="v4-strip-track">
+      <!-- Un seul jeu dans le HTML : le script clone ce qu'il faut pour
+           remplir l'écran, et les clones sont masqués aux lecteurs d'écran. -->
       <div class="v4-strip-set">
-        <a href="#services" class="v4-service-tag">Sites web</a>
-        <a href="#services" class="v4-service-tag">SEO local</a>
-        <a href="#services" class="v4-service-tag">Réseaux sociaux</a>
-        <a href="#services" class="v4-service-tag">Identité visuelle</a>
-        <a href="#services" class="v4-service-tag">Photo &amp; drone</a>
-        <a href="#services" class="v4-service-tag">Google Ads</a>
-      </div>
-      <!-- Copie strictement visuelle : masquée aux lecteurs d'écran et retirée
-           du parcours de tabulation, pour ne pas annoncer deux fois les services. -->
-      <div class="v4-strip-set" aria-hidden="true">
-        <a href="#services" class="v4-service-tag" tabindex="-1">Sites web</a>
-        <a href="#services" class="v4-service-tag" tabindex="-1">SEO local</a>
-        <a href="#services" class="v4-service-tag" tabindex="-1">Réseaux sociaux</a>
-        <a href="#services" class="v4-service-tag" tabindex="-1">Identité visuelle</a>
-        <a href="#services" class="v4-service-tag" tabindex="-1">Photo &amp; drone</a>
-        <a href="#services" class="v4-service-tag" tabindex="-1">Google Ads</a>
+        <a href="creation-site-web-valenciennes.html" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>Site internet</a>
+        <a href="#tarifs" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.4"/><circle cx="19" cy="20" r="1.4"/><path d="M2 3h3l2.4 11.4a1.8 1.8 0 0 0 1.8 1.4h8.4a1.8 1.8 0 0 0 1.8-1.4L21 8H6"/></svg>Boutique en ligne</a>
+        <a href="seo-local-valenciennes.html" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.8"/></svg>SEO local</a>
+        <a href="seo-local-valenciennes.html" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.4l6-.9L12 3z"/></svg>Fiche &amp; avis Google</a>
+        <a href="#services" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l2-5.2a8.4 8.4 0 0 1-.9-3.8 8.4 8.4 0 0 1 8.4-8.4h.5a8.4 8.4 0 0 1 8 8v.4z"/></svg>Réseaux sociaux</a>
+        <a href="#services" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l1.6 4.3 4.3 1.6-4.3 1.6L12 14.3l-1.6-4.3L6.1 8.4l4.3-1.6L12 2.5z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"/><path d="M5.5 14l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8z"/></svg>Logo &amp; identité visuelle</a>
+        <a href="#tarifs" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2.5 2.5 7 12 11.5 21.5 7 12 2.5"/><polyline points="2.5 16.8 12 21.3 21.5 16.8"/><polyline points="2.5 11.9 12 16.4 21.5 11.9"/></svg>Flyers &amp; cartes de visite</a>
+        <a href="#tarifs" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l1.8-2.6h6.4L17 7h3a2 2 0 0 1 2 2z"/><circle cx="12" cy="13.5" r="3.6"/></svg>Photo professionnelle</a>
+        <a href="photo-video-drone-valenciennes.html" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="22 7.5 16 12 22 16.5 22 7.5"/><rect x="2" y="5.5" width="14" height="13" rx="2"/></svg>Vidéo par drone</a>
+        <a href="#services" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Publicité en ligne</a>
+        <a href="#abonnements" class="v4-service-tag">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.5s7.5-3.8 7.5-9.5V5.2L12 2.5 4.5 5.2V12c0 5.7 7.5 9.5 7.5 9.5z"/><polyline points="9.2 12 11.2 14 15 10.2"/></svg>Suivi &amp; maintenance</a>
       </div>
     </div>
   </div>
 </nav>
+
+<!-- Défilement du bandeau de services. Piloté en JS plutôt qu'en CSS pour
+     trois raisons : la boucle reste sans raccord à toute largeur d'écran
+     (le nombre de copies s'adapte), le survol ralentit en douceur au lieu
+     de figer net, et le défilement de la page pousse légèrement le
+     bandeau. Placé juste après le bandeau : la classe est posée avant
+     le premier rendu, donc pas de saut depuis la rangée statique. -->
+<script>
+(function(){
+  var strip = document.getElementById('v4Strip');
+  if (!strip) return;
+  var lent = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (lent.matches) return;   // on garde la rangée statique
+
+  var piste = strip.querySelector('.v4-strip-track');
+  var jeu = strip.querySelector('.v4-strip-set');
+  if (!piste || !jeu) return;
+  strip.classList.add('is-live');
+
+  var VITESSE = 40;      // px/s de croisière
+  var largeurJeu = 0, position = 0, poussee = 0, allure = 1, cible = 1;
+  var precedent = 0, image = 0, visible = true, dansEcran = true;
+
+  // Autant de copies qu'il faut pour qu'un jeu entier puisse sortir par la
+  // gauche sans jamais découvrir de vide à droite.
+  function recopier(){
+    var l = jeu.getBoundingClientRect().width;
+    if (!l) return;
+    var voulu = Math.ceil((strip.clientWidth + l) / l);
+    var copies = piste.querySelectorAll('[data-copie]');
+    if (l === largeurJeu && copies.length === voulu) return;
+    largeurJeu = l;
+    for (var i = 0; i < copies.length; i++) copies[i].remove();
+    for (var j = 0; j < voulu; j++){
+      var c = jeu.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      c.setAttribute('data-copie', '');
+      var liens = c.querySelectorAll('a');
+      for (var k = 0; k < liens.length; k++) liens[k].tabIndex = -1;
+      piste.appendChild(c);
+    }
+  }
+
+  function boucle(maintenant){
+    image = 0;
+    if (!precedent) precedent = maintenant;
+    var dt = Math.min((maintenant - precedent) / 1000, 0.1);  // garde-fou après une pause d'onglet
+    precedent = maintenant;
+    allure += (cible - allure) * (1 - Math.pow(0.0015, dt));   // survol : arrêt en douceur
+    poussee *= Math.pow(0.15, dt);                             // l'élan du scroll retombe
+    position -= (VITESSE + poussee) * allure * dt;
+    if (largeurJeu > 0){
+      while (position <= -largeurJeu) position += largeurJeu;
+      while (position > 0) position -= largeurJeu;
+    }
+    piste.style.transform = 'translate3d(' + position.toFixed(2) + 'px,0,0)';
+    planifier();
+  }
+
+  function planifier(){
+    if (!image && visible && dansEcran) image = requestAnimationFrame(boucle);
+  }
+  function reprendre(){ precedent = 0; planifier(); }
+
+  recopier();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(recopier);
+  window.addEventListener('resize', recopier);
+  if (window.ResizeObserver) new ResizeObserver(recopier).observe(jeu);
+
+  // Le bandeau ne tourne que quand il est à l'écran et l'onglet actif.
+  if (window.IntersectionObserver){
+    new IntersectionObserver(function(e){
+      dansEcran = e[0].isIntersecting;
+      reprendre();
+    }, { rootMargin: '150px' }).observe(strip);
+  }
+  document.addEventListener('visibilitychange', function(){
+    visible = !document.hidden;
+    reprendre();
+  });
+
+  // Le défilement de la page pousse le bandeau dans son sens (et le freine
+  // quand on remonte), puis l'élan retombe tout seul.
+  var dernierY = window.pageYOffset;
+  window.addEventListener('scroll', function(){
+    var y = window.pageYOffset;
+    poussee = Math.max(-550, Math.min(550, poussee + (y - dernierY) * 2.6));
+    dernierY = y;
+    planifier();
+  }, { passive: true });
+
+  // Survol et tabulation : on s'arrête pour laisser cliquer.
+  if (window.matchMedia('(hover: hover)').matches){
+    strip.addEventListener('pointerenter', function(){ cible = 0; });
+    strip.addEventListener('pointerleave', function(){ cible = 1; reprendre(); });
+  }
+  strip.addEventListener('focusin', function(){ cible = 0; });
+  strip.addEventListener('focusout', function(){ cible = 1; reprendre(); });
+
+  reprendre();
+})();
+</script>
 
 <!-- ═══ SERVICES ═══ -->
 <section class="services" id="services">
