@@ -93,7 +93,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .v4-hero {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden; padding: calc(var(--nav-h) + 20px) 24px 0;
+  position: relative; overflow: hidden;
+  /* Le bas réserve la place de l'indicateur « Scroll », qui est en position
+     absolue : sans ça le contenu se centre par-dessus et, sur écran court, la
+     rangée de réassurance passait carrément sur le mot. Il faut au moins la
+     hauteur de l'indicateur (~63 px) plus son décalage (36 px). */
+  padding: calc(var(--nav-h) + 20px) 24px 116px;
 }
 .v4-hero-glow {
   position: absolute; width: 900px; height: 900px;
@@ -130,18 +135,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .v4-hero-inner {
   position: relative; z-index: 2; text-align: center; max-width: 880px;
 }
-.v4-overline {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 7px 18px; border-radius: 100px;
-  border: 1px solid var(--border); background: rgba(99,102,241,0.06);
-  font-size: 0.8rem; font-weight: 600; color: var(--accent-light);
-  letter-spacing: 0.02em; margin-bottom: 32px;
-  opacity: 0; transform: translateY(16px);
-}
-.v4-overline .v4-dot-green {
-  width: 6px; height: 6px; border-radius: 50%; background: #10b981;
-}
-
 .v4-h1 {
   font-family: 'Space Grotesk', var(--font-display);
   font-size: clamp(2.4rem, 5.8vw, 4.6rem);
@@ -210,6 +203,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   width: 14px; height: 14px; stroke: var(--accent-light);
   fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
 }
+/* La ligne de lieu remplace l'ancienne pastille au-dessus du titre : elle porte
+   le mot-clé local, donc un cran plus lisible que les trois réassurances. */
+.v4-hero-trust-item--lieu { color: var(--text-secondary); font-weight: 600; }
+
 .v4-scroll-cue {
   position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0;
@@ -338,14 +335,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 
 @media (max-width: 600px) {
-  .v4-hero { padding: calc(var(--nav-h) + 10px) 16px 0; }
+  .v4-hero { padding: calc(var(--nav-h) + 10px) 16px 112px; }
   .v4-hero-btns { flex-direction: column; }
   .v4-hero-btns .btn { width: 100%; justify-content: center; }
 }
 /* Mobile : premier rendu immédiat — pas d'écran d'intro, hero visible sans JS */
 @media (max-width: 768px) {
   .v4-loader { display: none; }
-  .v4-overline, .v4-hero-p, .v4-hero-btns, .v4-hero-trust, #v4ScrollCue { opacity: 1 !important; transform: none !important; }
+  .v4-hero-p, .v4-hero-btns, .v4-hero-trust, #v4ScrollCue { opacity: 1 !important; transform: none !important; }
   .v4-h1 .v4-line-inner { transform: none !important; }
 }
 </style>
@@ -412,10 +409,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="v4-aurora v4-aurora--2" aria-hidden="true"></div>
   <div class="v4-aurora v4-aurora--3" aria-hidden="true"></div>
   <div class="v4-hero-inner" id="v4HeroInner">
-    <div class="v4-overline">
-      <span class="v4-dot-green"></span>
-      Agence marketing digital · Valenciennes
-    </div>
     <h1 class="v4-h1">
       <span class="v4-line"><span class="v4-line-inner">Vos clients vous cherchent.</span></span>
       <span class="v4-line"><span class="v4-line-inner">On fait en sorte qu'ils</span></span>
@@ -430,6 +423,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#tarifs" class="btn btn-outline">Découvrir nos tarifs</a>
     </div>
     <div class="v4-hero-trust">
+      <div class="v4-hero-trust-item v4-hero-trust-item--lieu">
+        <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.8"/></svg>
+        <span>Agence digitale à Valenciennes</span>
+      </div>
       <div class="v4-hero-trust-item">
         <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <span>Sans engagement</span>
@@ -1295,38 +1292,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   // Hero reveal
   function v4HeroReveal(){
-    var overline = document.querySelector('.v4-overline');
     var lines = document.querySelectorAll('.v4-h1 .v4-line-inner');
     var p = document.querySelector('.v4-hero-p');
     var btns = document.querySelector('.v4-hero-btns');
     var trust = document.querySelector('.v4-hero-trust');
     var cue = document.getElementById('v4ScrollCue');
 
-    setTimeout(function(){
-      overline.style.transition='opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
-      overline.style.opacity=1; overline.style.transform='translateY(0)';
-    }, 100);
     lines.forEach(function(l,i){
       setTimeout(function(){
         l.style.transition='transform 0.9s cubic-bezier(0.16,1,0.3,1)';
         l.style.transform='translateY(0)';
-      }, 300 + i*140);
+      }, 150 + i*140);
     });
     setTimeout(function(){
       p.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
       p.style.opacity=1; p.style.transform='translateY(0)';
-    }, 900);
+    }, 750);
     setTimeout(function(){
       btns.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
       btns.style.opacity=1; btns.style.transform='translateY(0)';
-    }, 1050);
+    }, 900);
     setTimeout(function(){
       trust.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
       trust.style.opacity=1; trust.style.transform='translateY(0)';
-    }, 1200);
+    }, 1050);
     setTimeout(function(){
       cue.style.transition='opacity 0.8s'; cue.style.opacity=1;
-    }, 1600);
+    }, 1450);
   }
 
   // Hero parallax
@@ -1345,12 +1337,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     });
   }
 
-  // Hero scroll fade
+  // Effacement du hero au défilement. Le flou montait jusqu'à 5 px dès le
+  // premier tiers d'écran : le texte devenait illisible pendant qu'on scrollait.
+  // Il plafonne maintenant à 1,4 px et ne démarre qu'une fois le hero déjà à
+  // moitié effacé — la lecture reste nette tant que le texte est bien visible.
   window.addEventListener('scroll', function(){
     if(!heroInner) return;
-    var p2 = Math.min(window.scrollY / (window.innerHeight * 0.55), 1);
+    var p2 = Math.min(window.scrollY / (window.innerHeight * 0.7), 1);
     heroInner.style.opacity = 1 - p2;
-    heroInner.style.filter = 'blur(' + p2*5 + 'px)';
+    var flou = Math.max(0, p2 - 0.5) * 2.8;   // 0 jusqu'à mi-course, 1,4 px au bout
+    heroInner.style.filter = flou ? 'blur(' + flou.toFixed(2) + 'px)' : '';
   }, {passive:true});
 
   // Magnetic on buttons
