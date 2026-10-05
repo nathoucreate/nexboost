@@ -9,7 +9,7 @@
 // Déplacé dans js/theme.js. Le bloc qui se trouvait ici faisait
 // themeToggle.addEventListener sans vérifier que le bouton existe : sur toute
 // page dépourvue de #themeToggle, il levait une TypeError qui interrompait
-// TOUT le reste de ce fichier (navigation, panier, révélations, chatbot).
+// TOUT le reste de ce fichier (navigation, révélations, formulaire, chatbot).
 
 // ═══════════════════════════════════════
 //  NAVIGATION
@@ -69,7 +69,9 @@ const revealObserver = new IntersectionObserver((entries) => {
         el.classList.contains('reveal-scale')
       );
       const idx = siblings.indexOf(entry.target);
-      entry.target.style.transitionDelay = `${idx * 0.08}s`;
+      // Décalage plafonné : une rangée de cartes apparaît en cascade, mais le
+      // dernier élément n'attend jamais plus d'un quart de seconde.
+      entry.target.style.transitionDelay = `${Math.min(idx, 4) * 0.06}s`;
       entry.target.classList.remove('masque');
       entry.target.classList.add('visible');
       revealObserver.unobserve(entry.target);
@@ -90,189 +92,32 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
 // Particles removed — replaced by V4 hero
 
 // ═══════════════════════════════════════
-//  PRICING TABS
+//  DEMANDES PRÉREMPLIES
 // ═══════════════════════════════════════
-const pricingTabs = document.querySelectorAll('.pricing-tab');
-const pricingCards = document.querySelectorAll('.pricing-card');
-
-pricingTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const cat = tab.dataset.category;
-    pricingTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    pricingCards.forEach(card => {
-      if (cat === 'all' || card.dataset.category === cat) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  });
-});
-
-// ═══════════════════════════════════════
-//  CART SYSTEM
-// ═══════════════════════════════════════
-let cart = [];
-
-const cartFab = document.getElementById('cartFab');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartSidebar = document.getElementById('cartSidebar');
-const cartClose = document.getElementById('cartClose');
-const cartItemsEl = document.getElementById('cartItems');
-const cartCountEl = document.getElementById('cartCount');
-const cartTotalEl = document.getElementById('cartTotal');
-const cartFooterEl = document.getElementById('cartFooter');
-const toast = document.getElementById('toast');
-
-function openCart() {
-  cartOverlay.classList.add('open');
-  cartSidebar.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeCart() {
-  cartOverlay.classList.remove('open');
-  cartSidebar.classList.remove('open');
-  document.body.style.overflow = '';
-  // Hide devis form when closing
-  const df = document.getElementById('cartDevisForm');
-  if (df) df.classList.remove('visible');
-}
-
-cartFab.addEventListener('click', openCart);
-cartOverlay.addEventListener('click', closeCart);
-cartClose.addEventListener('click', closeCart);
-
-function showToast(msg) {
-  toast.querySelector('.toast-text').textContent = msg;
-  toast.classList.add('visible');
-  setTimeout(() => toast.classList.remove('visible'), 2500);
-}
-
-function updateCartUI() {
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const count = cart.reduce((s, i) => s + i.qty, 0);
-
-  // FAB visibility
-  cartFab.classList.toggle('visible', count > 0);
-  cartCountEl.textContent = count;
-
-  // Footer visibility
-  cartFooterEl.style.display = count > 0 ? '' : 'none';
-  cartTotalEl.textContent = total.toLocaleString('fr-FR') + ' €';
-
-  // Items
-  if (count === 0) {
-    cartItemsEl.innerHTML = `
-      <div class="cart-empty">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <p>Votre panier est vide</p>
-      </div>`;
-    return;
-  }
-
-  cartItemsEl.innerHTML = cart.map((item, i) => `
-    <div class="cart-item">
-      <div class="cart-item-info">
-        <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">${item.price.toLocaleString('fr-FR')} € / unité</div>
-      </div>
-      <div class="cart-item-controls">
-        <button class="cart-qty-btn" onclick="changeQty(${i}, -1)" aria-label="Diminuer">−</button>
-        <span class="cart-qty">${item.qty}</span>
-        <button class="cart-qty-btn" onclick="changeQty(${i}, 1)" aria-label="Augmenter">+</button>
-        <button class="cart-item-remove" onclick="removeItem(${i})" aria-label="Supprimer">✕</button>
-      </div>
-    </div>
-  `).join('');
-
-  // Vente additionnelle : suggestions selon le contenu du panier
-  const ups = getUpsells();
-  if (ups.length) {
-    cartItemsEl.innerHTML += `
-      <div class="cart-upsell">
-        <div class="cart-upsell-title">Pour aller plus loin</div>
-        ${ups.map(u => `
-          <div class="cart-upsell-item">
-            <div class="cart-upsell-info">
-              <div class="cart-upsell-name">${u.name}</div>
-              <div class="cart-upsell-desc">${u.desc}</div>
-            </div>
-            <button class="cart-upsell-add" onclick="addUpsell('${u.name.replace(/'/g, "\\'")}', ${u.price})">+ ${u.price.toLocaleString('fr-FR')} €</button>
-          </div>`).join('')}
-      </div>`;
-  }
-}
-
-// ═══════════════════════════════════════
-//  VENTE ADDITIONNELLE (upsell panier)
-// ═══════════════════════════════════════
-function getUpsells() {
-  const names = cart.map(i => i.name);
-  const has = s => names.some(n => n.toLowerCase().includes(s.toLowerCase()));
-  const suggestions = [];
-
-  // 1. Un site dans le panier, pas encore de suivi → proposer l'abonnement assorti
-  if (!has('Suivi')) {
-    if (has('Site e-commerce')) {
-      suggestions.push({ name: 'Suivi Performance (199 €/mois)', price: 199, desc: 'Votre boutique suivie et améliorée chaque mois' });
-    } else if (has('Site vitrine')) {
-      suggestions.push({ name: 'Suivi Croissance (99 €/mois)', price: 99, desc: 'Améliorations + SEO tous les mois, sans engagement' });
-    } else if (has('Landing page')) {
-      suggestions.push({ name: 'Suivi Essentiel (49 €/mois)', price: 49, desc: 'Hébergement, mises à jour et modifications incluses' });
+// Le panier a disparu avec les prix affichés : chaque bouton « Demander un
+// devis » ou « Choisir cette formule » mène au formulaire de contact et y
+// écrit la première phrase du message. Si le visiteur a déjà commencé à
+// écrire, on ne touche pas à son texte.
+document.querySelectorAll('[data-demande]').forEach(lien => {
+  lien.addEventListener('click', () => {
+    const champ = document.querySelector('#contactForm [name="message"]');
+    if (!champ) return;
+    const intact = !champ.value.trim() || champ.value === champ.dataset.prerempli;
+    if (intact) {
+      champ.value = `Bonjour, je suis intéressé(e) par ${lien.dataset.demande}. `;
+      champ.dataset.prerempli = champ.value;
     }
-  }
-
-  const aUnSite = has('Landing page') || has('Site vitrine') || has('Site e-commerce');
-
-  // 2. Un site sans logo → proposer l'identité visuelle
-  if (aUnSite && !has('logo')) {
-    suggestions.push({ name: 'Création de logo', price: 150, desc: 'Une identité cohérente pour votre nouveau site' });
-  }
-
-  // 3. Un site sans visuels → proposer le pack photos
-  if (aUnSite && !has('photos') && !has('photo')) {
-    suggestions.push({ name: 'Pack 5 photos', price: 100, desc: 'Des vraies photos de votre activité plutôt que des images de banque' });
-  }
-
-  return suggestions.slice(0, 2);
-}
-
-window.addUpsell = function(name, price) {
-  addToCart(name, price);
-};
-
-function addToCart(name, price) {
-  const existing = cart.find(i => i.name === name);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ name, price, qty: 1 });
-  }
-  updateCartUI();
-  showToast(`${name} ajouté au panier`);
-}
-
-window.changeQty = function(index, delta) {
-  cart[index].qty += delta;
-  if (cart[index].qty <= 0) cart.splice(index, 1);
-  updateCartUI();
-};
-
-window.removeItem = function(index) {
-  cart.splice(index, 1);
-  updateCartUI();
-};
-
-// Add to cart buttons
-document.querySelectorAll('[data-add-cart]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    addToCart(btn.dataset.name, parseInt(btn.dataset.price));
+    // Le défilement vers #contact est fait par le navigateur ; on place le
+    // curseur une fois arrivé, sans provoquer un second saut.
+    setTimeout(() => {
+      champ.focus({ preventScroll: true });
+      champ.setSelectionRange(champ.value.length, champ.value.length);
+    }, 650);
   });
 });
 
 // ═══════════════════════════════════════
-//  EMAIL HELPERS (shared by cart + contact)
+//  EMAIL HELPERS
 // ═══════════════════════════════════════
 function sendViaFormSubmit(data) {
   const formData = new FormData();
@@ -289,80 +134,6 @@ function sendViaMailto(subject, body) {
   a.href = `mailto:nathan.lepretre@nexboost.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   a.click();
 }
-
-// Devis form inside cart
-const devisToggle = document.getElementById('devisToggle');
-const cartDevisForm = document.getElementById('cartDevisForm');
-
-devisToggle.addEventListener('click', () => {
-  cartDevisForm.classList.toggle('visible');
-  if (cartDevisForm.classList.contains('visible')) {
-    cartDevisForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-});
-
-// Submit devis
-document.getElementById('cartDevisForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  // Validate
-  let valid = true;
-  this.querySelectorAll('[required]').forEach(field => {
-    const err = field.parentElement.querySelector('.field-error');
-    if (!field.value.trim()) {
-      field.classList.add('error');
-      if (err) err.classList.add('visible');
-      valid = false;
-    } else {
-      field.classList.remove('error');
-      if (err) err.classList.remove('visible');
-    }
-  });
-  if (!valid) return;
-
-  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const cartSummary = cart.map(i => `- ${i.name} x${i.qty} = ${(i.price * i.qty).toLocaleString('fr-FR')} €`).join('\n');
-
-  const name = this.querySelector('[name="devis-name"]').value;
-  const company = this.querySelector('[name="devis-company"]').value || 'Non renseignée';
-  const email = this.querySelector('[name="devis-email"]').value;
-  const phone = this.querySelector('[name="devis-phone"]').value || 'Non renseigné';
-  const activite = this.querySelector('[name="devis-activite"]').value || 'Non renseignée';
-  const budget = this.querySelector('[name="devis-budget"]').value || 'Non renseigné';
-  const delai = this.querySelector('[name="devis-delai"]').value || 'Non renseigné';
-  const message = this.querySelector('[name="devis-message"]').value || 'Aucun message';
-
-  const subject = 'Demande de devis NexBoost — ' + name;
-  const body = `Nom : ${name}\nEntreprise : ${company}\nActivité : ${activite}\nEmail : ${email}\nTéléphone : ${phone}\nBudget : ${budget}\nDélai : ${delai}\nMessage : ${message}\n\n--- PANIER ---\n${cartSummary}\n\nTotal estimé : ${total.toLocaleString('fr-FR')} € HT`;
-
-  // Try FormSubmit, fallback mailto
-  sendViaFormSubmit({
-    name, company, activite, email, phone, budget, delai, message,
-    panier: cartSummary,
-    total: total.toLocaleString('fr-FR') + ' € HT',
-    _subject: subject
-  })
-    .then(res => {
-      if (!res.ok) throw new Error('err');
-      return res.json();
-    })
-    .then(data => {
-      if (data.success !== 'true' && data.success !== true) throw new Error('err');
-    })
-    .catch(() => {
-      sendViaMailto(subject, body);
-    });
-
-  showToast('Demande de devis envoyée !');
-  cart = [];
-  updateCartUI();
-  closeCart();
-  this.reset();
-  cartDevisForm.classList.remove('visible');
-});
-
-// Init cart UI
-updateCartUI();
 
 // ═══════════════════════════════════════
 //  CONTACT FORM
@@ -475,7 +246,7 @@ const chatbotForm = document.getElementById('chatbotForm');
 const chatbotInput = document.getElementById('chatbotInput');
 
 const botResponses = {
-  tarifs: `Voici nos tarifs :\n\n🚀 <b>Sites web</b>\n• Landing page : à partir de 490 €\n• Site vitrine (3-5 pages) : à partir de 990 €\n• Site e-commerce : à partir de 1 900 €\n\n🎨 <b>Identité visuelle</b>\n• Logo : 150 €\n• Flyer recto/verso : 200 €\n• Carte de visite : 90 €\n\n📸 <b>Photo & Vidéo</b>\n• Pack 5 photos : 100 €\n• 3 photos drone : 150 €\n• Vidéo drone (15-30s) : 240 €\n\nTous nos prix sont sans engagement. <a href="#tarifs" style="color:var(--accent-light)">Voir la section tarifs →</a>`,
+  tarifs: `Pour un <b>site</b>, le prix varie en fonction de vos attentes : nombre de pages, fonctionnalités (réservation, boutique…), textes et photos à créer. On en parle 15 minutes, puis vous recevez un <b>devis détaillé, gratuit et sans engagement</b>.\n\nPour faire vivre le site ensuite, trois formules de suivi :\n• <b>Essentiel</b> : 49 € HT/mois\n• <b>Croissance</b> : 99 € HT/mois\n• <b>Performance</b> : 199 € HT/mois\n\nEt la formule <b>Sérénité</b> : le site et son suivi réglés en mensualités. <a href="#abonnements" style="color:var(--accent-light)">Voir les formules →</a>`,
 
   services: `Nous proposons :\n\n🌐 <b>Création de site web</b> — landing page, site vitrine, e-commerce\n📈 <b>SEO local</b> — être trouvé sur Google à Valenciennes\n📱 <b>Réseaux sociaux</b> — stratégie et gestion de contenu\n🎨 <b>Identité visuelle</b> — logo, flyer, carte de visite\n📸 <b>Photo & vidéo drone</b> — mise en valeur de votre activité\n📣 <b>Publicité en ligne</b> — Google Ads, Facebook Ads\n\nOn s'adapte à votre budget et vos besoins. <a href="#services" style="color:var(--accent-light)">Voir nos services →</a>`,
 
@@ -485,11 +256,11 @@ const botResponses = {
 
   delai: `Les délais dépendent du projet :\n\n• Landing page : <b>1-2 semaines</b>\n• Site vitrine : <b>2-4 semaines</b>\n• Site e-commerce : <b>4-6 semaines</b>\n• Logo / flyer : <b>3-5 jours</b>\n\nOn s'adapte aussi à vos urgences si besoin !`,
 
-  engagement: `<b>Aucun engagement</b> ! Chez NexBoost :\n\n✅ Pas de contrat longue durée\n✅ Devis gratuit et sans obligation\n✅ Vous payez uniquement ce que vous commandez\n✅ Réponse sous 24h\n\nOn veut gagner votre confiance par la qualité, pas par un contrat.`,
+  engagement: `Le <b>devis est gratuit et sans obligation</b>, et la création de votre site se règle à la prestation : vous payez uniquement ce que vous commandez.\n\nLes formules de suivi sont <b>optionnelles</b>. Seule la formule <b>Sérénité</b>, qui étale le prix du site en mensualités, comporte une durée d'engagement (12 ou 24 mois), indiquée noir sur blanc sur le devis.`,
 
   apropos: `NexBoost a été fondé par <b>Nathan</b>, un passionné du Nord qui a vu — ici et jusqu'au Vietnam — le même problème : <b>les meilleurs artisans et commerçants sont souvent les moins visibles en ligne</b>.\n\nFace aux grands, il faut lutter. NexBoost existe pour ça : booster votre activité avec un marketing humain, accessible et sans jargon.\n\n<a href="a-propos.html" style="color:var(--accent-light)">Lire l'histoire complète →</a>`,
 
-  default: `Je n'ai pas de réponse précise à cette question, mais je peux vous aider sur :\n\n💰 Nos <b>tarifs</b>\n🛠 Nos <b>services</b>\n📋 Notre <b>fonctionnement</b>\n📞 Comment nous <b>contacter</b>\n⏱ Nos <b>délais</b>\n🤝 Notre politique <b>sans engagement</b>\n\nOu contactez-nous directement : <a href="#contact" style="color:var(--accent-light)">formulaire de contact →</a>`
+  default: `Je n'ai pas de réponse précise à cette question, mais je peux vous aider sur :\n\n💰 Nos <b>tarifs</b>\n🛠 Nos <b>services</b>\n📋 Notre <b>fonctionnement</b>\n📞 Comment nous <b>contacter</b>\n⏱ Nos <b>délais</b>\n🤝 La question de <b>l’engagement</b>\n\nOu contactez-nous directement : <a href="#contact" style="color:var(--accent-light)">formulaire de contact →</a>`
 };
 
 function detectIntent(msg) {
@@ -527,7 +298,9 @@ function addBotMsg(html) {
 function addUserMsg(text) {
   const div = document.createElement('div');
   div.className = 'chatbot-msg chatbot-msg-user';
-  div.innerHTML = `<span>${text}</span>`;
+  const bulle = document.createElement('span');
+  bulle.textContent = text; // jamais de HTML venant du visiteur
+  div.appendChild(bulle);
   chatbotMessages.appendChild(div);
   chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 }

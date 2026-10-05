@@ -41,55 +41,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet"></noscript>
     <script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
-<link rel="stylesheet" href="css/style.css?v=theme1">
+    <script>if(matchMedia('(min-width: 769px) and (prefers-reduced-motion: no-preference)').matches)document.documentElement.classList.add('hero-anim')</script>
+<link rel="stylesheet" href="css/style.css?v=devis1">
 <style>
 /* ─── V4 HERO ADDITIONS ─── */
-.v4-loader {
-  position: fixed; inset: 0; background: var(--bg); z-index: 10000;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 20px;
-  transition: opacity 0.7s ease, visibility 0.7s;
-}
-.v4-loader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-.v4-loader-logo { height: 70px; opacity: 0; animation: v4FadeIn 0.5s 0.2s forwards; }
-.v4-loader-track {
-  width: 160px; height: 2px; background: rgba(255,255,255,0.04);
-  border-radius: 2px; overflow: hidden;
-  opacity: 0; animation: v4FadeIn 0.4s 0.5s forwards;
-}
-.v4-loader-fill {
-  height: 100%; width: 0;
-  background: linear-gradient(90deg, var(--accent), var(--accent-light));
-  animation: v4Fill 1.6s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
-}
-@keyframes v4FadeIn { to { opacity: 1; } }
-@keyframes v4Fill { to { width: 100%; } }
-
 .v4-progress {
   position: fixed; top: 0; left: 0; height: 2px; width: 0;
   background: linear-gradient(90deg, var(--accent), var(--accent-light), #a78bfa);
   z-index: 9999;
 }
-
-@media (pointer: fine) {
-  body { cursor: none; }
-  body a, body button { cursor: none; }
-}
-.v4-ring {
-  position: fixed; width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 50%; pointer-events: none; z-index: 10001;
-  transform: translate(-50%,-50%) scale(1);
-  transition: transform 0.25s, background 0.25s, border-color 0.25s;
-  mix-blend-mode: difference;
-}
-.v4-ring.hover { transform: translate(-50%,-50%) scale(1.667); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
-.v4-dot {
-  position: fixed; width: 4px; height: 4px;
-  background: white; border-radius: 50%;
-  pointer-events: none; z-index: 10002; transform: translate(-50%,-50%);
-}
-@media (pointer: coarse) { .v4-ring, .v4-dot { display: none; } body { cursor: auto; } body a, body button { cursor: auto; } }
 
 .v4-hero {
   min-height: 100vh; display: flex; align-items: center; justify-content: center;
@@ -142,7 +102,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   letter-spacing: -0.04em; line-height: 1.06; margin-bottom: 22px;
 }
 .v4-h1 .v4-line { display: block; overflow: hidden; }
-.v4-h1 .v4-line-inner { display: inline-block; transform: translateY(105%); }
+.v4-h1 .v4-line-inner { display: inline-block; }
 .v4-h1 .v4-serif {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400; font-style: italic;
@@ -150,7 +110,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   background-size: 220% 100%;
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
-  animation: v4Shimmer 7s linear infinite;
+  animation: v4Shimmer 3.2s cubic-bezier(0.16,1,0.3,1) 0.4s 1 both;
 }
 @keyframes v4Shimmer { to { background-position: -220% 0; } }
 @media (prefers-reduced-motion: reduce) { .v4-h1 .v4-serif { animation: none; } }
@@ -160,17 +120,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   position: relative; overflow: hidden;
   background: linear-gradient(135deg, var(--accent), #8b5cf6);
   box-shadow: 0 10px 40px var(--accent-glow-strong);
-  animation: v4Pulse 3.2s ease-in-out infinite;
 }
 .v4-hero-btns .btn-primary::before {
   content: ''; position: absolute; top: 0; bottom: 0; width: 40%;
   left: -60%; transform: skewX(-20deg);
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-  animation: v4Shine 3.2s ease-in-out infinite;
-}
-@keyframes v4Pulse {
-  0%, 100% { box-shadow: 0 10px 40px var(--accent-glow-strong); }
-  50% { box-shadow: 0 10px 55px rgba(99,102,241,0.55); }
+  animation: v4Shine 2.4s ease-in-out 1.2s 1 both;
 }
 @keyframes v4Shine {
   0%, 55% { left: -60%; }
@@ -184,16 +139,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   font-size: clamp(0.95rem, 1.4vw, 1.1rem); font-weight: 300;
   color: var(--text-secondary); max-width: 540px;
   margin: 0 auto 38px; line-height: 1.75;
-  opacity: 0; transform: translateY(20px);
 }
 .v4-hero-btns {
   display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-  opacity: 0; transform: translateY(20px);
 }
 .v4-hero-trust {
   display: flex; gap: 28px; justify-content: center; flex-wrap: wrap;
   margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--border);
-  opacity: 0; transform: translateY(14px);
 }
 .v4-hero-trust-item {
   display: flex; align-items: center; gap: 6px;
@@ -209,7 +161,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 .v4-scroll-cue {
   position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
 }
 .v4-scroll-cue span {
   font-size: 0.7rem; font-weight: 500;
@@ -339,11 +291,76 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .v4-hero-btns { flex-direction: column; }
   .v4-hero-btns .btn { width: 100%; justify-content: center; }
 }
-/* Mobile : premier rendu immédiat — pas d'écran d'intro, hero visible sans JS */
-@media (max-width: 768px) {
-  .v4-loader { display: none; }
-  .v4-hero-p, .v4-hero-btns, .v4-hero-trust, #v4ScrollCue { opacity: 1 !important; transform: none !important; }
-  .v4-h1 .v4-line-inner { transform: none !important; }
+/* ─── Entrée du hero ───
+   Visible par défaut. Sur grand écran, le <head> pose .hero-anim avant le
+   premier rendu (état de départ), puis le script ajoute .hero-in (arrivée).
+   Les délais sont en CSS : rien ne dépend de minuteries JS. */
+.hero-anim .v4-h1 .v4-line-inner { transform: translateY(105%); }
+.hero-anim .v4-hero-p,
+.hero-anim .v4-hero-btns,
+.hero-anim .v4-hero-trust { opacity: 0; transform: translateY(16px); }
+.hero-anim .v4-scroll-cue { opacity: 0; }
+.hero-in .v4-h1 .v4-line-inner {
+  transform: none;
+  transition: transform 0.85s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-in .v4-h1 .v4-line:nth-child(2) .v4-line-inner { transition-delay: 0.1s; }
+.hero-in .v4-h1 .v4-line:nth-child(3) .v4-line-inner { transition-delay: 0.2s; }
+.hero-in .v4-hero-p,
+.hero-in .v4-hero-btns,
+.hero-in .v4-hero-trust {
+  opacity: 1; transform: none;
+  transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-in .v4-hero-p { transition-delay: 0.38s; }
+.hero-in .v4-hero-btns { transition-delay: 0.48s; }
+.hero-in .v4-hero-trust { transition-delay: 0.58s; }
+.hero-in .v4-scroll-cue { opacity: 1; transition: opacity 0.6s ease 0.9s; }
+/* Les nappes de couleur s'arrêtent quand le hero n'est plus à l'écran */
+.v4-hero.au-repos .v4-aurora,
+.v4-hero.au-repos .v4-scroll-line { animation-play-state: paused; }
+
+/* ─── Harmonisation de la page d'accueil ───
+   Une seule voix pour les titres : celle du hero (Space Grotesk). Syne en
+   800, très large, rendait les titres de section difficiles à lire. */
+:root { --font-display: 'Space Grotesk', 'Syne', sans-serif; }
+.section-title {
+  font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.032em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.section-subtitle { text-wrap: pretty; }
+
+/* Portrait de Nathan : visible en entier à droite de la carte, la citation
+   à gauche. En filigrane à 12 %, il passait pour une image ratée. */
+.story-visual { justify-content: flex-start; }
+.story-photo {
+  left: auto; right: -2%; transform: none;
+  height: 104%; opacity: 1; filter: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 78%, transparent 100%);
+}
+[data-theme="light"] .story-photo { opacity: 1; }
+.story-visual-inner { text-align: left; max-width: 56%; padding: 36px 0 36px 36px; }
+.story-quote { font-size: 1.3rem; letter-spacing: -0.015em; }
+.story-value-icon svg {
+  width: 16px; height: 16px; fill: none; stroke: var(--accent-light);
+  stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+@media (max-width: 900px) {
+  .story-visual { aspect-ratio: 4 / 3.2; }
+}
+@media (max-width: 600px) {
+  .story-visual-inner { max-width: 55%; padding: 22px 0 22px 20px; }
+  .story-quote { font-size: 1.02rem; }
+  .story-quote-author { font-size: 0.78rem; }
+  .story-photo { height: 94%; right: -14%; }
+  /* Écarts entre sections : 120 px de vide sur un écran de téléphone,
+     c'est un écran presque blanc entre deux blocs. */
+  .services, .story, .process, .faq, .contact { padding: 72px 0; }
+  .abos { padding: 112px 0 120px; }
 }
 </style>
 </head>
@@ -353,15 +370,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- ═══ V4 LOADER ═══ -->
-<div class="v4-loader" id="v4Loader">
-  <img src="assets/logo nexboost.svg" alt="" class="v4-loader-logo">
-  <div class="v4-loader-track"><div class="v4-loader-fill"></div></div>
-</div>
-
-<!-- ═══ V4 CURSOR ═══ -->
-<div class="v4-ring" id="v4Ring"></div>
-<div class="v4-dot" id="v4Dot"></div>
 
 <!-- ═══ V4 PROGRESS ═══ -->
 <div class="v4-progress" id="v4Progress"></div>
@@ -379,13 +387,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="#accueil">Accueil</a>
       <a href="#services">Services</a>
       <a href="#histoire">Notre histoire</a>
-      <a href="#tarifs">Tarifs</a>
-      <a href="#abonnements">Abonnements</a>
+      <a href="#tarifs">Prestations</a>
+      <a href="#abonnements">Suivi</a>
       <a href="#faq">FAQ</a>
       <a href="a-propos.html">A propos</a>
       <a href="#contact">Contact</a>
       <a href="blog/">Blog</a>
-      <a href="#tarifs" class="nav-cta">Voir les tarifs</a>
+      <a href="#contact" class="nav-cta">Demander un devis</a>
     </div>
     <div style="display:flex;align-items:center;gap:10px">
       <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
@@ -420,7 +428,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Parlez-nous de votre projet
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
-      <a href="#tarifs" class="btn btn-outline">Découvrir nos tarifs</a>
+      <a href="#tarifs" class="btn btn-outline">Voir nos prestations</a>
     </div>
     <div class="v4-hero-trust">
       <div class="v4-hero-trust-item v4-hero-trust-item--lieu">
@@ -587,7 +595,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="services" id="services">
   <div class="container">
     <div class="section-center reveal">
-      <div class="section-label">Ce qu'on fait pour vous</div>
       <h2 class="section-title">Tout ce qu'il faut pour être<br>visible et attractif en ligne</h2>
       <p class="section-subtitle">Pas besoin de tout comprendre au digital. On vous accompagne de A à Z, avec des solutions claires et adaptées à votre activité.</p>
     </div>
@@ -647,23 +654,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="story-wrapper">
       <div class="story-visual reveal-left">
-        <img src="assets/nathan.webp" alt="" class="story-photo" aria-hidden="true" loading="lazy">
+        <img src="assets/nathan.webp" alt="Nathan Lepretre, fondateur de NexBoost" class="story-photo" width="700" height="1050" loading="lazy" decoding="async">
         <div class="story-visual-inner">
-          <p class="story-quote">"Le talent ne suffit pas.<br>Il faut qu'on <span class="story-quote-accent">vous trouve</span>."</p>
+          <p class="story-quote">«&nbsp;Le talent ne suffit pas.<br>Il faut qu'on <span class="story-quote-accent">vous trouve</span>.&nbsp;»</p>
           <p class="story-quote-author">— Nathan, fondateur de NexBoost<br><a href="a-propos.html" style="color:var(--accent-light);font-size:0.78rem;margin-top:8px;display:inline-block">Découvrir mon parcours →</a></p>
         </div>
       </div>
       <div class="story-text reveal-right">
-        <div class="section-label">Notre histoire</div>
         <h2 class="section-title">Né d'un constat simple : le talent mérite d'être vu</h2>
         <p>En voyageant au Vietnam, j'ai vu l'écart de plein fouet : d'un côté les grandes enseignes, de l'autre des artisans incroyables, tapis dans l'ombre, obligés de casser leurs prix pour survivre. En rentrant, j'ai réalisé que le même problème existe ici, chez nous.</p>
         <p>Des boulangers, des coiffeurs, des restaurateurs passionnés — <strong>invisibles en ligne.</strong> Pas de site, un Google qui ne les trouve pas. Pendant ce temps, des concurrents moins bons mais plus visibles leur prennent des clients.</p>
         <p>Face aux grands, il faut lutter. <strong>NexBoost est né pour ça : booster votre activité avec un marketing humain, accessible, sans jargon.</strong> Un avenir plus visible, plus proche que ce que vous pouvez imaginer. <a href="a-propos.html" style="color:var(--accent-light);text-decoration:underline">En savoir plus sur mon histoire →</a></p>
         <div class="story-values">
-          <div class="story-value"><div class="story-value-icon">🤝</div>Approche humaine</div>
-          <div class="story-value"><div class="story-value-icon">🎯</div>Résultats concrets</div>
-          <div class="story-value"><div class="story-value-icon">💬</div>Zéro jargon</div>
-          <div class="story-value"><div class="story-value-icon">📍</div>Ancré localement</div>
+          <div class="story-value"><div class="story-value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>Approche humaine</div>
+          <div class="story-value"><div class="story-value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>Résultats concrets</div>
+          <div class="story-value"><div class="story-value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 1 1 21 11.5z"/></svg></div>Zéro jargon</div>
+          <div class="story-value"><div class="story-value-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.8"/></svg></div>Ancré localement</div>
         </div>
       </div>
     </div>
@@ -674,7 +680,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="process" id="process">
   <div class="container">
     <div class="section-center reveal">
-      <div class="section-label">Comment ça marche</div>
       <h2 class="section-title">De votre idée à vos premiers clients<br>en 4 étapes simples</h2>
       <p class="section-subtitle">Pas besoin de comprendre le digital. Vous nous parlez de votre métier, on s'occupe de tout le reste.</p>
     </div>
@@ -739,224 +744,156 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ═══ PRICING ═══ -->
-<section class="pricing" id="tarifs">
+<!-- ═══ PRESTATIONS (sur devis) ═══
+     L'ancre #tarifs est conservée : d'autres pages et des articles y renvoient. -->
+<section class="devis" id="tarifs">
   <div class="container">
-    <div class="section-center reveal">
-      <div class="section-label">Tarifs transparents</div>
-      <h2 class="section-title">Des prix clairs,<br>sans mauvaise surprise</h2>
-      <p class="section-subtitle">Pas de forfait caché, pas d'abonnement forcé. Vous choisissez ce dont vous avez besoin, on s'occupe du reste.</p>
-    </div>
-
-    <div class="pricing-categories reveal">
-      <button class="pricing-tab active" data-category="all">Tout voir</button>
-      <button class="pricing-tab" data-category="web">Sites web</button>
-      <button class="pricing-tab" data-category="design">Design & print</button>
-      <button class="pricing-tab" data-category="photo">Photo & vidéo</button>
-    </div>
-
-    <div class="pricing-grid">
-      <!-- WEB -->
-      <div class="pricing-card reveal" data-category="web">
-        <div class="pricing-icon" style="background:rgba(99,102,241,0.1)">🚀</div>
-        <div class="pricing-card-title">Landing page</div>
-        <div class="pricing-card-desc">Une page unique et percutante pour convertir vos visiteurs en clients</div>
-        <div class="pricing-from">À partir de</div>
-        <div class="pricing-price">490 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>Page unique optimisée conversion</li>
-          <li>Design sur mesure</li>
-          <li>Adapté mobile et tablette</li>
-          <li>Formulaire de contact</li>
-          <li>Optimisation SEO de base</li>
-          <li>Livraison sous 2 semaines</li>
+    <div class="devis-grid">
+      <div class="devis-intro reveal">
+        <h2 class="section-title">Un site à la mesure de ce que vous en attendez</h2>
+        <p class="devis-lead">Pour les sites, le prix varie en fonction de vos attentes. Une page qui présente une offre ne demande pas le même travail qu'une boutique avec paiement en ligne et suivi des stocks.</p>
+        <p class="devis-facteurs-titre">Ce qui fait varier le devis</p>
+        <ul class="devis-facteurs">
+          <li>le nombre de pages et de sections</li>
+          <li>les fonctionnalités : réservation, demande de devis, boutique, espace client</li>
+          <li>les textes et les photos à créer, ou fournis par vous</li>
+          <li>le délai souhaité</li>
         </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="Landing page" data-price="490">Ajouter au panier</button>
+        <a href="#contact" class="btn btn-primary" data-demande="un devis pour mon site">Demander mon devis gratuit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <p class="devis-note">15 minutes d'échange, puis un devis détaillé ligne par ligne, gratuit et sans engagement.</p>
       </div>
 
-      <div class="pricing-card popular reveal" data-category="web">
-        <div class="pricing-icon" style="background:rgba(99,102,241,0.1)">💼</div>
-        <div class="pricing-card-title">Site vitrine</div>
-        <div class="pricing-card-desc">Le site complet pour présenter votre entreprise et vos services</div>
-        <div class="pricing-from">À partir de</div>
-        <div class="pricing-price">990 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>3 à 5 pages sur mesure</li>
-          <li>Design professionnel</li>
-          <li>100% responsive</li>
-          <li>Référencement SEO optimisé</li>
-          <li>Formulaire de contact</li>
-          <li>Hébergement 1 an inclus</li>
-        </ul>
-        <button class="btn btn-primary pricing-add-btn" data-add-cart data-name="Site vitrine (3-5 pages)" data-price="990">Ajouter au panier</button>
-      </div>
-
-      <div class="pricing-card reveal" data-category="web">
-        <div class="pricing-icon" style="background:rgba(99,102,241,0.1)">🛒</div>
-        <div class="pricing-card-title">Site e-commerce</div>
-        <div class="pricing-card-desc">Vendez vos produits en ligne avec une boutique simple et efficace</div>
-        <div class="pricing-from">À partir de</div>
-        <div class="pricing-price">1 990 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>Boutique en ligne complète</li>
-          <li>Jusqu'à 30 produits intégrés</li>
-          <li>Paiement sécurisé</li>
-          <li>Design professionnel</li>
-          <li>Formation utilisation incluse</li>
-          <li>SEO e-commerce optimisé</li>
-        </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="Site e-commerce" data-price="1990">Ajouter au panier</button>
-      </div>
-
-      <!-- DESIGN -->
-      <div class="pricing-card reveal" data-category="design">
-        <div class="pricing-icon" style="background:rgba(168,85,247,0.1)">🎨</div>
-        <div class="pricing-card-title">Création de logo</div>
-        <div class="pricing-card-desc">Un logo professionnel qui vous ressemble</div>
-        <div class="pricing-price">150 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>3 propositions de logo</li>
-          <li>2 allers-retours inclus</li>
-          <li>Fichiers HD + vectoriel</li>
-          <li>Déclinaisons couleur</li>
-        </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="Création de logo" data-price="150">Ajouter au panier</button>
-      </div>
-
-      <div class="pricing-card reveal" data-category="design">
-        <div class="pricing-icon" style="background:rgba(168,85,247,0.1)">📄</div>
-        <div class="pricing-card-title">Flyer recto-verso</div>
-        <div class="pricing-card-desc">Un flyer impactant pour votre communication locale</div>
-        <div class="pricing-price">200 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>Design recto et verso</li>
-          <li>Textes rédigés pour vous</li>
-          <li>Fichier prêt à imprimer</li>
-          <li>2 retouches incluses</li>
-        </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="Flyer recto-verso" data-price="200">Ajouter au panier</button>
-      </div>
-
-      <div class="pricing-card reveal" data-category="design">
-        <div class="pricing-icon" style="background:rgba(168,85,247,0.1)">🪪</div>
-        <div class="pricing-card-title">Carte de visite</div>
-        <div class="pricing-card-desc">Des cartes pro qui marquent les esprits</div>
-        <div class="pricing-price">90 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>Design recto-verso</li>
-          <li>Cohérent avec votre identité</li>
-          <li>Fichier prêt à imprimer</li>
-          <li>Format standard 85×55mm</li>
-        </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="Carte de visite" data-price="90">Ajouter au panier</button>
-      </div>
-
-      <!-- PHOTO & VIDEO -->
-      <div class="pricing-card reveal" data-category="photo">
-        <div class="pricing-icon" style="background:rgba(245,158,11,0.1)">📸</div>
-        <div class="pricing-card-title">Pack 5 photos</div>
-        <div class="pricing-card-desc">Des photos professionnelles de votre entreprise ou produits</div>
-        <div class="pricing-price">100 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>5 photos haute qualité</li>
-          <li>Retouche professionnelle</li>
-          <li>Livraison sous 48h</li>
-          <li>Usage web & print illimité</li>
-        </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="Pack 5 photos" data-price="100">Ajouter au panier</button>
-      </div>
-
-      <div class="pricing-card reveal" data-category="photo">
-        <div class="pricing-icon" style="background:rgba(245,158,11,0.1)">🚁</div>
-        <div class="pricing-card-title">3 photos drone</div>
-        <div class="pricing-card-desc">Des vues aériennes spectaculaires de votre lieu</div>
-        <div class="pricing-price">150 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>3 photos aériennes HD</li>
-          <li>Retouche professionnelle</li>
-          <li>Pilote certifié</li>
-          <li>Déplacement inclus (20km)</li>
-        </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="3 photos drone" data-price="150">Ajouter au panier</button>
-      </div>
-
-      <div class="pricing-card reveal" data-category="photo">
-        <div class="pricing-icon" style="background:rgba(245,158,11,0.1)">🎬</div>
-        <div class="pricing-card-title">Vidéo drone courte</div>
-        <div class="pricing-card-desc">Un clip aérien de 15 à 30 secondes pour impressionner</div>
-        <div class="pricing-price">240 € <span>HT</span></div>
-        <ul class="pricing-includes">
-          <li>Vidéo 15-30 secondes</li>
-          <li>Montage professionnel</li>
-          <li>Musique libre de droits</li>
-          <li>Format réseaux sociaux inclus</li>
-        </ul>
-        <button class="btn btn-ghost pricing-add-btn" data-add-cart data-name="Vidéo drone courte (15-30s)" data-price="240">Ajouter au panier</button>
+      <div class="devis-liste">
+        <article class="devis-item reveal">
+          <div class="devis-item-tete">
+            <h3>Landing page</h3>
+            <span class="devis-delai">1 à 2 semaines</span>
+          </div>
+          <p>Une page unique et percutante, pour présenter une offre précise et transformer vos visiteurs en clients.</p>
+          <p class="devis-inclus">Design sur mesure · adaptée au mobile · formulaire de contact · référencement de base</p>
+          <a href="#contact" class="devis-lien" data-demande="une landing page">Demander un devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="devis-item reveal">
+          <div class="devis-item-tete">
+            <h3>Site vitrine</h3>
+            <span class="devis-delai">2 à 4 semaines</span>
+          </div>
+          <p>Le site complet pour présenter votre entreprise, vos services et vos réalisations. Le bon format pour la plupart des artisans et commerçants.</p>
+          <p class="devis-inclus">Pages sur mesure · adapté au mobile · référencement optimisé · formulaire de contact</p>
+          <a href="#contact" class="devis-lien" data-demande="un site vitrine">Demander un devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
+        <article class="devis-item reveal">
+          <div class="devis-item-tete">
+            <h3>Site e-commerce</h3>
+            <span class="devis-delai">4 à 6 semaines</span>
+          </div>
+          <p>Vendez vos produits en ligne avec une boutique simple à tenir au quotidien.</p>
+          <p class="devis-inclus">Catalogue produits · paiement sécurisé · référencement e-commerce · prise en main incluse</p>
+          <a href="#contact" class="devis-lien" data-demande="un site e-commerce">Demander un devis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </article>
       </div>
     </div>
 
-    <p class="pricing-note reveal">Tarifs donnés à titre indicatif : chaque projet est unique, et le devis final dépend de vous — vos besoins, vos attentes et votre budget. On en parle, puis on chiffre juste.</p>
+    <div class="devis-aussi reveal">
+      <h3>Pour compléter votre image</h3>
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2.5 2.5 7 12 11.5 21.5 7 12 2.5"/><polyline points="2.5 16.8 12 21.3 21.5 16.8"/><polyline points="2.5 11.9 12 16.4 21.5 11.9"/></svg>
+          <div><b>Logo et identité visuelle</b><span>plusieurs propositions, fichiers HD et vectoriels</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h6"/><path d="M7 13h10"/></svg>
+          <div><b>Flyers et cartes de visite</b><span>textes rédigés, fichiers prêts à imprimer</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <div><b><a href="photo-video-drone-valenciennes.html">Photo et vidéo drone</a></b><span>vues aériennes HD, pilote certifié</span></div>
+        </li>
+      </ul>
+      <p>Sur devis également, seuls ou avec votre site.</p>
+    </div>
   </div>
 </section>
 
-<!-- ═══ ABONNEMENTS DE SUIVI ═══ -->
+<!-- ═══ FORMULES DE SUIVI ═══
+     Contenu aligné sur le pilotage (noyau.FORMULES, devis, contrat) :
+     Essentiel 49 € / 10 crédits, Croissance 99 € / 25, Performance 199 € / 60,
+     crédit = 10 €, reporté un mois. Sérénité = site + suivi en mensualités. -->
 <section class="abos" id="abonnements">
   <svg class="abos-wave abos-wave--top" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,0 L1440,0 L1440,38 C1220,72 1040,6 820,34 C600,62 380,10 180,40 C120,49 60,52 0,44 Z"/>
   </svg>
   <div class="container">
     <div class="section-center reveal">
-      <div class="section-label">Abonnements de suivi</div>
-      <h2 class="section-title">Après la création,<br>votre site continue de progresser</h2>
-      <p class="section-subtitle">En option avec chaque pack : on héberge, on sécurise et on améliore votre site tous les mois. Sans engagement, résiliable à tout moment.</p>
+      <h2 class="section-title">Après la mise en ligne,<br>votre site continue d'avancer</h2>
+      <p class="section-subtitle">Chaque formule comprend l'hébergement, la sécurité, les sauvegardes et les mises à jour techniques. Ce qui change de l'une à l'autre, c'est le nombre de modifications que l'on fait pour vous chaque mois.</p>
     </div>
 
     <div class="abos-grid">
       <div class="abo-card reveal">
-        <div class="abo-emoji">🌱</div>
-        <h3 class="abo-name">Suivi Essentiel</h3>
-        <p class="abo-pair">Conseillé avec la <strong>Landing page</strong></p>
+        <h3 class="abo-name">Essentiel</h3>
+        <p class="abo-pair">Pour un site qui doit rester juste et à jour</p>
         <div class="abo-price">49 €<span> HT / mois</span></div>
+        <p class="abo-credits"><b>10 crédits</b> de modification par mois</p>
         <ul class="abo-includes">
-          <li>Hébergement &amp; nom de domaine gérés</li>
-          <li>Mises à jour &amp; sauvegardes</li>
-          <li>1 modification par mois (30 min)</li>
-          <li>Support par e-mail</li>
+          <li>Hébergement, sécurité et sauvegardes</li>
+          <li>Mises à jour techniques et correction des anomalies</li>
+          <li>De quoi changer quelques textes, une photo, vos horaires</li>
         </ul>
-        <button class="btn btn-ghost abo-btn" data-add-cart data-name="Suivi Essentiel (49 €/mois)" data-price="49">Ajouter au panier</button>
+        <a href="#contact" class="btn btn-ghost abo-btn" data-demande="la formule de suivi Essentiel">Choisir Essentiel</a>
       </div>
 
       <div class="abo-card abo-card--star reveal">
         <div class="abo-badge">Le plus choisi</div>
-        <div class="abo-emoji">📈</div>
-        <h3 class="abo-name">Suivi Croissance</h3>
-        <p class="abo-pair">Conseillé avec le <strong>Site vitrine</strong></p>
+        <h3 class="abo-name">Croissance</h3>
+        <p class="abo-pair">Pour un site qui vit au fil des saisons</p>
         <div class="abo-price">99 €<span> HT / mois</span></div>
+        <p class="abo-credits"><b>25 crédits</b> de modification par mois</p>
         <ul class="abo-includes">
-          <li>Tout le Suivi Essentiel</li>
-          <li>2 h d'améliorations par mois</li>
-          <li>Suivi SEO &amp; fiche Google Business</li>
-          <li>Rapport mensuel simple</li>
+          <li>Tout ce que comprend Essentiel</li>
+          <li>Une nouvelle section, un contenu de saison, une actualité</li>
+          <li>Des ajustements réguliers, au fil de votre activité</li>
         </ul>
-        <button class="btn btn-primary abo-btn" data-add-cart data-name="Suivi Croissance (99 €/mois)" data-price="99">Ajouter au panier</button>
+        <a href="#contact" class="btn btn-primary abo-btn" data-demande="la formule de suivi Croissance">Choisir Croissance</a>
       </div>
 
       <div class="abo-card reveal">
-        <div class="abo-emoji">🚀</div>
-        <h3 class="abo-name">Suivi Performance</h3>
-        <p class="abo-pair">Conseillé avec le <strong>Site e-commerce</strong></p>
+        <h3 class="abo-name">Performance</h3>
+        <p class="abo-pair">Pour publier souvent</p>
         <div class="abo-price">199 €<span> HT / mois</span></div>
+        <p class="abo-credits"><b>60 crédits</b> de modification par mois</p>
         <ul class="abo-includes">
-          <li>Tout le Suivi Croissance</li>
-          <li>4 h d'améliorations par mois</li>
-          <li>Ajout &amp; mise à jour de produits</li>
-          <li>Support prioritaire (réponse sous 24 h)</li>
+          <li>Tout ce que comprend Croissance</li>
+          <li>Articles, nouvelles pages, changements fréquents</li>
+          <li>Assez de crédits pour plusieurs articles chaque mois</li>
         </ul>
-        <button class="btn btn-ghost abo-btn" data-add-cart data-name="Suivi Performance (199 €/mois)" data-price="199">Ajouter au panier</button>
+        <a href="#contact" class="btn btn-ghost abo-btn" data-demande="la formule de suivi Performance">Choisir Performance</a>
       </div>
     </div>
 
-    <p class="abos-note reveal">Sans engagement · résiliable chaque mois · démarre à la mise en ligne de votre site<br>Montants indicatifs — l'abonnement s'ajuste à vos besoins réels et à vos attentes.</p>
+    <div class="abos-credits reveal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <p><b>Comment marchent les crédits&nbsp;?</b> Chaque modification est chiffrée avant d'être faite&nbsp;: ajouter une section à une page compte 6 crédits, un article de 400 mots en compte 9. Un crédit non utilisé se reporte sur le mois suivant. Au-delà de votre forfait, rien n'est fait sans votre accord (10 € HT le crédit).</p>
+    </div>
+
+    <div class="serenite reveal">
+      <div class="serenite-texte">
+        <h3>Formule Sérénité</h3>
+        <p class="serenite-lead">Votre site et son suivi, réglés ensemble en mensualités.</p>
+        <ul>
+          <li>Un versement à la signature, puis des mensualités sur 12 ou 24 mois</li>
+          <li>Le site complet, avec la formule de suivi de votre choix</li>
+          <li>Moins cher au total qu'un site et un abonnement pris séparément</li>
+          <li>Sur 24 mois, l'hébergement et le nom de domaine sont inclus</li>
+        </ul>
+      </div>
+      <div class="serenite-action">
+        <a href="#contact" class="btn btn-primary" data-demande="la formule Sérénité (site et suivi en mensualités)">Étudier la formule Sérénité <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <p>Mensualités calculées sur votre devis, avec un engagement de 12 ou 24 mois.</p>
+      </div>
+    </div>
+
+    <p class="abos-note reveal">Les formules de suivi démarrent à la mise en ligne de votre site.</p>
   </div>
   <svg class="abos-wave abos-wave--bottom" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,80 L1440,80 L1440,42 C1260,8 1060,68 840,44 C620,20 400,66 200,38 C130,28 60,30 0,42 Z"/>
@@ -967,7 +904,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="faq" id="faq">
   <div class="container">
     <div class="section-center reveal">
-      <div class="section-label">Questions fréquentes</div>
       <h2 class="section-title">On répond à vos questions</h2>
       <p class="section-subtitle">Tout ce que vous vous demandez peut-être avant de vous lancer. Et si votre question n'est pas là, écrivez-nous.</p>
     </div>
@@ -978,6 +914,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="faq-question-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
         </button>
         <div class="faq-answer"><div class="faq-answer-inner">Absolument. NexBoost est né justement pour les artisans, commerçants et petites entreprises. On sait que vous n'avez pas le temps ni le budget d'une grande boîte — et c'est exactement pour ça qu'on a pensé nos offres : simples, abordables et efficaces. Pas besoin d'être un expert du web, on s'occupe de tout.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question">
+          <span>Combien coûte un site internet ?</span>
+          <div class="faq-question-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">Le prix d'un site varie en fonction de vos attentes : le nombre de pages, les fonctionnalités (réservation, boutique, demande de devis), les textes et les photos à créer, et le délai. Plutôt qu'un tarif affiché qui ne correspondrait à personne, on échange 15 minutes sur votre projet et vous recevez un devis détaillé, gratuit et sans engagement. Et si vous préférez étaler la dépense, la formule Sérénité règle le site et son suivi en mensualités.</div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-question">
@@ -998,7 +941,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span>Est-ce qu'il y a un engagement ou un abonnement ?</span>
           <div class="faq-question-icon"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></div>
         </button>
-        <div class="faq-answer"><div class="faq-answer-inner">Non, aucun engagement. Vous payez uniquement la prestation que vous commandez. Si vous souhaitez un accompagnement régulier, nos abonnements de suivi (dès 49 €/mois) maintiennent et améliorent votre site chaque mois — optionnels et résiliables à tout moment.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Pas pour la création : le devis est gratuit, et vous payez uniquement la prestation que vous commandez. Les formules de suivi (dès 49 € HT par mois) sont optionnelles et démarrent à la mise en ligne. Seule la formule Sérénité, qui étale le prix du site en mensualités, comporte une durée d'engagement de 12 ou 24 mois, indiquée clairement sur le devis.</div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-question">
@@ -1023,7 +966,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="contact-wrapper reveal-scale">
       <div class="contact-info">
-        <div class="section-label">Parlons de votre projet</div>
         <h2>On vous répond sous 24h.<br>Promis.</h2>
         <p>Décrivez-nous votre activité et ce dont vous avez besoin. On revient vers vous rapidement avec des solutions concrètes et un devis adapté.</p>
         <div class="contact-detail">
@@ -1136,7 +1078,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="#accueil">Accueil</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#histoire">Notre histoire</a></li>
-          <li><a href="#tarifs">Tarifs</a></li>
+          <li><a href="#tarifs">Prestations</a></li>
+          <li><a href="#abonnements">Formules de suivi</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="a-propos.html">A propos</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -1171,199 +1114,51 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<!-- ═══ CART FAB ═══ -->
-<button class="cart-fab" id="cartFab" aria-label="Ouvrir le panier">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-  <span class="cart-fab-count" id="cartCount">0</span>
-</button>
-
-<!-- ═══ CART SIDEBAR ═══ -->
-<div class="cart-overlay" id="cartOverlay"></div>
-<aside class="cart-sidebar" id="cartSidebar" aria-label="Panier">
-  <div class="cart-header">
-    <h3>Votre panier</h3>
-    <button class="cart-close" id="cartClose" aria-label="Fermer le panier">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-footer" id="cartFooter" style="display:none">
-    <div class="cart-total">
-      <span class="cart-total-label">Total estimé</span>
-      <span class="cart-total-value" id="cartTotal">0 €</span>
-    </div>
-    <p class="cart-total-note">Estimation indicative — devis personnalisé sur demande</p>
-    <button class="btn btn-primary cart-devis-btn" id="devisToggle">Demander mon devis</button>
-    <form class="cart-devis-form" id="cartDevisForm">
-      <div class="form-group">
-        <label>Nom *</label>
-        <input type="text" name="devis-name" placeholder="Votre nom" required>
-        <span class="field-error">Requis</span>
-      </div>
-      <div class="form-group">
-        <label>Entreprise</label>
-        <input type="text" name="devis-company" placeholder="Nom de votre activité">
-      </div>
-      <div class="form-group">
-        <label>Email *</label>
-        <input type="email" name="devis-email" placeholder="votre@email.com" required>
-        <span class="field-error">Requis</span>
-      </div>
-      <div class="form-group">
-        <label>Téléphone</label>
-        <input type="tel" name="devis-phone" placeholder="06 00 00 00 00">
-      </div>
-      <div class="form-group">
-        <label>Votre activité / secteur</label>
-        <input type="text" name="devis-activite" placeholder="Ex : Boulangerie, Plomberie, Coiffure...">
-      </div>
-      <div class="form-group">
-        <label>Budget envisagé</label>
-        <select name="devis-budget" style="font-family:var(--font);font-size:0.88rem;padding:10px 14px;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--bg);color:var(--text);outline:none">
-          <option value="">Sélectionnez une fourchette</option>
-          <option value="< 500 €">Moins de 500 €</option>
-          <option value="500 - 1000 €">500 — 1 000 €</option>
-          <option value="1000 - 2000 €">1 000 — 2 000 €</option>
-          <option value="> 2000 €">Plus de 2 000 €</option>
-          <option value="A définir">Je ne sais pas encore</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Délai souhaité</label>
-        <select name="devis-delai" style="font-family:var(--font);font-size:0.88rem;padding:10px 14px;border-radius:var(--radius-xs);border:1px solid var(--border);background:var(--bg);color:var(--text);outline:none">
-          <option value="">Quand souhaitez-vous démarrer ?</option>
-          <option value="Urgent (< 2 semaines)">Urgent (moins de 2 semaines)</option>
-          <option value="1-2 mois">Dans le mois / les 2 mois</option>
-          <option value="Pas pressé">Pas pressé, je me renseigne</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Décrivez vos besoins</label>
-        <textarea name="devis-message" placeholder="Dites-nous en plus sur votre projet : ce que vous attendez, vos contraintes, vos idées..." style="min-height:80px"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Envoyer ma demande de devis →</button>
-    </form>
-  </div>
-</aside>
-
-<!-- ═══ TOAST ═══ -->
-<div class="toast" id="toast">
-  <div class="toast-icon">✓</div>
-  <span class="toast-text"></span>
-</div>
 
 <!-- V4 Hero Script -->
 <script>
 (function(){
-  // Loader
-  var loader = document.getElementById('v4Loader');
-  var rideauOuvert = false;
-  function ouvrirRideau(){
-    if (rideauOuvert) return; rideauOuvert = true;
-    loader.classList.add('done'); v4HeroReveal();
-  }
-  // Plus d'attente du chargement complet : on révèle dès que le DOM est prêt.
-  if (matchMedia('(max-width: 768px)').matches) { ouvrirRideau(); }
-  else { setTimeout(ouvrirRideau, 350); }
-  window.addEventListener('load', ouvrirRideau); // filet de sécurité
-
-  // Cursor
-  var ring = document.getElementById('v4Ring'), dotEl = document.getElementById('v4Dot');
-  if (window.matchMedia('(pointer: fine)').matches && ring && dotEl) {
-    var mx=0,my=0,rx=0,ry=0,dxc=0,dyc=0;
-    document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
-    (function cl(){
-      rx+=(mx-rx)*0.09; ry+=(my-ry)*0.09;
-      dxc+=(mx-dxc)*0.28; dyc+=(my-dyc)*0.28;
-      ring.style.left=rx+'px'; ring.style.top=ry+'px';
-      dotEl.style.left=dxc+'px'; dotEl.style.top=dyc+'px';
-      requestAnimationFrame(cl);
-    })();
-    document.querySelectorAll('a,button').forEach(function(el){
-      el.addEventListener('mouseenter', function(){ ring.classList.add('hover'); });
-      el.addEventListener('mouseleave', function(){ ring.classList.remove('hover'); });
-    });
-  }
-
-  // Progress bar
+  // Barre de progression de lecture
   var prog = document.getElementById('v4Progress');
   window.addEventListener('scroll', function(){
     var max = document.documentElement.scrollHeight - window.innerHeight;
     if(max > 0) prog.style.width = (window.scrollY / max * 100) + '%';
   }, {passive:true});
 
-  // Hero reveal
-  function v4HeroReveal(){
-    var lines = document.querySelectorAll('.v4-h1 .v4-line-inner');
-    var p = document.querySelector('.v4-hero-p');
-    var btns = document.querySelector('.v4-hero-btns');
-    var trust = document.querySelector('.v4-hero-trust');
-    var cue = document.getElementById('v4ScrollCue');
-
-    lines.forEach(function(l,i){
-      setTimeout(function(){
-        l.style.transition='transform 0.9s cubic-bezier(0.16,1,0.3,1)';
-        l.style.transform='translateY(0)';
-      }, 150 + i*140);
+  // Entrée du hero : le seul moment chorégraphié de la page. Le titre monte
+  // ligne par ligne, puis le texte, les boutons et la réassurance suivent.
+  // Plus d'écran de chargement avant : tout est joué en moins d'une seconde.
+  // L'état caché n'existe que si le <head> a posé .hero-anim (grand écran,
+  // mouvement autorisé) : sans JS ou sur mobile, le hero est visible d'emblée.
+  var racine = document.documentElement;
+  if (racine.classList.contains('hero-anim')) {
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ racine.classList.add('hero-in'); });
     });
-    setTimeout(function(){
-      p.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
-      p.style.opacity=1; p.style.transform='translateY(0)';
-    }, 750);
-    setTimeout(function(){
-      btns.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
-      btns.style.opacity=1; btns.style.transform='translateY(0)';
-    }, 900);
-    setTimeout(function(){
-      trust.style.transition='opacity 0.7s, transform 0.7s cubic-bezier(0.16,1,0.3,1)';
-      trust.style.opacity=1; trust.style.transform='translateY(0)';
-    }, 1050);
-    setTimeout(function(){
-      cue.style.transition='opacity 0.8s'; cue.style.opacity=1;
-    }, 1450);
   }
 
-  // Hero parallax
-  var glow = document.getElementById('v4Glow');
+  // Le hero s'efface doucement quand on descend ; sans flou, pour que le
+  // texte reste net tant qu'on peut le lire.
   var heroInner = document.getElementById('v4HeroInner');
-  var heroEl = document.querySelector('.v4-hero');
-  if(heroEl){
-    heroEl.addEventListener('mousemove', function(e){
-      var rx2 = (e.clientX/window.innerWidth - 0.5)*2;
-      var ry2 = (e.clientY/window.innerHeight - 0.5)*2;
-      glow.style.transform = 'translate(calc(-50% + '+rx2*50+'px), calc(-50% + '+ry2*30+'px))';
-      heroInner.style.transform = 'translate('+rx2*-5+'px, '+ry2*-3+'px)';
-    });
-    heroEl.addEventListener('mouseleave', function(){
-      glow.style.transform='translate(-50%,-50%)'; heroInner.style.transform='';
-    });
-  }
-
-  // Effacement du hero au défilement. Le flou montait jusqu'à 5 px dès le
-  // premier tiers d'écran : le texte devenait illisible pendant qu'on scrollait.
-  // Il plafonne maintenant à 1,4 px et ne démarre qu'une fois le hero déjà à
-  // moitié effacé — la lecture reste nette tant que le texte est bien visible.
+  var hero = document.querySelector('.v4-hero');
   window.addEventListener('scroll', function(){
     if(!heroInner) return;
-    var p2 = Math.min(window.scrollY / (window.innerHeight * 0.7), 1);
-    heroInner.style.opacity = 1 - p2;
-    var flou = Math.max(0, p2 - 0.5) * 2.8;   // 0 jusqu'à mi-course, 1,4 px au bout
-    heroInner.style.filter = flou ? 'blur(' + flou.toFixed(2) + 'px)' : '';
+    var p2 = Math.min(window.scrollY / (window.innerHeight * 0.8), 1);
+    heroInner.style.opacity = (1 - p2 * 0.85).toFixed(3);
   }, {passive:true});
 
-  // Magnetic on buttons
-  document.querySelectorAll('.v4-hero-btns .btn').forEach(function(el){
-    el.addEventListener('mousemove', function(e){
-      var r=el.getBoundingClientRect();
-      var x=(e.clientX-r.left-r.width/2)*0.1;
-      var y=(e.clientY-r.top-r.height/2)*0.1;
-      el.style.transform='translate('+x+'px,'+y+'px)';
-    });
-    el.addEventListener('mouseleave', function(){ el.style.transform=''; });
-  });
+  // Les nappes de couleur du fond tournent en boucle : on les arrête quand
+  // le hero est hors de l'écran, inutile de les calculer pour rien.
+  if (hero && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function(entrees){
+      hero.classList.toggle('au-repos', !entrees[0].isIntersecting);
+    }).observe(hero);
+  }
 })();
 </script>
 
 <!-- JavaScript -->
-<script src="js/main.js?v=theme1" defer></script>
+<script src="js/main.js?v=devis1" defer></script>
 
 <!-- Schema.org — LocalBusiness -->
 <script type="application/ld+json">
@@ -1441,13 +1236,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     },
     {
       "@type": "Question",
+      "name": "Combien coûte un site internet chez NexBoost ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le prix d'un site varie en fonction de vos attentes : nombre de pages, fonctionnalités, textes et photos à créer, délai. Après un échange de 15 minutes, vous recevez un devis détaillé, gratuit et sans engagement. La formule Sérénité permet de régler le site et son suivi en mensualités." }
+    },
+    {
+      "@type": "Question",
       "name": "Combien de temps pour avoir mon site en ligne ?",
       "acceptedAnswer": { "@type": "Answer", "text": "Comptez 1 à 2 semaines pour une landing page, 2 à 4 semaines pour un site vitrine, et 4 à 6 semaines pour un e-commerce." }
     },
     {
       "@type": "Question",
       "name": "Est-ce qu'il y a un engagement ou un abonnement ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Non, aucun engagement. Vous payez uniquement la prestation commandée. Des abonnements de suivi optionnels et résiliables existent dès 49 €/mois." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Pas pour la création : le devis est gratuit et vous payez uniquement la prestation commandée. Les formules de suivi, dès 49 € HT par mois, sont optionnelles. Seule la formule Sérénité, qui étale le prix du site en mensualités, comporte un engagement de 12 ou 24 mois." }
     },
     {
       "@type": "Question",
@@ -1479,7 +1279,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Tarifs",
+      "name": "Prestations",
       "item": "https://nexboost.fr/#tarifs"
     },
     {
