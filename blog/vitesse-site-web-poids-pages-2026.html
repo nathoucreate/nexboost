@@ -37,7 +37,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"></noscript>
 
     <!-- CSS -->
     <script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
@@ -52,7 +52,7 @@
         "description": "55 % des TPE-PME déclarent utiliser l'IA générative, 17 % seulement s'en servent régulièrement. Les chiffres INSEE et Bpifrance, et la méthode concrète pour qu'un artisan ou un commerçant fasse partie des seconds.",
         "author": {
             "@type": "Person",
-            "name": "Nathan Lepretre"
+            "name": "Nathan Leprêtre"
         },
         "publisher": {
             "@type": "Organization",
@@ -135,7 +135,7 @@
         }
 
         .blog-article h1 {
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-size: clamp(1.8rem, 4vw, 2.6rem);
             font-weight: 800;
             line-height: 1.2;
@@ -152,7 +152,7 @@
         }
 
         .blog-article h2 {
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-size: clamp(1.3rem, 3vw, 1.7rem);
             font-weight: 700;
             margin-top: 2.5rem;
@@ -161,7 +161,7 @@
         }
 
         .blog-article h3 {
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-size: 1.05rem;
             font-weight: 700;
             margin-top: 1.8rem;
@@ -200,7 +200,7 @@
             margin: 2.2rem 0;
             padding: 0 0 0 1.4rem;
             border-left: 3px solid var(--accent);
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-size: clamp(1.15rem, 2.4vw, 1.5rem);
             font-weight: 700;
             line-height: 1.4;
@@ -309,7 +309,7 @@
             border-radius: 14px;
         }
         .chart-title {
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-size: 1rem;
             font-weight: 700;
             color: var(--text);
@@ -339,7 +339,7 @@
             fill: var(--text-muted);
         }
         .c-val {
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-size: 17px;
             font-weight: 800;
             fill: var(--accent-light);
@@ -495,7 +495,7 @@
             border-radius: 0 10px 10px 0;
         }
         .usage-num {
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-weight: 800;
             font-size: 1rem;
             color: var(--uc);
@@ -542,7 +542,7 @@
         .faq-article summary::-webkit-details-marker { display: none; }
         .faq-article summary::after {
             content: '+';
-            font-family: 'Syne', sans-serif;
+            font-family: var(--font-display);
             font-size: 1.2rem;
             color: var(--accent-light);
             flex-shrink: 0;
@@ -613,6 +613,7 @@
         .liens-lies ul { margin: 0 0 0 1.1rem; }
         .liens-lies li { font-size: 0.9rem; margin-bottom: 0.4rem; }
     </style>
+    <link rel="stylesheet" href="article.css?v=blog1">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -624,12 +625,12 @@
         <a href="../index.html">
             <img src="../assets/logo nexboost.svg" alt="NexBoost">
         </a>
-        <a href="index.html" class="btn-back">Retour au blog</a>
+        <a href="index.html" class="btn-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>Le blog</a>
     </nav>
 
     <article class="blog-article">
         <h1>J'ai pesé cinq sites d'entreprises du Nord : de 0,2 à 16,8 Mo</h1>
-        <div class="blog-meta">Publié le 22 août 2026 par Nathan Lepretre</div>
+        <div class="blog-meta">Publié le 22 août 2026 par Nathan Leprêtre</div>
 
         <p class="blog-lead">Le 20 août, j'ai téléchargé la page d'accueil de cinq sites d'entreprises
         et de collectivités des environs de Valenciennes et du littoral, puis j'ai additionné tout ce
@@ -883,7 +884,14 @@
     </article>
 
     <footer class="blog-footer">
-        <p>&copy; 2026 NexBoost. Tous droits réservés. | <a href="../mentions-legales.html">Mentions légales</a></p>
+        <p class="marque"><a href="../index.html">NexBoost</a> · agence de marketing digital à Valenciennes</p>
+        <nav aria-label="Liens du site">
+            <a href="index.html">Tous les articles</a>
+            <a href="../index.html#contact">Contact</a>
+            <a href="../a-propos.html">À propos</a>
+            <a href="../mentions-legales.html">Mentions légales</a>
+        </nav>
+        <p>&copy; 2026 NexBoost</p>
     </footer>
 
     <!-- Apparition en cascade au defilement : memes reglages que js/main.js (threshold, delai, easing) -->
@@ -949,6 +957,7 @@
         meta.textContent+=' · '+m+' min de lecture';
       })();
     </script>
+<script defer src="article.js?v=blog1"></script>
 <script defer src="../js/theme.js?v=theme1"></script>
 </body>
 </html>

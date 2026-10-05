@@ -13,7 +13,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <title>Blog | NexBoost — Conseils Marketing Digital</title>
 <meta name="description" content="Conseils et astuces en marketing digital pour les entreprises locales. SEO local, cr&#233;ation de site web et strat&#233;gies pour artisans et commer&#231;ants.">
 <meta name="robots" content="index, follow">
-<meta name="author" content="NexBoost - Nathan Lepretre">
+<meta name="author" content="NexBoost - Nathan Leprêtre">
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
 <link rel="canonical" href="https://nexboost.fr/blog/">
 <meta property="og:type" content="website">
@@ -56,13 +56,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     { "@type": "BlogPosting", "headline": "Réseaux sociaux pour artisans et commerçants : guide 2026", "datePublished": "2026-05-07", "url": "https://nexboost.fr/blog/reseaux-sociaux-artisan-commercant.html" },
     { "@type": "BlogPosting", "headline": "Optimiser sa fiche Google Business Profile en 2026", "datePublished": "2026-04-30", "url": "https://nexboost.fr/blog/google-business-profile-optimiser-fiche.html" },
     { "@type": "BlogPosting", "headline": "Stratégie digitale pour PME et artisans", "datePublished": "2026-03-08", "url": "https://nexboost.fr/blog/strategie-digitale-pme-artisan.html" },
-    { "@type": "BlogPosting", "headline": "Le guide du SEO local pour les debutants", "datePublished": "2026-02-28", "url": "https://nexboost.fr/blog/seo-local-guide-debutant.html" },
+    { "@type": "BlogPosting", "headline": "Le guide du SEO local pour les débutants", "datePublished": "2026-02-28", "url": "https://nexboost.fr/blog/seo-local-guide-debutant.html" },
     { "@type": "BlogPosting", "headline": "Pourquoi votre entreprise a besoin d'un site web en 2026", "datePublished": "2026-02-27", "url": "https://nexboost.fr/blog/pourquoi-site-web-artisan.html" }
   ]
 }
 </script>
 
-<script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
+<script>document.documentElement.classList.add('js');try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -611,12 +611,14 @@ img { max-width: 100%; display: block; }
   padding: 40px 0; color: var(--text-muted); font-size: 0.9rem;
 }
 
-/* ─── REVEAL ─── */
-[data-reveal] {
+/* ─── REVEAL ───
+   Masqué seulement quand le script tourne (classe .js posée dans le <head>) :
+   sans JavaScript, ou s'il plante, le blog reste lisible. */
+.js [data-reveal] {
   opacity: 0; transform: translateY(32px);
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
 }
-[data-reveal].visible { opacity: 1; transform: translateY(0); }
+.js [data-reveal].visible { opacity: 1; transform: translateY(0); }
 
 /* ─── ENTREE DU HERO ───
    Au-dessus de la ligne de flottaison : ca s'anime au chargement, pas au
@@ -673,6 +675,9 @@ img { max-width: 100%; display: block; }
 /* La fleche part vers la droite au survol de toute la carte, pas seulement
    du lien : la cible cliquable percue devient la carte entiere. */
 .blog-card-link svg { transition: transform 0.3s var(--ease); }
+.blog-card-link::before { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.blog-card-link:focus-visible { outline: none; }
+.blog-card:focus-within { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow-strong); }
 .blog-card:hover .blog-card-link svg { transform: translateX(4px); }
 .blog-card:hover .blog-card-link { color: var(--accent-light); }
 
@@ -681,7 +686,7 @@ img { max-width: 100%; display: block; }
   .blog-hero-glow { animation: none; opacity: 1; transform: none; }
   /* la compensation optique n'est pas une animation : elle reste */
   .ligne-titre:nth-child(2) > span { transform: translate(-0.05em, 0); }
-  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .blog-card.sortie { transition: none; }
 }
 </style>
@@ -785,7 +790,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="card-tag" data-cat="technique">Performance</span>
       <span class="blog-card-date">22 août 2026<span class="card-time">7 min de lecture</span></span>
       <h2>J'ai pesé cinq sites d'entreprises du Nord : de 0,2 à 16,8 Mo</h2>
-      <p>Mesures réelles de poids de pages, du plus léger au plus lourd — 84 fois l'écart. Ce que ça coûte en secondes d'attente, ce que dit l'étude Google-Deloitte, et les quatre gestes qui règlent l'essentiel.</p>
+      <p>Mesures réelles de poids de pages, du plus léger au plus lourd : 84 fois l'écart. Ce que ça coûte en secondes d'attente, ce que dit l'étude Google-Deloitte, et les quatre gestes qui règlent l'essentiel.</p>
       <a href="vitesse-site-web-poids-pages-2026.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -807,7 +812,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="card-tag" data-cat="strategie">Stratégie</span>
       <span class="blog-card-date">29 juillet 2026<span class="card-time">6 min de lecture</span></span>
       <h2>Site web par secteur d'activité : pourquoi un modèle unique ne marche pas</h2>
-      <p>Un site de restaurant, un site d'artisan BTP et un site de kine n'ont rien a vendre de la meme facon. Pourquoi votre site doit être pense pour votre metier, pas copie sur un modèle générique.</p>
+      <p>Un site de restaurant, un site d'artisan BTP et un site de kiné n'ont rien à vendre de la même façon. Pourquoi votre site doit être pensé pour votre métier, pas copié sur un modèle générique.</p>
       <a href="site-web-different-selon-secteur-activite.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -829,7 +834,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="card-tag" data-cat="ia">IA</span>
       <span class="blog-card-date">29 juin 2026<span class="card-time">6 min de lecture</span></span>
       <h2>AEO &amp; GEO : être visible et cité par les IA en 2026</h2>
-      <p>ChatGPT, Gemini et Perplexity recommandent déjà des entreprises. Voici la méthode AEO/GEO en 8 étapes pour que ce soit la votre.</p>
+      <p>ChatGPT, Gemini et Perplexity recommandent déjà des entreprises. Voici la méthode AEO/GEO en 8 étapes pour que ce soit la vôtre.</p>
       <a href="aeo-geo-referencement-ia-2026.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -840,7 +845,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="card-tag" data-cat="social">Réseaux sociaux</span>
       <span class="blog-card-date">7 mai 2026<span class="card-time">6 min de lecture</span></span>
       <h2>Réseaux sociaux pour artisans et commerçants : guide 2026</h2>
-      <p>Comment utiliser Instagram, Facebook et Google pour attirer des clients locaux ? 10 idees de publications et les 5 erreurs a eviter.</p>
+      <p>Comment utiliser Instagram, Facebook et Google pour attirer des clients locaux ? 10 idées de publications et les 5 erreurs à éviter.</p>
       <a href="reseaux-sociaux-artisan-commercant.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -851,7 +856,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="card-tag" data-cat="seo">Référencement</span>
       <span class="blog-card-date">30 avril 2026<span class="card-time">7 min de lecture</span></span>
       <h2>Comment optimiser votre fiche Google Business Profile en 2026</h2>
-      <p>Guide complet pour tirer le maximum de votre fiche Google gratuite : photos, avis, posts et astuces pour apparaitre en tete des recherches locales.</p>
+      <p>Guide complet pour tirer le maximum de votre fiche Google gratuite : photos, avis, posts et astuces pour apparaître en tête des recherches locales.</p>
       <a href="google-business-profile-optimiser-fiche.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -861,8 +866,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <article class="blog-card" data-reveal data-cat="strategie">
       <span class="card-tag" data-cat="strategie">Stratégie</span>
       <span class="blog-card-date">8 mars 2026<span class="card-time">6 min de lecture</span></span>
-      <h2>Stratégie digitale pour PME et artisans : par ou commencer ?</h2>
-      <p>Comment construire une stratégie digitale efficace quand on est artisan ou PME ? Les étapes cles pour développer votre presence en ligne.</p>
+      <h2>Stratégie digitale pour PME et artisans : par où commencer ?</h2>
+      <p>Comment construire une stratégie digitale efficace quand on est artisan ou PME ? Les étapes clés pour développer votre présence en ligne.</p>
       <a href="strategie-digitale-pme-artisan.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -871,9 +876,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <article class="blog-card" data-reveal data-cat="seo">
       <span class="card-tag" data-cat="seo">Référencement</span>
-      <span class="blog-card-date">28 fevrier 2026<span class="card-time">4 min de lecture</span></span>
-      <h2>Le guide du SEO local pour les debutants</h2>
-      <p>Apprenez les bases du référencement local pour apparaitre en tete des resultats Google dans votre ville.</p>
+      <span class="blog-card-date">28 février 2026<span class="card-time">4 min de lecture</span></span>
+      <h2>Le guide du SEO local pour les débutants</h2>
+      <p>Apprenez les bases du référencement local pour apparaître en tête des résultats Google dans votre ville.</p>
       <a href="seo-local-guide-debutant.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -882,9 +887,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <article class="blog-card" data-reveal data-cat="strategie">
       <span class="card-tag" data-cat="strategie">Stratégie</span>
-      <span class="blog-card-date">27 fevrier 2026<span class="card-time">4 min de lecture</span></span>
+      <span class="blog-card-date">27 février 2026<span class="card-time">4 min de lecture</span></span>
       <h2>Pourquoi votre entreprise a besoin d'un site web en 2026</h2>
-      <p>Decouvrez pourquoi un site web professionnel est devenu indispensable pour attirer de nouveaux clients.</p>
+      <p>Découvrez pourquoi un site web professionnel est devenu indispensable pour attirer de nouveaux clients.</p>
       <a href="pourquoi-site-web-artisan.html" class="blog-card-link">
         Lire l'article
         <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -896,7 +901,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section class="blog-cta" data-reveal>
     <div class="blog-cta-inner">
       <h2>Besoin d'un accompagnement ?</h2>
-      <p>On met en place votre stratégie digitale de A a Z. Devis gratuit, sans engagement.</p>
+      <p>On met en place votre stratégie digitale de A à Z. Devis gratuit, sans engagement.</p>
       <a href="../index.html#contact" class="blog-cta-btn">
         Discutons de votre projet
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
