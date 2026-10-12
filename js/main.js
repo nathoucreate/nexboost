@@ -252,7 +252,7 @@ const botResponses = {
 
   fonctionnement: `C'est très simple :\n\n1️⃣ <b>On échange</b> — vous nous parlez de votre activité et vos besoins\n2️⃣ <b>On vous propose un devis gratuit</b> — clair, sans surprise\n3️⃣ <b>On réalise le projet</b> — vous validez chaque étape\n4️⃣ <b>On livre</b> — votre site/contenu est en ligne !\n\nPas de jargon, pas de contrat longue durée. Vous restez concentré sur votre métier.`,
 
-  contact: `Vous pouvez nous contacter de plusieurs façons :\n\n📧 <b>Email</b> : nathan.lepretre@nexboost.fr\n📍 <b>Localisation</b> : Valenciennes, Hauts-de-France\n\nOu remplissez directement notre <a href="#contact" style="color:var(--accent-light)">formulaire de contact →</a>\n\nOn vous répond sous 24h, promis ! 🤝`,
+  contact: `Vous pouvez nous contacter de plusieurs façons :\n\n📧 <b>Email</b> : contact@nexboost.fr\n📍 <b>Localisation</b> : Valenciennes, Hauts-de-France\n\nOu remplissez directement notre <a href="#contact" style="color:var(--accent-light)">formulaire de contact →</a>\n\nOn vous répond sous 24h, promis ! 🤝`,
 
   delai: `Les délais dépendent du projet :\n\n• Landing page : <b>1-2 semaines</b>\n• Site vitrine : <b>2-4 semaines</b>\n• Site e-commerce : <b>4-6 semaines</b>\n• Logo / flyer : <b>3-5 jours</b>\n\nOn s'adapte aussi à vos urgences si besoin !`,
 
