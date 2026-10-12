@@ -123,7 +123,7 @@ function sendViaFormSubmit(data) {
   const formData = new FormData();
   Object.entries(data).forEach(([k, v]) => formData.append(k, v));
   formData.append('_captcha', 'false');
-  return fetch('https://formsubmit.co/ajax/nathan.lepretre@nexboost.fr', {
+  return fetch('https://formsubmit.co/ajax/contact@nexboost.fr', {
     method: 'POST',
     body: formData
   });
@@ -131,7 +131,7 @@ function sendViaFormSubmit(data) {
 
 function sendViaMailto(subject, body) {
   const a = document.createElement('a');
-  a.href = `mailto:nathan.lepretre@nexboost.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  a.href = `mailto:contact@nexboost.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   a.click();
 }
 
