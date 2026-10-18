@@ -201,7 +201,8 @@ contactForm.addEventListener('submit', function(e) {
         form.reset();
       }, 5000);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.warn('[NexBoost] Formulaire non envoyé :', err && err.message);
       alerte = document.createElement('p');
       alerte.className = 'form-envoi-erreur';
       alerte.setAttribute('role', 'alert');
