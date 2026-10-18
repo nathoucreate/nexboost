@@ -43,7 +43,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Instrument+Serif:ital@1&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet"></noscript>
 <script>try{if(localStorage.getItem('nexboost-theme')==='dark')document.documentElement.removeAttribute('data-theme')}catch(e){}</script>
-<link rel="stylesheet" href="css/style.css?v=devis1">
+<link rel="stylesheet" href="css/style.css?v=form1">
 <style>
 /* ═══ SEO local Valenciennes — même voix que l'accueil (textes et mots-clés intacts) ═══ */
 :root { --font-display: 'Space Grotesk', system-ui, sans-serif; --slv-grad: linear-gradient(135deg, var(--accent), #7c3aed); }
@@ -239,6 +239,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 .slv-form .err { display:none; font-size:.78rem; color:#dc2626; margin-top:5px; }
 .slv-form [aria-invalid="true"] + .err { display:block; }
 .slv-form .slv-btn-main { width:100%; justify-content:center; margin-top:4px; border:0; }
+.slv-erreur { font-size:.86rem; line-height:1.55; color:#b91c1c; background:rgba(220,38,38,.08); border:1px solid rgba(220,38,38,.25); border-radius:10px; padding:10px 12px; }
+:root:not([data-theme="light"]) .slv-erreur { color:#fca5a5; }
+.slv-erreur a { font-weight:600; text-decoration:underline; }
 .slv-form .note { font-size:.78rem; color:var(--text-muted); text-align:center; line-height:1.5; }
 .slv-form .piege { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
 .slv-ok { display:none; text-align:center; margin:auto 0; }
@@ -547,7 +550,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <form class="slv-form" id="slvForm" action="https://formsubmit.co/contact@nexboost.fr" method="POST" novalidate>
           <h3>Votre diagnostic en 30 secondes</h3>
-          <input type="hidden" name="_subject" value="Diagnostic SEO local — nexboost.fr">
+          <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_next" value="https://nexboost.fr/seo-local-valenciennes.html#diagnostic">
           <div class="piege" aria-hidden="true"><label for="slv-honey">Ne pas remplir</label><input type="text" id="slv-honey" name="_honey" tabindex="-1" autocomplete="off"></div>
@@ -578,6 +581,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <button type="submit" class="btn slv-btn-main">Recevoir mon diagnostic gratuit
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <p class="slv-erreur" role="alert" hidden>L'envoi n'a pas abouti, votre message est conservé. Réessayez dans un instant, ou appelez-nous au <a href="tel:+33788845343">07 88 84 53 43</a>.</p>
           <p class="note">Vos coordonnées servent uniquement à vous répondre. <a href="mentions-legales.html" style="text-decoration:underline;text-underline-offset:2px">Données personnelles</a></p>
           <div class="slv-ok" role="status" aria-live="polite">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
@@ -781,17 +785,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if(ko){ c.setAttribute('aria-invalid','true'); premier=premier||c; } else c.removeAttribute('aria-invalid');
       });
       if(premier){ premier.focus(); return; }
-      var bouton=f.querySelector('button[type="submit"]');
+      var bouton=f.querySelector('button[type="submit"]'), erreur=f.querySelector('.slv-erreur');
+      if(f.dataset.envoi==='1') return;
+      f.dataset.envoi='1'; erreur.hidden=true;
       bouton.disabled=true; bouton.style.opacity='.7';
-      var d=new FormData(f);
-      fetch('https://formsubmit.co/ajax/contact@nexboost.fr',{method:'POST',body:d,headers:{'Accept':'application/json'}})
+      var d=new FormData(f), nom=d.get('name').trim();
+      // Envoi direct vers contact@nexboost.fr : jamais de renvoi vers la messagerie du visiteur
+      var e2=new FormData();
+      e2.append('_subject','[Formulaire de contact nexboost.fr] Demande de diagnostic SEO local de '+nom);
+      e2.append('_replyto',d.get('email').trim());
+      e2.append('_captcha','false'); e2.append('_template','table');
+      e2.append('Provenance','Formulaire de contact du site nexboost.fr (page SEO local Valenciennes)');
+      e2.append('Nom',nom);
+      e2.append('E-mail',d.get('email').trim());
+      e2.append('Téléphone',d.get('phone').trim()||'Non renseigné');
+      e2.append('Activité et ville',d.get('company').trim());
+      e2.append('Lien ou message',d.get('message').trim()||'Non renseigné');
+      fetch('https://formsubmit.co/ajax/contact@nexboost.fr',{method:'POST',body:e2,headers:{'Accept':'application/json'}})
         .then(function(r){ if(!r.ok) throw 0; return r.json(); })
         .then(function(j){ if(j.success!==true && j.success!=='true') throw 0; f.classList.add('envoye'); if(window.dataLayer) dataLayer.push({event:'diagnostic_seo_envoye'}); })
-        .catch(function(){
-          var corps='Nom : '+d.get('name')+'\nTéléphone : '+(d.get('phone')||'Non renseigné')+'\nE-mail : '+d.get('email')+'\nActivité et ville : '+d.get('company')+'\n\n'+(d.get('message')||'');
-          location.href='mailto:contact@nexboost.fr?subject='+encodeURIComponent('Diagnostic SEO local gratuit')+'&body='+encodeURIComponent(corps);
-          bouton.disabled=false; bouton.style.opacity='';
-        });
+        .catch(function(){ erreur.hidden=false; })
+        .then(function(){ f.dataset.envoi=''; bouton.disabled=false; bouton.style.opacity=''; });
     });
   })();
 </script>

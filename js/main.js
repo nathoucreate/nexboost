@@ -117,22 +117,23 @@ document.querySelectorAll('[data-demande]').forEach(lien => {
 });
 
 // ═══════════════════════════════════════
-//  EMAIL HELPERS
+//  ENVOI DES FORMULAIRES
+//  Tout part directement vers contact@nexboost.fr par FormSubmit. On n'ouvre
+//  JAMAIS la messagerie du visiteur : si l'envoi échoue, on le dit dans le
+//  formulaire, le texte saisi est conservé et le numéro de téléphone est proposé.
 // ═══════════════════════════════════════
-function sendViaFormSubmit(data) {
+function envoyerFormulaire(champs) {
   const formData = new FormData();
-  Object.entries(data).forEach(([k, v]) => formData.append(k, v));
+  Object.entries(champs).forEach(([k, v]) => formData.append(k, v));
   formData.append('_captcha', 'false');
+  formData.append('_template', 'table');
   return fetch('https://formsubmit.co/ajax/contact@nexboost.fr', {
     method: 'POST',
-    body: formData
-  });
-}
-
-function sendViaMailto(subject, body) {
-  const a = document.createElement('a');
-  a.href = `mailto:contact@nexboost.fr?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  a.click();
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  })
+    .then(res => { if (!res.ok) throw new Error('FormSubmit ' + res.status); return res.json(); })
+    .then(data => { if (data.success !== 'true' && data.success !== true) throw new Error('Envoi non confirmé'); });
 }
 
 // ═══════════════════════════════════════
@@ -144,10 +145,12 @@ const contactSuccess = document.getElementById('contactSuccess');
 
 contactForm.addEventListener('submit', function(e) {
   e.preventDefault();
+  const form = this;
+  if (form.dataset.envoi === '1') return;
 
   // Validate
   let valid = true;
-  this.querySelectorAll('[required]').forEach(field => {
+  form.querySelectorAll('[required]').forEach(field => {
     const err = field.parentElement.querySelector('.field-error');
     if (!field.value.trim()) {
       field.classList.add('error');
@@ -163,40 +166,52 @@ contactForm.addEventListener('submit', function(e) {
     }
   });
   if (!valid) return;
+  if (form.querySelector('[name="_honey"]') && form.querySelector('[name="_honey"]').value) return;
 
-  const name = this.querySelector('[name="name"]').value;
-  const email = this.querySelector('[name="email"]').value;
-  const phone = this.querySelector('[name="phone"]').value || 'Non renseigné';
-  const company = this.querySelector('[name="company"]').value || 'Non renseignée';
-  const message = this.querySelector('[name="message"]').value;
+  const name = form.querySelector('[name="name"]').value.trim();
+  const email = form.querySelector('[name="email"]').value.trim();
+  const phone = form.querySelector('[name="phone"]').value.trim() || 'Non renseigné';
+  const company = form.querySelector('[name="company"]').value.trim() || 'Non renseignée';
+  const message = form.querySelector('[name="message"]').value.trim();
 
-  const subject = 'Nouveau message NexBoost — ' + name;
-  const body = `Nom : ${name}\nEntreprise : ${company}\nEmail : ${email}\nTéléphone : ${phone}\n\nMessage :\n${message}`;
+  const bouton = form.querySelector('button[type="submit"]');
+  const libelle = bouton ? bouton.innerHTML : '';
+  let alerte = form.querySelector('.form-envoi-erreur');
+  if (alerte) alerte.remove();
+  form.dataset.envoi = '1';
+  if (bouton) { bouton.disabled = true; bouton.textContent = 'Envoi en cours…'; }
 
-  // Try FormSubmit first, fallback to mailto
-  sendViaFormSubmit({ name, email, phone, company, message, _subject: subject })
-    .then(res => {
-      if (!res.ok) throw new Error('FormSubmit error');
-      return res.json();
-    })
-    .then(data => {
-      if (data.success !== 'true' && data.success !== true) throw new Error('Not confirmed');
-      // FormSubmit worked
+  envoyerFormulaire({
+    _subject: '[Formulaire de contact nexboost.fr] Nouveau message de ' + name,
+    _replyto: email,
+    'Provenance': "Formulaire de contact du site nexboost.fr (page d'accueil)",
+    'Nom': name,
+    'E-mail': email,
+    'Téléphone': phone,
+    'Entreprise': company,
+    'Message': message
+  })
+    .then(() => {
+      contactFormInner.style.display = 'none';
+      contactSuccess.classList.add('visible');
+      if (window.dataLayer) window.dataLayer.push({ event: 'formulaire_contact_envoye' });
+      setTimeout(() => {
+        contactFormInner.style.display = '';
+        contactSuccess.classList.remove('visible');
+        form.reset();
+      }, 5000);
     })
     .catch(() => {
-      // FormSubmit failed (not verified yet), use mailto
-      sendViaMailto(subject, body);
+      alerte = document.createElement('p');
+      alerte.className = 'form-envoi-erreur';
+      alerte.setAttribute('role', 'alert');
+      alerte.innerHTML = "L'envoi n'a pas abouti, votre message est conservé. Réessayez dans un instant, ou appelez-nous au <a href=\"tel:+33788845343\">07 88 84 53 43</a>.";
+      (bouton ? bouton.parentElement : form).appendChild(alerte);
+    })
+    .finally(() => {
+      form.dataset.envoi = '';
+      if (bouton) { bouton.disabled = false; bouton.innerHTML = libelle; }
     });
-
-  // Show success regardless
-  contactFormInner.style.display = 'none';
-  contactSuccess.classList.add('visible');
-
-  setTimeout(() => {
-    contactFormInner.style.display = '';
-    contactSuccess.classList.remove('visible');
-    this.reset();
-  }, 5000);
 });
 
 // Remove error on input

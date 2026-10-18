@@ -2274,3 +2274,9 @@ main .blog-article .blog-cta {
     var(--bg-card);
   box-shadow: 0 18px 50px var(--accent-glow);
 }
+
+/* Échec d'envoi du formulaire : on le dit sur place, sans ouvrir la messagerie du visiteur */
+.form-envoi-erreur { margin-top: 12px; font-size: .86rem; line-height: 1.55; color: #b91c1c;
+  background: rgba(220, 38, 38, .08); border: 1px solid rgba(220, 38, 38, .25); border-radius: 10px; padding: 10px 12px; }
+:root:not([data-theme="light"]) .form-envoi-erreur { color: #fca5a5; }
+.form-envoi-erreur a { font-weight: 600; text-decoration: underline; }
