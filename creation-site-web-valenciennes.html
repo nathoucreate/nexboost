@@ -14,7 +14,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="description" content="Cr&#233;ation de site web &#224; Valenciennes : site vitrine, e-commerce et landing page pour artisans et commer&#231;ants. Design moderne, responsive et SEO optimis&#233;. Devis gratuit.">
 <meta name="keywords" content="cr&#233;ation site web valenciennes, site internet valenciennes, site vitrine valenciennes, agence web valenciennes, cr&#233;ation site e-commerce valenciennes">
 <meta name="robots" content="index, follow">
-<meta name="author" content="NexBoost - Nathan Lepretre">
+<meta name="author" content="Nathan Leprêtre — NexBoost">
 <meta name="geo.region" content="FR-HDF">
 <meta name="geo.placename" content="Valenciennes">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -49,10 +49,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header>
   <nav class="nav" style="background: var(--nav-bg-scroll); backdrop-filter: blur(16px);">
     <div class="container nav-inner">
-      <a href="index.html" class="logo">
-        <img src="assets/logo nexboost.svg" alt="NexBoost" class="logo-img">
+      <a href="/" class="logo">
+        <img src="assets/logo nexboost.svg" width="500" height="500" alt="NexBoost" class="logo-img">
       </a>
-      <a href="index.html" class="btn btn-outline" style="font-size:0.8rem;">Retour au site</a>
+      <a href="/" class="btn btn-outline" style="font-size:0.8rem;">Retour au site</a>
     </div>
   </nav>
 </header>
@@ -155,7 +155,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>le d&#233;lai souhait&#233;</li>
         </ul>
         <p style="color: var(--text-muted); line-height: 1.7;">
-          Apr&#232;s un &#233;change de 15 minutes, vous recevez un devis d&#233;taill&#233; ligne par ligne, gratuit et sans engagement. Pour faire vivre le site ensuite, nos <a href="index.html#abonnements" style="color: var(--accent);">formules de suivi</a> d&#233;marrent &#224; 49&nbsp;&#8364; HT par mois, et la formule S&#233;r&#233;nit&#233; permet de r&#233;gler le site et son suivi en mensualit&#233;s.
+          Apr&#232;s un &#233;change de 15 minutes, vous recevez un devis d&#233;taill&#233; ligne par ligne, gratuit et sans engagement. Pour faire vivre le site ensuite, nos <a href="/#abonnements" style="color: var(--accent);">formules de suivi</a> d&#233;marrent &#224; 49&nbsp;&#8364; HT par mois, et la formule S&#233;r&#233;nit&#233; permet de r&#233;gler le site et son suivi en mensualit&#233;s.
         </p>
       </div>
     </div>
@@ -170,7 +170,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 32px;">
         Contactez-nous pour un devis gratuit sous 24 h. On &#233;change sur votre projet, sans engagement.
       </p>
-      <a href="index.html#contact" class="btn btn-primary" style="font-size: 1rem; padding: 14px 36px;">Demander un devis gratuit</a>
+      <a href="/#contact" class="btn btn-primary" style="font-size: 1rem; padding: 14px 36px;">Demander un devis gratuit</a>
     </div>
   </section>
 </main>
@@ -181,5 +181,102 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   if (t) document.documentElement.setAttribute('data-theme', t);
 </script>
 <script defer src="js/theme.js?v=theme1"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "LocalBusiness",
+        "ProfessionalService"
+      ],
+      "@id": "https://nexboost.fr/#organization",
+      "name": "NexBoost",
+      "url": "https://nexboost.fr/",
+      "logo": "https://nexboost.fr/assets/favicon.svg",
+      "image": "https://nexboost.fr/assets/og-image.png",
+      "email": "contact@nexboost.fr",
+      "telephone": "+33788845343",
+      "priceRange": "€€-€€€",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Valenciennes",
+        "postalCode": "59300",
+        "addressRegion": "Hauts-de-France",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.357,
+        "longitude": 3.5236
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://nexboost.fr/creation-site-web-valenciennes.html#service",
+      "name": "Création de site web à Valenciennes",
+      "serviceType": "Création de site internet",
+      "description": "Création de site web à Valenciennes : site vitrine, e-commerce et landing page pour artisans et commerçants, adaptés au mobile et optimisés pour Google.",
+      "provider": {
+        "@id": "https://nexboost.fr/#organization"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Valenciennes"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hauts-de-France"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Création de site web à Valenciennes",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Site vitrine"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Site e-commerce"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Landing page"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://nexboost.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Création de site web à Valenciennes",
+          "item": "https://nexboost.fr/creation-site-web-valenciennes.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </body>
 </html>

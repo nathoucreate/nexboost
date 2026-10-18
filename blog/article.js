@@ -145,7 +145,7 @@
     '<div><p class="qui">Nathan Leprêtre</p>' +
     '<p class="role">Fondateur de NexBoost, à Valenciennes. J’aide les artisans et les commerçants à être trouvés ' +
     'en ligne, avec un marketing humain, accessible et sans jargon.</p>' +
-    '<p class="liens"><a' + (dejaCta ? '' : ' class="contact"') + ' href="../index.html#contact">Me poser une question</a>' +
+    '<p class="liens"><a' + (dejaCta ? '' : ' class="contact"') + ' href="/#contact">Me poser une question</a>' +
     '<a href="../a-propos.html">Mon parcours</a></p></div>';
   art.appendChild(auteur);
 
@@ -154,7 +154,7 @@
   if (art.querySelector('.liens-lies') || document.querySelector('.blog-related') || !window.fetch || !window.DOMParser) return;
   var ici = location.pathname.split('/').pop() || '';
   function charger() {
-    fetch('index.html', { credentials: 'same-origin' })
+    fetch('/blog/', { credentials: 'same-origin' })
       .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
       .then(function (txt) {
         var doc = new DOMParser().parseFromString(txt, 'text/html');

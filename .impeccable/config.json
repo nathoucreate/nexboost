@@ -26,6 +26,24 @@
         "value": "instrument serif",
         "createdAt": "2026-07-29T22:03:38.695Z",
         "reason": "Police d'accent propre a la page /blog, identite distincte assumee du reste du site"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "seo-local-valenciennes.html"
+        ],
+        "createdAt": "2026-10-18T22:12:24.667Z",
+        "reason": "Claude: the Instrument Serif gradient word is the NexBoost homepage signature (.v4-serif in index.html); the user asked to match the brand identity"
+      },
+      {
+        "rule": "ai-color-palette",
+        "value": "*",
+        "files": [
+          "seo-local-valenciennes.html"
+        ],
+        "createdAt": "2026-10-18T22:18:22.478Z",
+        "reason": "Claude: indigo/violet is NexBoost's existing brand palette (css/style.css --accent, homepage CTA band); user asked to match the brand identity"
       }
     ]
   }
